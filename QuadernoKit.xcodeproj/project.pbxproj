@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		31E9EE06182EB3E700EB9BA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9EE05182EB3E700EB9BA1 /* Foundation.framework */; };
+		31E9EE0B182EB3E700EB9BA1 /* QuadernoKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 31E9EE0A182EB3E700EB9BA1 /* QuadernoKit.h */; };
+		31E9EE0D182EB3E700EB9BA1 /* QuadernoKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E9EE0C182EB3E700EB9BA1 /* QuadernoKit.m */; };
+		31E9EE14182EB3E700EB9BA1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9EE13182EB3E700EB9BA1 /* XCTest.framework */; };
+		31E9EE15182EB3E700EB9BA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9EE05182EB3E700EB9BA1 /* Foundation.framework */; };
+		31E9EE17182EB3E700EB9BA1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9EE16182EB3E700EB9BA1 /* UIKit.framework */; };
+		31E9EE1A182EB3E700EB9BA1 /* libQuadernoKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E9EE02182EB3E700EB9BA1 /* libQuadernoKit.a */; };
+		31E9EE20182EB3E700EB9BA1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 31E9EE1E182EB3E700EB9BA1 /* InfoPlist.strings */; };
+		31E9EE22182EB3E700EB9BA1 /* QuadernoKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E9EE21182EB3E700EB9BA1 /* QuadernoKitTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		31E9EE18182EB3E700EB9BA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31E9EDFA182EB3E600EB9BA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 31E9EE01182EB3E600EB9BA1;
+			remoteInfo = QuadernoKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		31E9EE00182EB3E600EB9BA1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				31E9EE0B182EB3E700EB9BA1 /* QuadernoKit.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		31E9EE02182EB3E700EB9BA1 /* libQuadernoKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libQuadernoKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		31E9EE05182EB3E700EB9BA1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		31E9EE09182EB3E700EB9BA1 /* QuadernoKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuadernoKit-Prefix.pch"; sourceTree = "<group>"; };
+		31E9EE0A182EB3E700EB9BA1 /* QuadernoKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuadernoKit.h; sourceTree = "<group>"; };
+		31E9EE0C182EB3E700EB9BA1 /* QuadernoKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuadernoKit.m; sourceTree = "<group>"; };
+		31E9EE12182EB3E700EB9BA1 /* QuadernoKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuadernoKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		31E9EE13182EB3E700EB9BA1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		31E9EE16182EB3E700EB9BA1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		31E9EE1D182EB3E700EB9BA1 /* QuadernoKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "QuadernoKitTests-Info.plist"; sourceTree = "<group>"; };
+		31E9EE1F182EB3E700EB9BA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		31E9EE21182EB3E700EB9BA1 /* QuadernoKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuadernoKitTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		31E9EDFF182EB3E600EB9BA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31E9EE06182EB3E700EB9BA1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31E9EE0F182EB3E700EB9BA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31E9EE14182EB3E700EB9BA1 /* XCTest.framework in Frameworks */,
+				31E9EE1A182EB3E700EB9BA1 /* libQuadernoKit.a in Frameworks */,
+				31E9EE17182EB3E700EB9BA1 /* UIKit.framework in Frameworks */,
+				31E9EE15182EB3E700EB9BA1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		31E9EDF9182EB3E600EB9BA1 = {
+			isa = PBXGroup;
+			children = (
+				31E9EE07182EB3E700EB9BA1 /* QuadernoKit */,
+				31E9EE1B182EB3E700EB9BA1 /* QuadernoKitTests */,
+				31E9EE04182EB3E700EB9BA1 /* Frameworks */,
+				31E9EE03182EB3E700EB9BA1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		31E9EE03182EB3E700EB9BA1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31E9EE02182EB3E700EB9BA1 /* libQuadernoKit.a */,
+				31E9EE12182EB3E700EB9BA1 /* QuadernoKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		31E9EE04182EB3E700EB9BA1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31E9EE05182EB3E700EB9BA1 /* Foundation.framework */,
+				31E9EE13182EB3E700EB9BA1 /* XCTest.framework */,
+				31E9EE16182EB3E700EB9BA1 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		31E9EE07182EB3E700EB9BA1 /* QuadernoKit */ = {
+			isa = PBXGroup;
+			children = (
+				31E9EE0A182EB3E700EB9BA1 /* QuadernoKit.h */,
+				31E9EE0C182EB3E700EB9BA1 /* QuadernoKit.m */,
+				31E9EE08182EB3E700EB9BA1 /* Supporting Files */,
+			);
+			path = QuadernoKit;
+			sourceTree = "<group>";
+		};
+		31E9EE08182EB3E700EB9BA1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				31E9EE09182EB3E700EB9BA1 /* QuadernoKit-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		31E9EE1B182EB3E700EB9BA1 /* QuadernoKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				31E9EE21182EB3E700EB9BA1 /* QuadernoKitTests.m */,
+				31E9EE1C182EB3E700EB9BA1 /* Supporting Files */,
+			);
+			path = QuadernoKitTests;
+			sourceTree = "<group>";
+		};
+		31E9EE1C182EB3E700EB9BA1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				31E9EE1D182EB3E700EB9BA1 /* QuadernoKitTests-Info.plist */,
+				31E9EE1E182EB3E700EB9BA1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		31E9EE01182EB3E600EB9BA1 /* QuadernoKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 31E9EE25182EB3E700EB9BA1 /* Build configuration list for PBXNativeTarget "QuadernoKit" */;
+			buildPhases = (
+				31E9EDFE182EB3E600EB9BA1 /* Sources */,
+				31E9EDFF182EB3E600EB9BA1 /* Frameworks */,
+				31E9EE00182EB3E600EB9BA1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuadernoKit;
+			productName = QuadernoKit;
+			productReference = 31E9EE02182EB3E700EB9BA1 /* libQuadernoKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		31E9EE11182EB3E700EB9BA1 /* QuadernoKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 31E9EE28182EB3E700EB9BA1 /* Build configuration list for PBXNativeTarget "QuadernoKitTests" */;
+			buildPhases = (
+				31E9EE0E182EB3E700EB9BA1 /* Sources */,
+				31E9EE0F182EB3E700EB9BA1 /* Frameworks */,
+				31E9EE10182EB3E700EB9BA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				31E9EE19182EB3E700EB9BA1 /* PBXTargetDependency */,
+			);
+			name = QuadernoKitTests;
+			productName = QuadernoKitTests;
+			productReference = 31E9EE12182EB3E700EB9BA1 /* QuadernoKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		31E9EDFA182EB3E600EB9BA1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = recrea;
+			};
+			buildConfigurationList = 31E9EDFD182EB3E600EB9BA1 /* Build configuration list for PBXProject "QuadernoKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 31E9EDF9182EB3E600EB9BA1;
+			productRefGroup = 31E9EE03182EB3E700EB9BA1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				31E9EE01182EB3E600EB9BA1 /* QuadernoKit */,
+				31E9EE11182EB3E700EB9BA1 /* QuadernoKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		31E9EE10182EB3E700EB9BA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31E9EE20182EB3E700EB9BA1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		31E9EDFE182EB3E600EB9BA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31E9EE0D182EB3E700EB9BA1 /* QuadernoKit.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31E9EE0E182EB3E700EB9BA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31E9EE22182EB3E700EB9BA1 /* QuadernoKitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		31E9EE19182EB3E700EB9BA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 31E9EE01182EB3E600EB9BA1 /* QuadernoKit */;
+			targetProxy = 31E9EE18182EB3E700EB9BA1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		31E9EE1E182EB3E700EB9BA1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				31E9EE1F182EB3E700EB9BA1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		31E9EE23182EB3E700EB9BA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		31E9EE24182EB3E700EB9BA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		31E9EE26182EB3E700EB9BA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/QuadernoKit.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "QuadernoKit/QuadernoKit-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		31E9EE27182EB3E700EB9BA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/QuadernoKit.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "QuadernoKit/QuadernoKit-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		31E9EE29182EB3E700EB9BA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "QuadernoKit/QuadernoKit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "QuadernoKitTests/QuadernoKitTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		31E9EE2A182EB3E700EB9BA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "QuadernoKit/QuadernoKit-Prefix.pch";
+				INFOPLIST_FILE = "QuadernoKitTests/QuadernoKitTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		31E9EDFD182EB3E600EB9BA1 /* Build configuration list for PBXProject "QuadernoKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31E9EE23182EB3E700EB9BA1 /* Debug */,
+				31E9EE24182EB3E700EB9BA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		31E9EE25182EB3E700EB9BA1 /* Build configuration list for PBXNativeTarget "QuadernoKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31E9EE26182EB3E700EB9BA1 /* Debug */,
+				31E9EE27182EB3E700EB9BA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		31E9EE28182EB3E700EB9BA1 /* Build configuration list for PBXNativeTarget "QuadernoKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31E9EE29182EB3E700EB9BA1 /* Debug */,
+				31E9EE2A182EB3E700EB9BA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 31E9EDFA182EB3E600EB9BA1 /* Project object */;
+}
