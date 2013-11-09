@@ -1,4 +1,6 @@
+###
 # Xcode
+###
 .DS_Store
 */build/*
 *.pbxuser
@@ -16,6 +18,10 @@ DerivedData
 .idea/
 *.hmap
 *.xccheckout
+*.xcworkspace
+!default.xcworkspace
 
-#CocoaPods
+###
+# CocoaPods
+###
 Pods
