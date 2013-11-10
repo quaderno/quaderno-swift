@@ -8,4 +8,7 @@
          location = "group:QuadernoKit.h">
       </FileRef>
    </Group>
+   <FileRef
+      location = "group:Tests/QuadernoKit Tests.xcodeproj">
+   </FileRef>
 </Workspace>
