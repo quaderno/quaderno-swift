@@ -12,4 +12,6 @@ Pod::Spec.new do |s|
 
   s.public_header_files = 'QuadernoKit/*.h'
   s.source_files        = 'QuadernoKit/QuadernoKit.h'
+
+  s.dependency 'AFNetworking', '~> 2.0'
 end
