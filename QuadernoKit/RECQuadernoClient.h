@@ -28,6 +28,12 @@
  */
 @interface RECQuadernoClient : NSObject
 
+/**
+ The URL used to monitor reachability and construct requests from relative paths.
+ */
+@property (nonatomic, strong, readonly) NSURL *baseURL;
+
+
 ///---------------------
 /// @name Initialization
 ///---------------------
@@ -41,5 +47,19 @@
  @return The newly-initialized Quaderno API client
  */
 - (instancetype)initWithAuthenticationToken:(NSString *)authToken account:(NSString *)account;
+
+/**
+ Initializes a `RECQuadernoClient` object with the specified authentication token, account and hostname.
+
+ This is the designated initializer. If `baseURL` is nil the default URL is used instead.
+
+ Note that this method is provided only for testing or debugging purposes. Most of the times you will be using `initWithAuthenticationToken:account:`.
+
+ @param authToken Authentication token that grants access to backend.
+ @param baseURL A custom base URL to use instead of the default.
+
+ @return The newly-initialized Quaderno API client
+ */
+- (instancetype)initWithAuthenticationToken:(NSString *)authToken baseURL:(NSURL *)baseURL;
 
 @end

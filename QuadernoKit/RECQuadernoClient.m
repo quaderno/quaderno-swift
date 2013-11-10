@@ -25,13 +25,15 @@
 
 #import <AFNetworking/AFNetworking.h>
 
-NSString * const RECQuadernoClientBaseURL = @"https://quadernoapp.com/";
-NSString * const RECQuadernoClientBaseDebugURL = @"https://127.0.0.1:3000/";
+NSString * const RECQuadernoKitAPIHostname				= @"https://quadernoapp.com/";
+NSString * const RECQuadernoKitAPIEndPointSuffix	= @"/api/v1";
 
 
 @interface RECQuadernoClient ()
 
 @property (nonatomic, strong, readonly) AFHTTPSessionManager *sessionManager;
+
+@property (nonatomic, strong, readonly) NSString *authToken;
 
 @end
 
@@ -42,16 +44,33 @@ NSString * const RECQuadernoClientBaseDebugURL = @"https://127.0.0.1:3000/";
 }
 
 - (instancetype)initWithAuthenticationToken:(NSString *)authToken account:(NSString *)account {
+	if (!account || account.length == 0) {
+		return nil;
+	}
+
+	NSString *URLString = [NSString stringWithFormat:@"%@%@%@", RECQuadernoKitAPIHostname, account, RECQuadernoKitAPIEndPointSuffix];
+	return [self initWithAuthenticationToken:authToken
+																	 baseURL:[NSURL URLWithString:URLString]];
+}
+
+- (instancetype)initWithAuthenticationToken:(NSString *)authToken baseURL:(NSURL *)baseURL {
 	self = [super init];
 	if (!self) {
 		return nil;
 	}
 
-#if DEBUG
-	_sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:RECQuadernoClientBaseDebugURL];
-#else
-	_sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:RECQuadernoClientBaseURL];
-#endif
+	if (!authToken || authToken.length == 0) {
+		return nil;
+	}
+
+	if (!baseURL) {
+		return nil;
+	}
+
+	_baseURL = baseURL;
+	_authToken = authToken;
+	_sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:_baseURL];
+
 	return self;
 }
 
