@@ -1,7 +1,7 @@
 //
-//  iOS_Tests.m
-//
-// Copyright (c) 2013 Recrea (http://recreahq.com)
+//  RECQuadernoClient.h
+//  
+//  Copyright (c) 2013 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RECTestCase.h"
+#import <Foundation/Foundation.h>
 
-@interface iOS_Tests : RECTestCase
-@end
-
-@implementation iOS_Tests
-
-- (void)testExample {
-	XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
-}
+@interface RECQuadernoClient : NSObject
 
 @end

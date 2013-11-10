@@ -1,5 +1,5 @@
 //
-//  RECTestCase.h
+//  RECQuadernoClientTest.m
 //
 // Copyright (c) 2013 Recrea (http://recreahq.com)
 //
@@ -21,11 +21,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <XCTest/XCTest.h>
+#import "RECTestCase.h"
 
-#define EXP_SHORTHAND YES
-#import "Expecta.h"
-#import "OCMock.h"
+#import "RECQuadernoClient.h"
 
-@interface RECTestCase : XCTestCase
+@interface RECQuadernoClientTest : RECTestCase
+@end
+
+@implementation RECQuadernoClientTest
+
+- (void)testThatRespondsToConfigure {
+	RECQuadernoClient *client = [RECQuadernoClient new];
+	expect(client).toNot.beNil;
+}
+
 @end

@@ -11,7 +11,7 @@
 		3180FE00182FEAD500EEF217 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3180FDFF182FEAD500EEF217 /* Foundation.framework */; };
 		3180FE02182FEAD500EEF217 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3180FE01182FEAD500EEF217 /* UIKit.framework */; };
 		3180FE08182FEAD500EEF217 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3180FE06182FEAD500EEF217 /* InfoPlist.strings */; };
-		3180FE0A182FEAD500EEF217 /* iOS_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3180FE09182FEAD500EEF217 /* iOS_Tests.m */; };
+		3180FE0A182FEAD500EEF217 /* RECQuadernoClientTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3180FE09182FEAD500EEF217 /* RECQuadernoClientTest.m */; };
 		3180FE11182FF20400EEF217 /* RECTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3180FE10182FF20400EEF217 /* RECTestCase.m */; };
 		4641BEC5A6834833A26E45F5 /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A550B246263A49EA8FEC4A14 /* libPods-ios.a */; };
 /* End PBXBuildFile section */
@@ -23,7 +23,7 @@
 		3180FE01182FEAD500EEF217 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		3180FE05182FEAD500EEF217 /* iOS Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOS Tests-Info.plist"; sourceTree = "<group>"; };
 		3180FE07182FEAD500EEF217 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3180FE09182FEAD500EEF217 /* iOS_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_Tests.m; sourceTree = "<group>"; };
+		3180FE09182FEAD500EEF217 /* RECQuadernoClientTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RECQuadernoClientTest.m; sourceTree = "<group>"; };
 		3180FE0B182FEAD500EEF217 /* iOS Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS Tests-Prefix.pch"; sourceTree = "<group>"; };
 		3180FE0F182FF17E00EEF217 /* RECTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RECTestCase.h; sourceTree = "<group>"; };
 		3180FE10182FF20400EEF217 /* RECTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECTestCase.m; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 			children = (
 				3180FE0F182FF17E00EEF217 /* RECTestCase.h */,
 				3180FE10182FF20400EEF217 /* RECTestCase.m */,
-				3180FE09182FEAD500EEF217 /* iOS_Tests.m */,
+				3180FE09182FEAD500EEF217 /* RECQuadernoClientTest.m */,
 				3180FE04182FEAD500EEF217 /* Supporting Files */,
 			);
 			path = "iOS Tests";
@@ -195,7 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3180FE11182FF20400EEF217 /* RECTestCase.m in Sources */,
-				3180FE0A182FEAD500EEF217 /* iOS_Tests.m in Sources */,
+				3180FE0A182FEAD500EEF217 /* RECQuadernoClientTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,7 +1,7 @@
 //
-//  RECTestCase.h
+//  RECQuadernoClient.m
 //
-// Copyright (c) 2013 Recrea (http://recreahq.com)
+//  Copyright (c) 2013 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <XCTest/XCTest.h>
+#import "RECQuadernoClient.h"
 
-#define EXP_SHORTHAND YES
-#import "Expecta.h"
-#import "OCMock.h"
+@implementation RECQuadernoClient
 
-@interface RECTestCase : XCTestCase
 @end

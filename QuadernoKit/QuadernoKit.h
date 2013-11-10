@@ -25,6 +25,7 @@
 #import <Foundation/Foundation.h>
 
 #ifndef _QUADERNOKIT_
-#define _QUADERNOKIT_
+	#define _QUADERNOKIT_
 
+	#import "RECQuadernoClient.h"
 #endif /* _QUADERNOKIT_ */
