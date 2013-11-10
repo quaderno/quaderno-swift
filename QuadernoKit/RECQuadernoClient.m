@@ -23,6 +23,36 @@
 
 #import "RECQuadernoClient.h"
 
+#import <AFNetworking/AFNetworking.h>
+
+NSString * const RECQuadernoClientBaseURL = @"https://quadernoapp.com/";
+NSString * const RECQuadernoClientBaseDebugURL = @"https://127.0.0.1:3000/";
+
+
+@interface RECQuadernoClient ()
+
+@property (nonatomic, strong, readonly) AFHTTPSessionManager *sessionManager;
+
+@end
+
 @implementation RECQuadernoClient
+
+- (instancetype)init {
+	return [self initWithAuthenticationToken:nil account:nil];
+}
+
+- (instancetype)initWithAuthenticationToken:(NSString *)authToken account:(NSString *)account {
+	self = [super init];
+	if (!self) {
+		return nil;
+	}
+
+#if DEBUG
+	_sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:RECQuadernoClientBaseDebugURL];
+#else
+	_sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:RECQuadernoClientBaseURL];
+#endif
+	return self;
+}
 
 @end

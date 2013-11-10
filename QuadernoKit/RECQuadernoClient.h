@@ -23,6 +23,23 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ `RECQuadernoClient` is the base object for all transactions with the Quaderno API
+ */
 @interface RECQuadernoClient : NSObject
+
+///---------------------
+/// @name Initialization
+///---------------------
+
+/**
+ Initializes a `RECQuadernoClient` object with the specified authentication token and account.
+
+ @param authToken Authentication token to access the Quaderno backend.
+ @param account Name of a valid account registered in Quaderno.
+
+ @return The newly-initialized Quaderno API client
+ */
+- (instancetype)initWithAuthenticationToken:(NSString *)authToken account:(NSString *)account;
 
 @end
