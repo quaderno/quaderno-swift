@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.platform            = :ios, '6.1'
 
   s.public_header_files = 'QuadernoKit/*.h'
-  s.source_files        = 'QuadernoKit/QuadernoKit.h'
+  s.source_files        = 'QuadernoKit/QuadernoKit.h', 'QuadernoKit/RECQuaderno*'
 
   s.dependency 'AFNetworking', '~> 2.0'
 end
