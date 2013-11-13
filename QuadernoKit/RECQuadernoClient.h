@@ -25,12 +25,12 @@
 
 
 /**
- *  `RECQuadernoClient` is the base object for all transactions with the Quaderno API
+ * `RECQuadernoClient` is the base object for all transactions with the Quaderno API
  */
 @interface RECQuadernoClient : NSObject
 
 /**
- *	The URL used to monitor reachability and construct requests from relative paths.
+ * The URL used to monitor reachability and construct requests from relative paths.
  */
 @property (nonatomic, strong, readonly) NSURL *baseURL;
 
@@ -40,26 +40,26 @@
 ///---------------------
 
 /**
- *  Initializes a `RECQuadernoClient` object with the specified authentication token and account.
+ * Initializes a `RECQuadernoClient` object with the specified authentication token and account.
  *
- *  @param authToken Authentication token to access the Quaderno backend.
- *  @param account   Name of a valid account registered in Quaderno.
+ * @param authToken Authentication token to access the Quaderno backend.
+ * @param account   Name of a valid account registered in Quaderno.
  *
- *  @return The newly-initialized Quaderno API client
+ * @return The newly-initialized Quaderno API client
  */
 - (instancetype)initWithAuthenticationToken:(NSString *)authToken account:(NSString *)account;
 
 /**
- *  Initializes a `RECQuadernoClient` object with the specified authentication token, account and hostname.
+ * Initializes a `RECQuadernoClient` object with the specified authentication token, account and hostname.
  *
- *	This is the designated initializer. If `baseURL` is nil the default URL is used instead.
+ * This is the designated initializer. If `baseURL` is nil the default URL is used instead.
  *
- *	Note that this method is provided only for testing or debugging purposes. Most of the times you will be using `initWithAuthenticationToken:account:`.
+ * Note that this method is provided only for testing or debugging purposes. Most of the times you will be using `initWithAuthenticationToken:account:`.
  *
- *  @param authToken Authentication token that grants access to backend.
- *  @param baseURL   A custom base URL to use instead of the default.
+ * @param authToken Authentication token that grants access to backend.
+ * @param baseURL   A custom base URL to use instead of the default.
  *
- *  @return The newly-initialized Quaderno API client
+ * @return The newly-initialized Quaderno API client
  */
 - (instancetype)initWithAuthenticationToken:(NSString *)authToken baseURL:(NSURL *)baseURL;
 
@@ -69,9 +69,9 @@
 ///---------------------------
 
 /**
- *  Check whether or not the Quaderno backend is available
+ * Check whether or not the Quaderno backend is available
  *
- *  @param response A block object to be executed when the task finishes. This block has no return value and takes one argument: whether or not the ping was successful.
+ * @param response A block object to be executed when the task finishes. This block has no return value and takes one argument: whether or not the ping was successful.
  */
 - (void)ping:(void (^)(BOOL success))response;
 
