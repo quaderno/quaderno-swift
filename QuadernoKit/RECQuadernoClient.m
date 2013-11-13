@@ -22,7 +22,6 @@
 // THE SOFTWARE.
 
 #import "RECQuadernoClient.h"
-
 #import <AFNetworking/AFNetworking.h>
 
 NSString * const RECQuadernoKitAPIHostname				= @"https://quadernoapp.com/";
@@ -31,11 +30,12 @@ NSString * const RECQuadernoKitAPIEndPointSuffix	= @"/api/v1";
 
 @interface RECQuadernoClient ()
 
-@property (nonatomic, strong, readonly) AFHTTPSessionManager *sessionManager;
-
 @property (nonatomic, strong, readonly) NSString *authToken;
 
+@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
+
 @end
+
 
 @implementation RECQuadernoClient
 
@@ -72,6 +72,18 @@ NSString * const RECQuadernoKitAPIEndPointSuffix	= @"/api/v1";
 	_sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:_baseURL];
 
 	return self;
+}
+
+#pragma mark -
+
+- (void)ping:(void (^)(BOOL success))response {
+	[self.sessionManager GET:@"/" parameters:nil
+									 success:^(NSURLSessionDataTask *task, id responseObject) {
+										 response(YES);
+									 }
+									 failure:^(NSURLSessionDataTask *task, NSError *error) {
+										 response(NO);
+									 }];
 }
 
 @end

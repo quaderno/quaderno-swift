@@ -27,6 +27,7 @@
 
 - (void)setUp {
 	[super setUp];
+	[Expecta setAsynchronousTestTimeout:5];
 }
 
 - (void)tearDown {
