@@ -83,7 +83,7 @@ NSString * const RECQuadernoKitRemainingRequestsKey	= @"remaining";
 #pragma mark -
 
 - (void)ping:(void (^)(BOOL success))response {
-	[self.sessionManager GET:@"/" parameters:nil
+	[self.sessionManager GET:@"/ping.json" parameters:nil
 									 success:^(NSURLSessionDataTask *task, id responseObject) {
 										 response(YES);
 									 }
