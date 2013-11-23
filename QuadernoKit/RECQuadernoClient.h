@@ -34,6 +34,16 @@
  */
 @property (nonatomic, strong, readonly) NSURL *baseURL;
 
+/**
+ * The request rate limit for a particular user.
+ */
+@property (nonatomic, readonly) NSUInteger rateLimit;
+
+/**
+ * The remaining requests available for a particular user.
+ */
+@property (nonatomic, readonly) NSUInteger remainingRequests;
+
 
 ///---------------------
 /// @name Initialization

@@ -324,6 +324,7 @@ extern NSString * const RECQuadernoKitRemainingRequestsKey;
 
 	expect(blockJSON.count).will.equal(1);
 	expect(blockJSON[RECQuadernoKitRateLimitKey]).will.equal(100);
+	expect(self.quadernoClient.rateLimit).will.equal(100);
 }
 
 - (void)testThatGetConnectionEntitlementsReturnsDictionaryWhenResponseHasAllEntitlementHeaders {
@@ -351,7 +352,9 @@ extern NSString * const RECQuadernoKitRemainingRequestsKey;
 
 	expect(blockJSON.count).will.equal(2);
 	expect(blockJSON[RECQuadernoKitRateLimitKey]).will.equal(100);
+	expect(self.quadernoClient.rateLimit).will.equal(100);
 	expect(blockJSON[RECQuadernoKitRemainingRequestsKey]).will.equal(100);
+	expect(self.quadernoClient.remainingRequests).will.equal(100);
 }
 
 @end

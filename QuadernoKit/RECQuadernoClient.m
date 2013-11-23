@@ -40,6 +40,10 @@ NSString * const RECQuadernoKitRemainingRequestsKey	= @"remaining";
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
+@property (nonatomic) NSUInteger rateLimit;
+
+@property (nonatomic) NSUInteger remainingRequests;
+
 @end
 
 
@@ -118,6 +122,7 @@ NSString * const RECQuadernoKitRemainingRequestsKey	= @"remaining";
 											 return;
 										 }
 										 NSMutableDictionary *entitlementsJSON = [NSMutableDictionary dictionaryWithDictionary:@{RECQuadernoKitRateLimitKey: rateLimit}];
+										 self.rateLimit = [rateLimit unsignedIntegerValue];
 
 										 id remainingRequests = headers[RECQuadernoAPIRemainingRequestsKey];
 										 if (!remainingRequests || ![remainingRequests isKindOfClass:[NSNumber class]]) {
@@ -126,6 +131,7 @@ NSString * const RECQuadernoKitRemainingRequestsKey	= @"remaining";
 										 }
 
 										 [entitlementsJSON setObject:remainingRequests forKey:RECQuadernoKitRemainingRequestsKey];
+										 self.remainingRequests = [remainingRequests unsignedIntegerValue];
 										 connectionEntitlements([NSDictionary dictionaryWithDictionary:entitlementsJSON], nil);
 									 }
 									 failure:^(NSURLSessionDataTask *task, NSError *error) {
