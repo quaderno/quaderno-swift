@@ -29,6 +29,16 @@ NSString * const RECQuadernoKitTestHost			= @"https://quadernoapp-com-d81137w3z9
 NSString * const RECQuadernoKitTestAccount	= @"quadernokit";
 NSString * const RECQuadernoKitTestToken		= @"c76712e5-a79e-4453-8a9b-7669fbd4e086";
 
+
+/**
+ *  Declare private constants
+ */
+extern NSString * const RECQuadernoAPIRateLimitKey;
+extern NSString * const RECQuadernoAPIRemainingRequestsKey;
+extern NSString * const RECQuadernoKitRateLimitKey;
+extern NSString * const RECQuadernoKitRemainingRequestsKey;
+
+
 /**
  *  Reopen class to test private properties
  */
@@ -137,6 +147,211 @@ NSString * const RECQuadernoKitTestToken		= @"c76712e5-a79e-4453-8a9b-7669fbd4e0
 	}];
 
 	expect(blockSuccess).will.equal(@NO);
+}
+
+#pragma mark -
+
+- (void)testThatGetConnectionEntitlementsInvokesSessionManager {
+	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
+	self.quadernoClient.sessionManager = mockSessionManager;
+
+	[[mockSessionManager expect] GET:OCMOCK_ANY parameters:nil success:OCMOCK_ANY failure:OCMOCK_ANY];
+	[self.quadernoClient getConnectionEntitlements:nil];
+	[mockSessionManager verify];
+}
+
+- (void)testThatGetConnectionEntitlementsSetsBlockArgumentWhenRequestSuccess {
+	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
+
+	[[mockSessionManager expect] GET:OCMOCK_ANY
+												parameters:nil
+													 success:[OCMArg checkWithBlock:^BOOL(void (^successBlock)(NSURLSessionTask *, id)) {
+		successBlock(nil, @{});
+		return YES;
+	}]
+													 failure:OCMOCK_ANY];
+	self.quadernoClient.sessionManager = mockSessionManager;
+
+
+	__block NSDictionary *blockJSON = nil;
+	__block NSError *blockError = nil;
+	[self.quadernoClient getConnectionEntitlements:^(NSDictionary *entitlements, NSError *error){
+		blockJSON = entitlements;
+		blockError = error;
+	}];
+
+	expect(blockJSON).willNot.beNil;
+	expect(blockError).will.beNil;
+}
+
+- (void)testThatGetConnectionEntitlementsSetsBlockArgumentWhenRequestFails {
+	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
+
+	[[mockSessionManager expect] GET:OCMOCK_ANY
+												parameters:nil
+													 success:OCMOCK_ANY
+													 failure:[OCMArg checkWithBlock:^BOOL(void (^failureBlock)(NSURLSessionTask *, NSError *)) {
+		failureBlock(nil, [NSError errorWithDomain:OCMOCK_ANY code:400 userInfo:OCMOCK_ANY]);
+		return YES;
+	}]];
+	self.quadernoClient.sessionManager = mockSessionManager;
+
+
+	__block NSDictionary *blockJSON = nil;
+	__block NSError *blockError = nil;
+	[self.quadernoClient getConnectionEntitlements:^(NSDictionary *entitlements, NSError *error){
+		blockJSON = entitlements;
+		blockError = error;
+	}];
+
+	expect(blockJSON).will.beNil;
+	expect(blockError).willNot.beNil;
+}
+
+- (void)testThatGetConnectionEntitlementsReturnsEmptyDictionaryWhenTaskIsNil {
+	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
+
+	[[mockSessionManager expect] GET:OCMOCK_ANY
+												parameters:nil
+													 success:[OCMArg checkWithBlock:^BOOL(void (^successBlock)(NSURLSessionTask *, id)) {
+		successBlock(nil, nil);
+		return YES;
+	}]
+													 failure:OCMOCK_ANY];
+	self.quadernoClient.sessionManager = mockSessionManager;
+
+
+	__block NSDictionary *blockJSON = nil;
+	[self.quadernoClient getConnectionEntitlements:^(NSDictionary *entitlements, NSError *error){
+		blockJSON = entitlements;
+	}];
+
+	expect(blockJSON.count).will.equal(0);
+}
+
+- (void)testThatGetConnectionEntitlementsReturnsEmptyDictionaryWhenResponseIsNotNSHTTPURLResponse {
+	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
+
+	[[mockSessionManager expect] GET:OCMOCK_ANY
+												parameters:nil
+													 success:[OCMArg checkWithBlock:^BOOL(void (^successBlock)(NSURLSessionTask *, id)) {
+		successBlock([NSURLSessionTask new], nil);
+		return YES;
+	}]
+													 failure:OCMOCK_ANY];
+	self.quadernoClient.sessionManager = mockSessionManager;
+
+
+	__block NSDictionary *blockJSON = nil;
+	[self.quadernoClient getConnectionEntitlements:^(NSDictionary *entitlements, NSError *error){
+		blockJSON = entitlements;
+	}];
+
+	expect(blockJSON.count).will.equal(0);
+}
+
+- (void)testThatGetConnectionEntitlementsReturnsEmptyDictionaryWhenResponseHasNoHeaders {
+	__block id mockNSURLSessionDataTask = [OCMockObject mockForClass:[NSURLSessionDataTask class]];
+	[[[mockNSURLSessionDataTask stub] andReturn:[NSHTTPURLResponse new]] response];
+
+	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
+	[[mockSessionManager expect] GET:OCMOCK_ANY
+												parameters:nil
+													 success:[OCMArg checkWithBlock:^BOOL(void (^successBlock)(NSURLSessionDataTask *, id)) {
+		successBlock(mockNSURLSessionDataTask, nil);
+		return YES;
+	}]
+													 failure:OCMOCK_ANY];
+	self.quadernoClient.sessionManager = mockSessionManager;
+
+
+	__block NSDictionary *blockJSON = nil;
+	[self.quadernoClient getConnectionEntitlements:^(NSDictionary *entitlements, NSError *error){
+		blockJSON = entitlements;
+	}];
+
+	expect(blockJSON.count).will.equal(0);
+}
+
+- (void)testThatGetConnectionEntitlementsReturnsEmptyDictionaryWhenResponseHasInvalidRateLimitHeader {
+	__block id mockNSHTTPURLResponse = [OCMockObject mockForClass:[NSHTTPURLResponse class]];
+	[[[mockNSHTTPURLResponse stub] andReturn:@{RECQuadernoAPIRateLimitKey: [NSNull null]}] allHeaderFields];
+
+	__block id mockNSURLSessionDataTask = [OCMockObject mockForClass:[NSURLSessionDataTask class]];
+	[[[mockNSURLSessionDataTask stub] andReturn:mockNSHTTPURLResponse] response];
+
+	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
+	[[mockSessionManager expect] GET:OCMOCK_ANY
+												parameters:nil
+													 success:[OCMArg checkWithBlock:^BOOL(void (^successBlock)(NSURLSessionDataTask *, id)) {
+		successBlock(mockNSURLSessionDataTask, nil);
+		return YES;
+	}]
+													 failure:OCMOCK_ANY];
+	self.quadernoClient.sessionManager = mockSessionManager;
+
+
+	__block NSDictionary *blockJSON = nil;
+	[self.quadernoClient getConnectionEntitlements:^(NSDictionary *entitlements, NSError *error){
+		blockJSON = entitlements;
+	}];
+
+	expect(blockJSON.count).will.equal(0);
+}
+
+- (void)testThatGetConnectionEntitlementsReturnsIncompleteDictionaryWhenResponseHasOnlyRateLimitHeader {
+	__block id mockNSHTTPURLResponse = [OCMockObject mockForClass:[NSHTTPURLResponse class]];
+	[[[mockNSHTTPURLResponse stub] andReturn:@{RECQuadernoAPIRateLimitKey: @100}] allHeaderFields];
+
+	__block id mockNSURLSessionDataTask = [OCMockObject mockForClass:[NSURLSessionDataTask class]];
+	[[[mockNSURLSessionDataTask stub] andReturn:mockNSHTTPURLResponse] response];
+
+	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
+	[[mockSessionManager expect] GET:OCMOCK_ANY
+												parameters:nil
+													 success:[OCMArg checkWithBlock:^BOOL(void (^successBlock)(NSURLSessionDataTask *, id)) {
+		successBlock(mockNSURLSessionDataTask, nil);
+		return YES;
+	}]
+													 failure:OCMOCK_ANY];
+	self.quadernoClient.sessionManager = mockSessionManager;
+
+
+	__block NSDictionary *blockJSON = nil;
+	[self.quadernoClient getConnectionEntitlements:^(NSDictionary *entitlements, NSError *error){
+		blockJSON = entitlements;
+	}];
+
+	expect(blockJSON.count).will.equal(1);
+	expect(blockJSON[RECQuadernoKitRateLimitKey]).will.equal(100);
+}
+
+- (void)testThatGetConnectionEntitlementsReturnsDictionaryWhenResponseHasAllEntitlementHeaders {
+	__block id mockNSHTTPURLResponse = [OCMockObject mockForClass:[NSHTTPURLResponse class]];
+	[[[mockNSHTTPURLResponse stub] andReturn:@{RECQuadernoAPIRateLimitKey: @100, RECQuadernoAPIRemainingRequestsKey: @100}] allHeaderFields];
+
+	__block id mockNSURLSessionDataTask = [OCMockObject mockForClass:[NSURLSessionDataTask class]];
+	[[[mockNSURLSessionDataTask stub] andReturn:mockNSHTTPURLResponse] response];
+
+	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
+	[[mockSessionManager expect] GET:OCMOCK_ANY
+												parameters:nil
+													 success:[OCMArg checkWithBlock:^BOOL(void (^successBlock)(NSURLSessionDataTask *, id)) {
+		successBlock(mockNSURLSessionDataTask, nil);
+		return YES;
+	}]
+													 failure:OCMOCK_ANY];
+	self.quadernoClient.sessionManager = mockSessionManager;
+
+
+	__block NSDictionary *blockJSON = nil;
+	[self.quadernoClient getConnectionEntitlements:^(NSDictionary *entitlements, NSError *error){
+		blockJSON = entitlements;
+	}];
+
+	expect(blockJSON.count).will.equal(2);
+	expect(blockJSON[RECQuadernoKitRateLimitKey]).will.equal(100);
+	expect(blockJSON[RECQuadernoKitRemainingRequestsKey]).will.equal(100);
 }
 
 @end

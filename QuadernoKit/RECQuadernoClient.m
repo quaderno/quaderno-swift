@@ -27,6 +27,12 @@
 NSString * const RECQuadernoAPIHostname				= @"https://quadernoapp.com/";
 NSString * const RECQuadernoAPIEndPointSuffix	= @"/api/v1";
 
+NSString * const RECQuadernoAPIRateLimitKey					= @"X-RateLimit-Limit";
+NSString * const RECQuadernoAPIRemainingRequestsKey	= @"X-RateLimit-Remaining";
+
+NSString * const RECQuadernoKitRateLimitKey					= @"limit";
+NSString * const RECQuadernoKitRemainingRequestsKey	= @"remaining";
+
 
 @interface RECQuadernoClient ()
 
@@ -83,6 +89,47 @@ NSString * const RECQuadernoAPIEndPointSuffix	= @"/api/v1";
 									 }
 									 failure:^(NSURLSessionDataTask *task, NSError *error) {
 										 response(NO);
+									 }];
+}
+
+- (void)getConnectionEntitlements:(void (^)(NSDictionary *entitlements, NSError *error))connectionEntitlements {
+	[self.sessionManager GET:@"/ping.json" parameters:nil
+									 success:^(NSURLSessionDataTask *task, id responseObject) {
+										 if (!task) {
+											 connectionEntitlements(@{}, nil);
+											 return;
+										 }
+
+										 if (![task.response isKindOfClass:[NSHTTPURLResponse class]]) {
+											 connectionEntitlements(@{}, nil);
+											 return;
+										 }
+
+										 NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+										 NSDictionary *headers = response.allHeaderFields;
+										 if (!headers || headers.count == 0) {
+											 connectionEntitlements(@{}, nil);
+											 return;
+										 }
+
+										 id rateLimit = headers[RECQuadernoAPIRateLimitKey];
+										 if (!rateLimit || ![rateLimit isKindOfClass:[NSNumber class]]) {
+											 connectionEntitlements(@{}, nil);
+											 return;
+										 }
+										 NSMutableDictionary *entitlementsJSON = [NSMutableDictionary dictionaryWithDictionary:@{RECQuadernoKitRateLimitKey: rateLimit}];
+
+										 id remainingRequests = headers[RECQuadernoAPIRemainingRequestsKey];
+										 if (!remainingRequests || ![remainingRequests isKindOfClass:[NSNumber class]]) {
+											 connectionEntitlements([NSDictionary dictionaryWithDictionary:entitlementsJSON], nil);
+											 return;
+										 }
+
+										 [entitlementsJSON setObject:remainingRequests forKey:RECQuadernoKitRemainingRequestsKey];
+										 connectionEntitlements([NSDictionary dictionaryWithDictionary:entitlementsJSON], nil);
+									 }
+									 failure:^(NSURLSessionDataTask *task, NSError *error) {
+										 connectionEntitlements(nil, error);
 									 }];
 }
 

@@ -75,4 +75,24 @@
  */
 - (void)ping:(void (^)(BOOL success))response;
 
+
+///---------------------------------------
+/// @name Checking connection entitlements
+///---------------------------------------
+
+/**
+ * Get the connection entitlements for current user.
+ *
+ * The connection entitlements are currently two: a request rate limit and the number of requests available. For example:
+ *
+ *	@{
+ *		@"limit": @100,
+ *		@"remaining": @100
+ *	}
+ *
+ * @param connectionEntitlements A block object to be executed when the task finishes. This block has no return value and takes two arguments: a dictionary with the entitlements parameters and the error describing the network or parsing error that occurred. If the request fails `rateLimit` is set to nil.
+ */
+- (void)getConnectionEntitlements:(void (^)(NSDictionary *entitlements, NSError *error))connectionEntitlements;
+
+
 @end
