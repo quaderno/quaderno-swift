@@ -24,8 +24,14 @@
 #import "RECQuadernoClient.h"
 #import <AFNetworking/AFNetworking.h>
 
-NSString * const RECQuadernoKitAPIHostname				= @"https://quadernoapp.com/";
-NSString * const RECQuadernoKitAPIEndPointSuffix	= @"/api/v1";
+NSString * const RECQuadernoAPIHostname				= @"https://quadernoapp.com/";
+NSString * const RECQuadernoAPIEndPointSuffix	= @"/api/v1";
+
+NSString * const RECQuadernoAPIRateLimitKey					= @"X-RateLimit-Limit";
+NSString * const RECQuadernoAPIRemainingRequestsKey	= @"X-RateLimit-Remaining";
+
+NSString * const RECQuadernoKitRateLimitKey					= @"limit";
+NSString * const RECQuadernoKitRemainingRequestsKey	= @"remaining";
 
 
 @interface RECQuadernoClient ()
@@ -33,6 +39,10 @@ NSString * const RECQuadernoKitAPIEndPointSuffix	= @"/api/v1";
 @property (nonatomic, strong, readonly) NSString *authToken;
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
+
+@property (nonatomic) NSUInteger rateLimit;
+
+@property (nonatomic) NSUInteger remainingRequests;
 
 @end
 
@@ -48,7 +58,7 @@ NSString * const RECQuadernoKitAPIEndPointSuffix	= @"/api/v1";
 		return nil;
 	}
 
-	NSString *URLString = [NSString stringWithFormat:@"%@%@%@", RECQuadernoKitAPIHostname, account, RECQuadernoKitAPIEndPointSuffix];
+	NSString *URLString = [NSString stringWithFormat:@"%@%@%@", RECQuadernoAPIHostname, account, RECQuadernoAPIEndPointSuffix];
 	return [self initWithAuthenticationToken:authToken
 																	 baseURL:[NSURL URLWithString:URLString]];
 }
@@ -77,12 +87,55 @@ NSString * const RECQuadernoKitAPIEndPointSuffix	= @"/api/v1";
 #pragma mark -
 
 - (void)ping:(void (^)(BOOL success))response {
-	[self.sessionManager GET:@"/" parameters:nil
+	[self.sessionManager GET:@"/ping.json" parameters:nil
 									 success:^(NSURLSessionDataTask *task, id responseObject) {
 										 response(YES);
 									 }
 									 failure:^(NSURLSessionDataTask *task, NSError *error) {
 										 response(NO);
+									 }];
+}
+
+- (void)getConnectionEntitlements:(void (^)(NSDictionary *entitlements, NSError *error))connectionEntitlements {
+	[self.sessionManager GET:@"/ping.json" parameters:nil
+									 success:^(NSURLSessionDataTask *task, id responseObject) {
+										 if (!task) {
+											 connectionEntitlements(@{}, nil);
+											 return;
+										 }
+
+										 if (![task.response isKindOfClass:[NSHTTPURLResponse class]]) {
+											 connectionEntitlements(@{}, nil);
+											 return;
+										 }
+
+										 NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+										 NSDictionary *headers = response.allHeaderFields;
+										 if (!headers || headers.count == 0) {
+											 connectionEntitlements(@{}, nil);
+											 return;
+										 }
+
+										 id rateLimit = headers[RECQuadernoAPIRateLimitKey];
+										 if (!rateLimit || ![rateLimit isKindOfClass:[NSNumber class]]) {
+											 connectionEntitlements(@{}, nil);
+											 return;
+										 }
+										 NSMutableDictionary *entitlementsJSON = [NSMutableDictionary dictionaryWithDictionary:@{RECQuadernoKitRateLimitKey: rateLimit}];
+										 self.rateLimit = [rateLimit unsignedIntegerValue];
+
+										 id remainingRequests = headers[RECQuadernoAPIRemainingRequestsKey];
+										 if (!remainingRequests || ![remainingRequests isKindOfClass:[NSNumber class]]) {
+											 connectionEntitlements([NSDictionary dictionaryWithDictionary:entitlementsJSON], nil);
+											 return;
+										 }
+
+										 [entitlementsJSON setObject:remainingRequests forKey:RECQuadernoKitRemainingRequestsKey];
+										 self.remainingRequests = [remainingRequests unsignedIntegerValue];
+										 connectionEntitlements([NSDictionary dictionaryWithDictionary:entitlementsJSON], nil);
+									 }
+									 failure:^(NSURLSessionDataTask *task, NSError *error) {
+										 connectionEntitlements(nil, error);
 									 }];
 }
 
