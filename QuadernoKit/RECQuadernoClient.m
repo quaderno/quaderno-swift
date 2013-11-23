@@ -24,8 +24,8 @@
 #import "RECQuadernoClient.h"
 #import <AFNetworking/AFNetworking.h>
 
-NSString * const RECQuadernoKitAPIHostname				= @"https://quadernoapp.com/";
-NSString * const RECQuadernoKitAPIEndPointSuffix	= @"/api/v1";
+NSString * const RECQuadernoAPIHostname				= @"https://quadernoapp.com/";
+NSString * const RECQuadernoAPIEndPointSuffix	= @"/api/v1";
 
 
 @interface RECQuadernoClient ()
@@ -48,7 +48,7 @@ NSString * const RECQuadernoKitAPIEndPointSuffix	= @"/api/v1";
 		return nil;
 	}
 
-	NSString *URLString = [NSString stringWithFormat:@"%@%@%@", RECQuadernoKitAPIHostname, account, RECQuadernoKitAPIEndPointSuffix];
+	NSString *URLString = [NSString stringWithFormat:@"%@%@%@", RECQuadernoAPIHostname, account, RECQuadernoAPIEndPointSuffix];
 	return [self initWithAuthenticationToken:authToken
 																	 baseURL:[NSURL URLWithString:URLString]];
 }
