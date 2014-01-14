@@ -63,7 +63,7 @@ QuadernoKit has been originally developed by [Eliezer Talón](https://github.com
 
 ## Contact
 
-Follow Quaderno ([@quadernoapp](https://twitter.com/quadernoapp)) and Recrea ([@recreahq](https://twitter.com/recreahq)) on Twitter.
+Follow Quaderno ([@quadernoapp](https://twitter.com/quadernoapp)) on Twitter.
 
 
 ## License
