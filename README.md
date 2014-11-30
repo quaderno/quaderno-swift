@@ -5,9 +5,9 @@ QuadernoKit is an Objective-C wrapper that provides easy access to the [Quaderno
 
 ## Why Using It?
 
-You can implement your own client for the [Quaderno API](https://github.com/recrea/quaderno-api). However, by using QuadernoKit you have instant access to the same interface without messing around with low-level HTTP requests and JSON-encoded data.
+You can implement your own client for the [Quaderno API](https://github.com/quaderno/quaderno-api). However, by using QuadernoKit you have instant access to the same interface without messing around with low-level HTTP requests and JSON-encoded data.
 
-Note that you need a valid [Quaderno](https://quadernoapp.com) account to use QuadernoKit.
+Note that you need a valid [Quaderno](https://quaderno.io) account to use QuadernoKit.
 
 
 ## Supported OS & SDK Versions
@@ -53,7 +53,7 @@ QuadernoKit doesn't automatically persist your objects for you.
 
 ## More Information
 
-Remember that this is only a Objective-C wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://github.com/recrea/quaderno-api).
+Remember that this is only a Objective-C wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://github.com/quaderno/quaderno-api).
 
 
 ## Credits
