@@ -1,7 +1,7 @@
 //
-//  QuadernoKit.h
+// Quaderno.h
 //
-//  Copyright (c) 2013 Recrea (http://recreahq.com/)
+// Copyright (c) 2013-2015 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+@import Foundation;
 
-#import <Foundation/Foundation.h>
+//! Project version number for Quaderno.
+FOUNDATION_EXPORT double QuadernoVersionNumber;
 
-#ifndef _QUADERNOKIT_
-	#define _QUADERNOKIT_
-
-	#import "RECQuadernoClient.h"
-#endif /* _QUADERNOKIT_ */
+//! Project version string for Quaderno.
+FOUNDATION_EXPORT const unsigned char QuadernoVersionString[];
