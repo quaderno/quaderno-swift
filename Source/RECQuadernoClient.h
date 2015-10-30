@@ -74,18 +74,6 @@
 - (instancetype)initWithAuthenticationToken:(NSString *)authToken baseURL:(NSURL *)baseURL;
 
 
-///---------------------------
-/// @name Testing connectivity
-///---------------------------
-
-/**
- * Check whether or not the Quaderno backend is available
- *
- * @param response A block object to be executed when the task finishes. This block has no return value and takes one argument: whether or not the ping was successful.
- */
-- (void)ping:(void (^)(BOOL success))response;
-
-
 ///---------------------------------------
 /// @name Checking connection entitlements
 ///---------------------------------------

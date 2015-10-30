@@ -21,31 +21,66 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import XCTest
 @testable import Quaderno
 
+import XCTest
+import OHHTTPStubs
+
+
 class QuadernoTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+  // MARK: Test Subject
+
+  var httpClient: Client!
+
+  // MARK: Set Up
+
+  override func setUp() {
+    super.setUp()
+
+    if let baseURL = NSURL(string: "https://quadernoapp.com/api/v1/") {
+      httpClient = Client(baseURL: baseURL, authenticationToken: "My token")
     }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+  }
+
+  override func tearDown() {
+    httpClient = nil
+    OHHTTPStubs.removeAllStubs()
+    super.tearDown()
+  }
+
+  // MARK: Ping
+
+  func testThatPingCompletesWithSuccessWhenConnectionIsAvailable() {
+    OHHTTPStubs.stubRequestsPassingTest({ request in
+      request.HTTPMethod == "GET" && request.URL!.lastPathComponent == PingResource.path
+      }) { _ in
+        return OHHTTPStubsResponse(JSONObject: ["status": "OK"], statusCode: 200, headers: nil)
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+    let expectation = expectationWithDescription("ping finishes")
+    httpClient.ping { success in
+      if success {
+        expectation.fulfill()
+      }
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
+  func testThatPingCompletesWithoutSuccessWhenConnectionIsUnavailable() {
+    OHHTTPStubs.stubRequestsPassingTest({ request in
+      request.HTTPMethod == "GET" && request.URL!.lastPathComponent == PingResource.path
+      }) { _ in
+        return OHHTTPStubsResponse(JSONObject: ["error": "Not authorized"], statusCode: 401, headers: nil)
     }
-    
+
+    let expectation = expectationWithDescription("ping finishes")
+    httpClient.ping { success in
+      if !success {
+        expectation.fulfill()
+      }
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
 }

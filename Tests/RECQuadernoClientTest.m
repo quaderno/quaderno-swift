@@ -98,59 +98,6 @@ extern NSString * const RECQuadernoKitRemainingRequestsKey;
 
 #pragma mark -
 
-- (void)testThatPingInvokesSessionManager {
-	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
-	self.quadernoClient.sessionManager = mockSessionManager;
-
-	[[mockSessionManager expect] GET:OCMOCK_ANY parameters:nil success:OCMOCK_ANY failure:OCMOCK_ANY];
-	[self.quadernoClient ping:nil];
-	[mockSessionManager verify];
-}
-
-- (void)testThatPingSetsBlockArgumentWhenRequestSuccess {
-	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
-
-	[[mockSessionManager expect] GET:OCMOCK_ANY
-												parameters:nil
-													 success:[OCMArg checkWithBlock:^BOOL(void (^successBlock)(NSURLSessionTask *, id)) {
-		successBlock(nil, [NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding]);
-		return YES;
-	}]
-													 failure:OCMOCK_ANY];
-	self.quadernoClient.sessionManager = mockSessionManager;
-
-
-	__block NSNumber *blockSuccess = nil;
-	[self.quadernoClient ping:^(BOOL success) {
-		blockSuccess = [NSNumber numberWithBool:success];
-	}];
-
-	expect(blockSuccess).will.equal(@YES);
-}
-
-- (void)testThatPingSetsBlockArgumentWhenRequestFails {
-	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
-
-	[[mockSessionManager expect] GET:OCMOCK_ANY
-												parameters:nil
-													 success:OCMOCK_ANY
-													 failure:[OCMArg checkWithBlock:^BOOL(void (^failureBlock)(NSURLSessionTask *, NSError *)) {
-		failureBlock(nil, [NSError errorWithDomain:OCMOCK_ANY code:400 userInfo:OCMOCK_ANY]);
-		return YES;
-	}]];
-	self.quadernoClient.sessionManager = mockSessionManager;
-
-
-	__block NSNumber *blockSuccess = nil;
-	[self.quadernoClient ping:^(BOOL success) {
-		blockSuccess = [NSNumber numberWithBool:success];
-	}];
-
-	expect(blockSuccess).will.equal(@NO);
-}
-
-#pragma mark -
-
 - (void)testThatGetConnectionEntitlementsInvokesSessionManager {
 	id mockSessionManager = [OCMockObject mockForClass:[AFHTTPSessionManager class]];
 	self.quadernoClient.sessionManager = mockSessionManager;

@@ -1,7 +1,7 @@
 //
-// RECTestCase.m
+//  Resource.swift
 //
-// Copyright (c) 2013-2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,17 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "RECTestCase.h"
+/// Requirements of a resource in the Quaderno API.
+protocol Resource {
 
-@implementation RECTestCase
+  /// Path of the resource.
+  static var path: String { get }
 
-- (void)setUp {
-	[super setUp];
-	[Expecta setAsynchronousTestTimeout:5];
 }
 
-- (void)tearDown {
-	[super tearDown];
-}
-
-@end
+/// A resource for checking the availability of the service.
+struct PingResource: Resource { static let path = "ping.json" }
