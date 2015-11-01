@@ -1,5 +1,6 @@
 language: objective-c
 osx_image: xcode7.1
+cache: cocoapods
 notifications:
   email: false
 env:
