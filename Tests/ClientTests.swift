@@ -1,5 +1,5 @@
 //
-// QuadernoTests.swift
+// ClientTests.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -27,7 +27,7 @@ import XCTest
 import OHHTTPStubs
 
 
-class QuadernoTests: XCTestCase {
+class ClientTests: XCTestCase {
 
   // MARK: Test Subject
 
@@ -74,7 +74,7 @@ class QuadernoTests: XCTestCase {
 
   // MARK: Connection Entitlements
 
-  func testThatFetchingConnectionEntitlementsReturnsNilWhenHeadersAreEmpty() {
+  func testThatFetchingConnectionEntitlementsReturnsNilWhenHeadersAreInvalid() {
     let response = OHHTTPStubsResponse(JSONObject: PingResponse.successJSON, statusCode: CInt(PingResponse.successCode), headers: nil)
     OHHTTPStubs.stubPingRequest(success: true, response: response)
 
@@ -87,48 +87,13 @@ class QuadernoTests: XCTestCase {
     waitForExpectationsWithTimeout(1, handler: nil)
   }
 
-  func testThatFetchingConnectionEntitlementsReturnsNilWhenResetHeaderIsMissing() {
-    let headers = ["X-RateLimit-Remaining": "15"]
-    let response = OHHTTPStubsResponse(JSONObject: PingResponse.successJSON, statusCode: CInt(PingResponse.successCode), headers: headers)
-    OHHTTPStubs.stubPingRequest(success: true, response: response)
-
-    let expectation = expectationWithDescription("ping finishes")
-    httpClient.fetchConnectionEntitlements { entitlements in
-      XCTAssertNil(entitlements)
-      XCTAssertNil(self.httpClient.entitlements)
-      expectation.fulfill()
-    }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
-
-  func testThatFetchingConnectionEntitlementsReturnsNilWhenRemainingRequestsHeaderIsMissing() {
-    let headers = ["X-RateLimit-Reset": "15"]
-    let response = OHHTTPStubsResponse(JSONObject: PingResponse.successJSON, statusCode: CInt(PingResponse.successCode), headers: headers)
-    OHHTTPStubs.stubPingRequest(success: true, response: response)
-
-    let expectation = expectationWithDescription("ping finishes")
-    httpClient.fetchConnectionEntitlements { entitlements in
-      XCTAssertNil(entitlements)
-      XCTAssertNil(self.httpClient.entitlements)
-      expectation.fulfill()
-    }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
-
-  func testThatFetchingConnectionEntitlementsParsesTheCurrentValues() {
+  func testThatFetchingConnectionEntitlementsReturnsEntitlementsWhenHeadersAreValid() {
     OHHTTPStubs.stubPingRequest(success: true)
 
     let expectation = expectationWithDescription("ping finishes")
     httpClient.fetchConnectionEntitlements { entitlements in
-      guard let currentEntitlements = entitlements else {
-        XCTFail("Unexpected nil entitlements")
-        expectation.fulfill()
-        return
-      }
-
-      XCTAssertEqual(currentEntitlements.resetInterval, 15)
-      XCTAssertEqual(currentEntitlements.remainingRequests, 100)
-
+      XCTAssertNotNil(entitlements)
+      XCTAssertNotNil(self.httpClient.entitlements)
       expectation.fulfill()
     }
     waitForExpectationsWithTimeout(1, handler: nil)
