@@ -68,12 +68,16 @@ extension ConnectionEntitlements {
 
     - returns: A newly initialized connection entitlements.
    */
-  init?(httpHeaders: [NSObject: AnyObject]) {
-    guard let resetIntervalValue = httpHeaders["X-RateLimit-Reset"] else {
+  init?(httpHeaders: [NSObject: AnyObject]?) {
+    guard let headers = httpHeaders else {
       return nil
     }
 
-    guard let remainingRequestsValue = httpHeaders["X-RateLimit-Remaining"] else {
+    guard let resetIntervalValue = headers["X-RateLimit-Reset"] else {
+      return nil
+    }
+
+    guard let remainingRequestsValue = headers["X-RateLimit-Remaining"] else {
       return nil
     }
 

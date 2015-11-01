@@ -112,12 +112,7 @@ public class Client {
       .authenticate(user: authenticationToken, password: "")
       .validate()
       .responseJSON { response in
-        guard let headers = response.response?.allHeaderFields else {
-          completion(entitlements: nil)
-          return
-        }
-
-        self.entitlements = ConnectionEntitlements(httpHeaders: headers)
+        self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)
         completion(entitlements: self.entitlements)
     }
   }
