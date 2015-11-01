@@ -64,6 +64,8 @@ extension ConnectionEntitlements {
   /**
     Initializes connection entitlements with an array of HTTP headers.
 
+    - precondition: All expected headers must be present. Otherwise initialization fails.
+
     - parameter httpHeaders: An array of HTTP headers, typically coming from a `NSHTTPURLResponse` object.
 
     - returns: A newly initialized connection entitlements.
