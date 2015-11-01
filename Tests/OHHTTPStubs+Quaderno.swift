@@ -49,7 +49,7 @@ protocol Response {
   static var failureJSON: JSONResponse { get }
 
   /// The HTTP headers returned with every response.
-  static var httpHeaders: [NSObject: AnyObject]? { get }
+  static var httpHeaders: HTTPHeaders? { get }
 
 }
 
@@ -78,10 +78,10 @@ extension Response {
     ]
   }
 
-  static var httpHeaders: [NSObject: AnyObject]? {
+  static var httpHeaders: HTTPHeaders? {
     return [
-      "X-RateLimit-Reset": "15",
-      "X-RateLimit-Remaining": "100",
+      ConnectionEntitlements.HTTPHeader.Reset.rawValue: "15",
+      ConnectionEntitlements.HTTPHeader.Remaining.rawValue: "100",
     ]
   }
 

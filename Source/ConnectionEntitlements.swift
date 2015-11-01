@@ -38,6 +38,10 @@ public struct ConnectionEntitlements {
 
 // MARK:- Initializing From HTTP Headers
 
+/// Alias for an array of HTTP headers as defined in `NSHTTPURLResponse`.
+typealias HTTPHeaders = [NSObject: AnyObject]
+
+
 /**
   Returns the equivalent integer of an HTTP header value.
 
@@ -62,6 +66,19 @@ private func parseHTTPHeaderValueAsInteger(value: AnyObject) -> Int? {
 extension ConnectionEntitlements {
 
   /**
+    HTTP headers containing the values for connection entitlements.
+
+    - Reset:      Header containing the value for `resetInterval`
+    - Remaining:  Header containing the value for `remainingRequests`.
+   */
+  enum HTTPHeader: String {
+
+    case Reset = "X-RateLimit-Reset"
+    case Remaining = "X-RateLimit-Remaining"
+
+  }
+
+  /**
     Initializes connection entitlements with an array of HTTP headers.
 
     - precondition: All expected headers must be present. Otherwise initialization fails.
@@ -70,16 +87,16 @@ extension ConnectionEntitlements {
 
     - returns: A newly initialized connection entitlements.
    */
-  init?(httpHeaders: [NSObject: AnyObject]?) {
+  init?(httpHeaders: HTTPHeaders?) {
     guard let headers = httpHeaders else {
       return nil
     }
 
-    guard let resetIntervalValue = headers["X-RateLimit-Reset"] else {
+    guard let resetIntervalValue = headers[HTTPHeader.Reset.rawValue] else {
       return nil
     }
 
-    guard let remainingRequestsValue = headers["X-RateLimit-Remaining"] else {
+    guard let remainingRequestsValue = headers[HTTPHeader.Remaining.rawValue] else {
       return nil
     }
 
