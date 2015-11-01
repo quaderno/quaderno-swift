@@ -21,15 +21,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Alamofire
+
+// MARK: Resource
+
 /**
   Requirements of a resource in the Quaderno API.
  */
-protocol Resource {
+protocol Resource: URLStringConvertible {
+
+  /// Path of the resource.
+  var baseURLString: String { get }
 
   /// Path of the resource.
   static var path: String { get }
 
+  /**
+    Initializes a resource with a base URL string.
+
+    - parameter baseURLString: A string representing the base URL of the service.
+
+    - returns: A newly initialized resource.
+   */
+  init(baseURLString: String)
+
 }
 
+
+// MARK:- URLStringConvertible
+extension Resource {
+
+  var URLString: String {
+    return baseURLString + Self.path
+  }
+
+}
+
+
+// MARK:-
+
 /// A resource for checking the availability of the service.
-struct PingResource: Resource { static let path = "ping.json" }
+struct PingResource: Resource {
+
+  let baseURLString: String
+
+  static let path = "ping.json"
+
+}

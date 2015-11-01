@@ -40,7 +40,7 @@ public class Client {
   // MARK: Properties
 
   /// The base URL of the service, typically `https://ACCOUNT-NAME.quadernoapp.com/api/v1/`.
-  public let baseURL: NSURL
+  public let baseURL: String
 
   /// The token used to authenticate requests to the service.
   public let authenticationToken: String
@@ -66,7 +66,7 @@ public class Client {
 
     - seealso: [Authentication](https://github.com/quaderno/quaderno-api#authentication)
    */
-  public init(baseURL: NSURL, authenticationToken: String) {
+  public init(baseURL: String, authenticationToken: String) {
     self.baseURL = baseURL
     self.authenticationToken = authenticationToken
   }
@@ -81,9 +81,7 @@ public class Client {
     - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
    */
   public func ping(completion: (success: Bool) -> Void = noop) {
-    let resourceURL = baseURL.URLByAppendingPathComponent(PingResource.path)
-
-    Alamofire.request(.GET, resourceURL)
+    Alamofire.request(.GET, PingResource(baseURLString: baseURL))
       .authenticate(user: authenticationToken, password: "")
       .validate()
       .responseJSON { response in
@@ -106,9 +104,7 @@ public class Client {
     - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting).
    */
   public func fetchConnectionEntitlements(completion: (entitlements: ConnectionEntitlements?) -> Void = noop) {
-    let resourceURL = baseURL.URLByAppendingPathComponent(PingResource.path)
-
-    Alamofire.request(.GET, resourceURL)
+    Alamofire.request(.GET, PingResource(baseURLString: baseURL))
       .authenticate(user: authenticationToken, password: "")
       .validate()
       .responseJSON { response in

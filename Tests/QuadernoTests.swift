@@ -37,10 +37,7 @@ class QuadernoTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
-
-    if let baseURL = NSURL(string: "https://quadernoapp.com/api/v1/") {
-      httpClient = Client(baseURL: baseURL, authenticationToken: "My token")
-    }
+    httpClient = Client(baseURL: "https://quadernoapp.com/api/v1/", authenticationToken: "My token")
   }
 
   override func tearDown() {
