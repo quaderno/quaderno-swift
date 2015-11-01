@@ -1,7 +1,7 @@
 //
-//  QuadernoTests.swift
+// QuadernoTests.swift
 //
-//  Copyright (c) 2013-2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -52,11 +52,7 @@ class QuadernoTests: XCTestCase {
   // MARK: Ping
 
   func testThatPingCompletesWithSuccessWhenConnectionIsAvailable() {
-    OHHTTPStubs.stubRequestsPassingTest({ request in
-      request.HTTPMethod == "GET" && request.URL!.lastPathComponent == PingResource.path
-      }) { _ in
-        return OHHTTPStubsResponse(JSONObject: ["status": "OK"], statusCode: 200, headers: nil)
-    }
+    OHHTTPStubs.stubPingRequest(success: true)
 
     let expectation = expectationWithDescription("ping finishes")
     httpClient.ping { success in
@@ -68,11 +64,7 @@ class QuadernoTests: XCTestCase {
   }
 
   func testThatPingCompletesWithoutSuccessWhenConnectionIsUnavailable() {
-    OHHTTPStubs.stubRequestsPassingTest({ request in
-      request.HTTPMethod == "GET" && request.URL!.lastPathComponent == PingResource.path
-      }) { _ in
-        return OHHTTPStubsResponse(JSONObject: ["error": "Not authorized"], statusCode: 401, headers: nil)
-    }
+    OHHTTPStubs.stubPingRequest(success: false)
 
     let expectation = expectationWithDescription("ping finishes")
     httpClient.ping { success in
@@ -86,11 +78,8 @@ class QuadernoTests: XCTestCase {
   // MARK: Connection Entitlements
 
   func testThatFetchingConnectionEntitlementsReturnsNilWhenResponseHasUnknownHeaders() {
-    OHHTTPStubs.stubRequestsPassingTest({ request in
-      request.HTTPMethod == "GET" && request.URL!.lastPathComponent == PingResource.path
-      }) { _ in
-        return OHHTTPStubsResponse(JSONObject: ["status": "OK"], statusCode: 200, headers: nil)
-    }
+    let response = OHHTTPStubsResponse(JSONObject: PingResponse.successJSON, statusCode: CInt(PingResponse.successCode), headers: nil)
+    OHHTTPStubs.stubPingRequest(success: true, response: response)
 
     let expectation = expectationWithDescription("ping finishes")
     httpClient.fetchConnectionEntitlements { entitlements in
@@ -102,11 +91,9 @@ class QuadernoTests: XCTestCase {
   }
 
   func testThatFetchingConnectionEntitlementsReturnsNilWhenResponseHasIncompleteHeaders() {
-    OHHTTPStubs.stubRequestsPassingTest({ request in
-      request.HTTPMethod == "GET" && request.URL!.lastPathComponent == PingResource.path
-      }) { _ in
-        return OHHTTPStubsResponse(JSONObject: ["status": "OK"], statusCode: 200, headers: ["X-RateLimit-Reset": "15"])
-    }
+    let headers = ["X-RateLimit-Reset": "15"]
+    let response = OHHTTPStubsResponse(JSONObject: PingResponse.successJSON, statusCode: CInt(PingResponse.successCode), headers: headers)
+    OHHTTPStubs.stubPingRequest(success: true, response: response)
 
     let expectation = expectationWithDescription("ping finishes")
     httpClient.fetchConnectionEntitlements { entitlements in
@@ -118,18 +105,7 @@ class QuadernoTests: XCTestCase {
   }
 
   func testThatFetchingConnectionEntitlementsParsesTheCurrentValues() {
-    OHHTTPStubs.stubRequestsPassingTest({ request in
-      request.HTTPMethod == "GET" && request.URL!.lastPathComponent == PingResource.path
-      }) { _ in
-        return OHHTTPStubsResponse(
-          JSONObject: ["status": "OK"],
-          statusCode: 200,
-          headers: [
-            "X-RateLimit-Reset": "15",
-            "X-RateLimit-Remaining": "100",
-          ]
-        )
-    }
+    OHHTTPStubs.stubPingRequest(success: true)
 
     let expectation = expectationWithDescription("ping finishes")
     httpClient.fetchConnectionEntitlements { entitlements in
