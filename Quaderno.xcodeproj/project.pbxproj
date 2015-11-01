@@ -11,8 +11,8 @@
 		31B979271BE2384800AD6234 /* Quaderno.h in Headers */ = {isa = PBXBuildFile; fileRef = 31B979261BE2384800AD6234 /* Quaderno.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		31B9792E1BE2384800AD6234 /* Quaderno.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B979231BE2384800AD6234 /* Quaderno.framework */; };
 		31B979331BE2384800AD6234 /* QuadernoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B979321BE2384800AD6234 /* QuadernoTests.swift */; };
-		31B979411BE2406200AD6234 /* RECQuadernoClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 31B9793F1BE2406200AD6234 /* RECQuadernoClient.h */; };
 		31E08A571BE37D680080AE74 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E08A561BE37D680080AE74 /* Resource.swift */; };
+		31E08A591BE3C4B50080AE74 /* ConnectionEntitlements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E08A581BE3C4B50080AE74 /* ConnectionEntitlements.swift */; };
 		46687A3DA2EF6C6EEC4B8FDF /* Pods_QuadernoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DE6A3A56E75696AAD7111D /* Pods_QuadernoTests.framework */; };
 		A842C097C31EC07DE68AFFE5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9EA620B0C662597238132E9 /* Pods.framework */; };
 /* End PBXBuildFile section */
@@ -37,10 +37,8 @@
 		31B9792D1BE2384800AD6234 /* QuadernoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuadernoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		31B979321BE2384800AD6234 /* QuadernoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadernoTests.swift; sourceTree = "<group>"; };
 		31B979341BE2384800AD6234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		31B9793F1BE2406200AD6234 /* RECQuadernoClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECQuadernoClient.h; sourceTree = "<group>"; };
-		31B979401BE2406200AD6234 /* RECQuadernoClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECQuadernoClient.m; sourceTree = "<group>"; };
-		31B979431BE240AF00AD6234 /* RECQuadernoClientTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECQuadernoClientTest.m; sourceTree = "<group>"; };
 		31E08A561BE37D680080AE74 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		31E08A581BE3C4B50080AE74 /* ConnectionEntitlements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionEntitlements.swift; sourceTree = "<group>"; };
 		36BC52B699B8F08081F323F0 /* Pods-QuadernoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuadernoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuadernoTests/Pods-QuadernoTests.release.xcconfig"; sourceTree = "<group>"; };
 		AEF115BC63FC5E16288BF36E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B9EA620B0C662597238132E9 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,8 +112,7 @@
 				31B979261BE2384800AD6234 /* Quaderno.h */,
 				31A076861BE26FF800276DE1 /* Client.swift */,
 				31E08A561BE37D680080AE74 /* Resource.swift */,
-				31B9793F1BE2406200AD6234 /* RECQuadernoClient.h */,
-				31B979401BE2406200AD6234 /* RECQuadernoClient.m */,
+				31E08A581BE3C4B50080AE74 /* ConnectionEntitlements.swift */,
 				31B979491BE240DC00AD6234 /* Supporting Files */,
 			);
 			path = Source;
@@ -125,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				31B979321BE2384800AD6234 /* QuadernoTests.swift */,
-				31B979431BE240AF00AD6234 /* RECQuadernoClientTest.m */,
 				31B9794A1BE240E300AD6234 /* Supporting Files */,
 			);
 			path = Tests;
@@ -155,7 +151,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				31B979271BE2384800AD6234 /* Quaderno.h in Headers */,
-				31B979411BE2406200AD6234 /* RECQuadernoClient.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +368,7 @@
 			files = (
 				31A076871BE26FF800276DE1 /* Client.swift in Sources */,
 				31E08A571BE37D680080AE74 /* Resource.swift in Sources */,
+				31E08A591BE3C4B50080AE74 /* ConnectionEntitlements.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

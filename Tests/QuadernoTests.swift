@@ -83,4 +83,68 @@ class QuadernoTests: XCTestCase {
     waitForExpectationsWithTimeout(1, handler: nil)
   }
 
+  // MARK: Connection Entitlements
+
+  func testThatFetchingConnectionEntitlementsReturnsNilWhenResponseHasUnknownHeaders() {
+    OHHTTPStubs.stubRequestsPassingTest({ request in
+      request.HTTPMethod == "GET" && request.URL!.lastPathComponent == PingResource.path
+      }) { _ in
+        return OHHTTPStubsResponse(JSONObject: ["status": "OK"], statusCode: 200, headers: nil)
+    }
+
+    let expectation = expectationWithDescription("ping finishes")
+    httpClient.fetchConnectionEntitlements { entitlements in
+      XCTAssertNil(entitlements)
+      XCTAssertNil(self.httpClient.entitlements)
+      expectation.fulfill()
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
+  func testThatFetchingConnectionEntitlementsReturnsNilWhenResponseHasIncompleteHeaders() {
+    OHHTTPStubs.stubRequestsPassingTest({ request in
+      request.HTTPMethod == "GET" && request.URL!.lastPathComponent == PingResource.path
+      }) { _ in
+        return OHHTTPStubsResponse(JSONObject: ["status": "OK"], statusCode: 200, headers: ["X-RateLimit-Reset": "15"])
+    }
+
+    let expectation = expectationWithDescription("ping finishes")
+    httpClient.fetchConnectionEntitlements { entitlements in
+      XCTAssertNil(entitlements)
+      XCTAssertNil(self.httpClient.entitlements)
+      expectation.fulfill()
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
+  func testThatFetchingConnectionEntitlementsParsesTheCurrentValues() {
+    OHHTTPStubs.stubRequestsPassingTest({ request in
+      request.HTTPMethod == "GET" && request.URL!.lastPathComponent == PingResource.path
+      }) { _ in
+        return OHHTTPStubsResponse(
+          JSONObject: ["status": "OK"],
+          statusCode: 200,
+          headers: [
+            "X-RateLimit-Reset": "15",
+            "X-RateLimit-Remaining": "100",
+          ]
+        )
+    }
+
+    let expectation = expectationWithDescription("ping finishes")
+    httpClient.fetchConnectionEntitlements { entitlements in
+      guard let currentEntitlements = entitlements else {
+        XCTFail("Unexpected nil entitlements")
+        expectation.fulfill()
+        return
+      }
+
+      XCTAssertEqual(currentEntitlements.resetInterval, 15)
+      XCTAssertEqual(currentEntitlements.remainingRequests, 100)
+
+      expectation.fulfill()
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
 }

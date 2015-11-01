@@ -45,6 +45,15 @@ public class Client {
   /// The token used to authenticate requests to the service.
   public let authenticationToken: String
 
+  /**
+    The entitlements granted to the current user for using the service.
+
+    If no entitlements are defined, it is not guaranteed that the next request will succeed.
+
+    - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting)
+   */
+  public private(set) var entitlements: ConnectionEntitlements?
+
   // MARK: Initialization
 
   /**
@@ -62,7 +71,7 @@ public class Client {
     self.authenticationToken = authenticationToken
   }
 
-  // MARK: Checking Availability
+  // MARK: Checking Service Availability
 
   /**
     Checks availability of the service.
@@ -84,6 +93,32 @@ public class Client {
         case .Failure:
           completion(success: false)
         }
+    }
+  }
+
+  /**
+    Fetches the connection entitlements for using the service with the current account.
+
+    - parameter completion: A closure called when the request finishes.
+
+    - postcondition: The value of `entitlements` is updated when the request finishes.
+
+    - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting).
+   */
+  public func fetchConnectionEntitlements(completion: (entitlements: ConnectionEntitlements?) -> Void = noop) {
+    let resourceURL = baseURL.URLByAppendingPathComponent(PingResource.path)
+
+    Alamofire.request(.GET, resourceURL)
+      .authenticate(user: authenticationToken, password: "")
+      .validate()
+      .responseJSON { response in
+        guard let headers = response.response?.allHeaderFields else {
+          completion(entitlements: nil)
+          return
+        }
+
+        self.entitlements = ConnectionEntitlements(httpHeaders: headers)
+        completion(entitlements: self.entitlements)
     }
   }
 

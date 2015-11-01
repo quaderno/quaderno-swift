@@ -1,5 +1,5 @@
 //
-//  Resource.swift
+// Resource.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -21,7 +21,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-/// Requirements of a resource in the Quaderno API.
+/**
+  Requirements of a resource in the Quaderno API.
+ */
 protocol Resource {
 
   /// Path of the resource.
