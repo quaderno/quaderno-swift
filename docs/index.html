@@ -12,7 +12,7 @@
     <a title="  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (100% documented)</p>
+        <p><a href="index.html"> Docs</a> (86% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -30,6 +30,14 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Classes/Client.html">Client</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/ConnectionEntitlements.html">ConnectionEntitlements</a>
               </li>
             </ul>
           </li>
@@ -57,7 +65,7 @@
             
             <a href='#quaderno' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='quaderno'>Quaderno</h1>
 
-<p>Quaderno is an Objective-C framework that provides easy access to the <a href="https://github.com/recrea/quaderno-api">Quaderno API</a>.</p>
+<p>Quaderno is a Swift framework that provides easy access to the <a href="https://github.com/recrea/quaderno-api">Quaderno API</a>.</p>
 <a href='#why_using_it' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='why_using_it'>Why Using It?</h2>
 
 <p>You can implement your own client for the <a href="https://github.com/quaderno/quaderno-api">Quaderno API</a>. However, using Quaderno gives you instant access to the same interface without messing around with low-level HTTP requests and JSON-encoded data.</p>
@@ -78,7 +86,7 @@
 <pre class="highlight ruby"><code><span class="n">pod</span> <span class="s2">"Quaderno"</span><span class="p">,</span> <span class="s2">"~&gt; 0.0.1"</span>
 </code></pre>
 
-<p>Otherwise just drag the source files under the <code>Source</code> directory into your project.</p>
+<p>Otherwise just drag the <code>.swift</code> source files under the <code>Source</code> directory into your project.</p>
 
 <blockquote>
 <p><strong>Embedded frameworks require a minimum deployment target of iOS 8.</strong></p>
@@ -86,9 +94,9 @@
 <p>To use Quaderno with application targets that do not support embedded frameworks, such as iOS 7, you must include all source files directly in your project.</p>
 </blockquote>
 <a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
-<a href='#import_header_files' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='import_header_files'>Import Header Files</h3>
-<pre class="highlight objective_c"><code><span class="cp">#import &lt;QuadernoKit/QuadernoKit.h&gt;
-</span></code></pre>
+<a href='#import_module' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='import_module'>Import Module</h3>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Quaderno</span>
+</code></pre>
 <a href='#persistence' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='persistence'>Persistence</h2>
 
 <p>Quaderno does not automatically persist your objects for you.</p>
@@ -108,9 +116,14 @@
 <li><code>Quaderno.xcodeproj</code>, with the source code of the framework.</li>
 <li><code>Pods.xcodeproj</code>, with third-party dependencies automatically managed by CocoaPods.</li>
 </ol>
+<a href='#documentation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='documentation'>Documentation</h3>
+
+<p>The source code is documented using the markup formatting commands defined by Apple.</p>
+
+<p>An HTML version of the documentation generated with <a href="https://github.com/realm/jazzy">jazzy</a> is also available under the <code>docs</code> directory.</p>
 <a href='#more_information' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='more_information'>More Information</h2>
 
-<p>Remember that this is only a Objective-C wrapper for the original API. If you want more information about the API itself, head to the original <a href="https://github.com/quaderno/quaderno-api">API documentation</a>.</p>
+<p>Remember that this is only a Swift wrapper for the original API. If you want more information about the API itself, head to the original <a href="https://github.com/quaderno/quaderno-api">API documentation</a>.</p>
 <a href='#credits' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='credits'>Credits</h2>
 
 <p>Quaderno has been originally developed by <a href="https://github.com/elitalon">Eliezer Talón</a>.</p>

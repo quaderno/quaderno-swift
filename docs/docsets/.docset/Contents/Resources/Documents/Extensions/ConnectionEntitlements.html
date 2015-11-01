@@ -1,59 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Structs  Reference</title>
-    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
-    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <title>ConnectionEntitlements Extension Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
-    <script src="js/jquery.min.js" defer></script>
-    <script src="js/jazzy.js" defer></script>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
   </head>
   <body>
-    <a title="Structs  Reference"></a>
+    <a name="//apple_ref/swift/Extension/ConnectionEntitlements" class="dashAnchor"></a>
+    <a title="ConnectionEntitlements Extension Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (86% documented)</p>
+        <p><a href="../index.html"> Docs</a> (86% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
-        <a href="index.html"> Reference</a>
-        <img id="carat" src="img/carat.png" />
-        Structs  Reference
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ConnectionEntitlements Extension Reference
       </p>
     </div>
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
-          <a href="Classes.html">Classes</a>
+          <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Classes/Client.html">Client</a>
+                <a href="../Classes/Client.html">Client</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-          <a href="Extensions.html">Extensions</a>
+          <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/ConnectionEntitlements.html">ConnectionEntitlements</a>
+                <a href="../Extensions/ConnectionEntitlements.html">ConnectionEntitlements</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-          <a href="Structs.html">Structs</a>
+          <a href="../Structs.html">Structs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/ConnectionEntitlements.html">ConnectionEntitlements</a>
+                <a href="../Structs/ConnectionEntitlements.html">ConnectionEntitlements</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-          <a href="Typealiases.html">Typealiases</a>
+          <a href="../Typealiases.html">Typealiases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:8Quaderno11HTTPHeaders">HTTPHeaders</a>
+                <a href="../Typealiases.html#/s:8Quaderno11HTTPHeaders">HTTPHeaders</a>
               </li>
             </ul>
           </li>
@@ -62,8 +63,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Structs</h1>
-            <p>The following structs are available globally.</p>
+            <h1>ConnectionEntitlements</h1>
+              <div class="declaration">
+                <div class="Swift">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ConnectionEntitlements</span></code></pre>
+
+                </div>
+              </div>
+            <p>The entitlements granted to a given user for connecting to the service.</p>
 
           </section>
           <section class="section task-group-section">
@@ -72,9 +79,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:V8Quaderno22ConnectionEntitlements"></a>
-                    <a name="//apple_ref/swift/Struct/ConnectionEntitlements" class="dashAnchor"></a>
-                    <a class="token" href="#/s:V8Quaderno22ConnectionEntitlements">ConnectionEntitlements</a>
+                    <a name="/s:OV8Quaderno22ConnectionEntitlements10HTTPHeader"></a>
+                    <a name="//apple_ref/swift/Enum/HTTPHeader" class="dashAnchor"></a>
+                    <a class="token" href="#/s:OV8Quaderno22ConnectionEntitlements10HTTPHeader">HTTPHeader</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -82,15 +89,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The entitlements granted to a given user for connecting to the service.</p>
+                        <p>HTTP headers containing the values for connection entitlements.</p>
 
-                        <a href="Structs/ConnectionEntitlements.html" class="slightly-smaller">See more</a>
+<ul>
+<li>Reset:      Header containing the value for <code>resetInterval</code></li>
+<li>Remaining:  Header containing the value for <code>remainingRequests</code>.</li>
+</ul>
+
+                        <a href="../Extensions/ConnectionEntitlements/HTTPHeader.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ConnectionEntitlements</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">HTTPHeader</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
