@@ -38,7 +38,7 @@ public struct ConnectionEntitlements {
 
 // MARK:- Initializing From HTTP Headers
 
-/// Alias for an array of HTTP headers as defined in `NSHTTPURLResponse`.
+/// Alias for an array of HTTP headers, as defined in `NSHTTPURLResponse`.
 typealias HTTPHeaders = [NSObject: AnyObject]
 
 

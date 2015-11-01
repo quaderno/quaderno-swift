@@ -1,6 +1,6 @@
 # Quaderno
 
-Quaderno is an Objective-C framework that provides easy access to the [Quaderno API](https://github.com/recrea/quaderno-api).
+Quaderno is a Swift framework that provides easy access to the [Quaderno API](https://github.com/recrea/quaderno-api).
 
 
 ## Why Using It?
@@ -27,7 +27,7 @@ Add Quaderno to your Podfile if you are using CocoaPods:
 pod "Quaderno", "~> 0.0.1"
 ```
 
-Otherwise just drag the source files under the `Source` directory into your project.
+Otherwise just drag the `.swift` source files under the `Source` directory into your project.
 
 > **Embedded frameworks require a minimum deployment target of iOS 8.**
 >
@@ -36,10 +36,10 @@ Otherwise just drag the source files under the `Source` directory into your proj
 
 ## Usage
 
-### Import Header Files
+### Import Module
 
-```objc
-#import <QuadernoKit/QuadernoKit.h>
+```swift
+import Quaderno
 ```
 
 
@@ -67,10 +67,16 @@ The entry point for the project is the `Quaderno.xcworkspace` file, which contai
 1. `Quaderno.xcodeproj`, with the source code of the framework.
 2. `Pods.xcodeproj`, with third-party dependencies automatically managed by CocoaPods.
 
+###Documentation
+
+The source code is documented using the markup formatting commands defined by Apple.
+
+An HTML version of the documentation generated with [jazzy](https://github.com/realm/jazzy) is also available under the `docs` directory.
+
 
 ## More Information
 
-Remember that this is only a Objective-C wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://github.com/quaderno/quaderno-api).
+Remember that this is only a Swift wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://github.com/quaderno/quaderno-api).
 
 
 ## Credits
