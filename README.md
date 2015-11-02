@@ -1,64 +1,92 @@
-# QuadernoKit
+# Quaderno
 
-QuadernoKit is an Objective-C wrapper that provides easy access to the [Quaderno API](https://github.com/recrea/quaderno-api).
+[![Build Status](https://travis-ci.org/quaderno/quaderno-ios.svg)](https://travis-ci.org/quaderno/quaderno-ios)
+[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/Quaderno.svg)](https://img.shields.io/cocoapods/v/Quaderno.svg)
+[![Platform](https://img.shields.io/cocoapods/p/Quaderno.svg?style=flat)](http://cocoadocs.org/docsets/Quaderno)
+[![Twitter](https://img.shields.io/badge/twitter-@quadernoapp-blue.svg?style=flat)](https://twitter.com/quadernoapp)
+
+Quaderno is a Swift framework that provides easy access to the [Quaderno API](https://github.com/recrea/quaderno-api).
 
 
 ## Why Using It?
 
-You can implement your own client for the [Quaderno API](https://github.com/quaderno/quaderno-api). However, by using QuadernoKit you have instant access to the same interface without messing around with low-level HTTP requests and JSON-encoded data.
+You can implement your own client for the [Quaderno API](https://github.com/quaderno/quaderno-api). However, using Quaderno gives you instant access to the same interface without messing around with low-level HTTP requests and JSON-encoded data.
 
-Note that you need a valid [Quaderno](https://quaderno.io) account to use QuadernoKit.
+Note that you need a valid account to use Quaderno.
 
 
 ## Supported OS & SDK Versions
 
-* Supported build target - iOS 7.0 (Xcode 5.0, Apple LLVM compiler 5.0)
-* Earliest supported deployment target - iOS 6.1
-* Earliest compatible deployment target - iOS 4.3
+* Supported build target - iOS 9.0
+* Earliest supported deployment target - iOS 9.0
+* Earliest compatible deployment target - iOS 8.0
 
 *'Supported'* means that the library has been tested with this version. *'Compatible'* means that the library should work on this OS version (i.e. it doesn't rely on any unavailable SDK features) but is no longer being tested for compatibility and may require tweaking or bug fixes to run correctly.
 
 
-## ARC Compatibility
-
-QuadernoKit requires ARC. If you wish to use QuadernoKit in a non-ARC project, just add the -fobjc-arc compiler flag to the appropiate classes. To do this, go to the Build Phases tab in your target settings, open the Compile Sources group, double-click on each class in the list and type -fobjc-arc into the popover.
-
-
 ## Installation
 
-Add QuadernoKit to your Podfile if you are using CocoaPods:
+Add Quaderno to your Podfile if you are using CocoaPods:
 
 ```ruby
-platform :ios, '7.0'
-pod "QuadernoKit", "~> 0.0.1"
+pod "Quaderno", "~> 0.0.1"
 ```
 
-Otherwise just drag the `QuadernoKit` directory into your project.
+Otherwise just drag the `.swift` source files under the `Source` directory into your project.
+
+> **Embedded frameworks require a minimum deployment target of iOS 8.**
+>
+> To use Quaderno with application targets that do not support embedded frameworks, such as iOS 7, you must include all source files directly in your project.
 
 
 ## Usage
 
+### Import Module
 
-### Import Header Files
-
-```objc
-#import <QuadernoKit/QuadernoKit.h>
+```swift
+import Quaderno
 ```
 
 
 ## Persistence
 
-QuadernoKit doesn't automatically persist your objects for you.
+Quaderno does not automatically persist your objects for you.
+
+
+## Development
+
+###Getting Started
+
+Quaderno uses [CocoaPods](http://cocoapods.org) to manage dependencies. See `Podfile` to get a comprehensive list of dependencies.
+
+After cloning this repository run the following commands:
+
+```bash
+pod install
+```
+
+###Project Structure
+
+The entry point for the project is the `Quaderno.xcworkspace` file, which contains two projects:
+
+1. `Quaderno.xcodeproj`, with the source code of the framework.
+2. `Pods.xcodeproj`, with third-party dependencies automatically managed by CocoaPods.
+
+###Documentation
+
+The source code is documented using the markup formatting commands defined by Apple.
+
+An HTML version of the documentation generated with [jazzy](https://github.com/realm/jazzy) is also available under the `docs` directory.
 
 
 ## More Information
 
-Remember that this is only a Objective-C wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://github.com/quaderno/quaderno-api).
+Remember that this is only a Swift wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://github.com/quaderno/quaderno-api).
 
 
 ## Credits
 
-QuadernoKit has been originally developed by [Eliezer Talón](https://github.com/elitalon).
+Quaderno has been originally developed by [Eliezer Talón](https://github.com/elitalon).
 
 
 ## Contact
@@ -68,4 +96,4 @@ Follow Quaderno ([@quadernoapp](https://twitter.com/quadernoapp)) on Twitter.
 
 ## License
 
-QuadernoKit is released under the MIT license. See [LICENSE.txt](https://github.com/elitalon/QuadernoKit/blob/master/LICENSE.txt).
+Quaderno is released under the MIT license. See [LICENSE.txt](https://github.com/quaderno/quaderno-ios/blob/master/LICENSE.txt).

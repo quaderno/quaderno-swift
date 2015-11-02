@@ -1,0 +1,3 @@
+ConnectionEntitlements.swift
+	case Reset = "X-RateLimit-Reset"
+	case Remaining = "X-RateLimit-Remaining"
