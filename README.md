@@ -1,5 +1,10 @@
 # Quaderno
 
+[![Build Status](https://travis-ci.org/quaderno/quaderno-ios.svg)](https://travis-ci.org/quaderno/quaderno-ios)
+[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/Quaderno.svg)](https://img.shields.io/cocoapods/v/Quaderno.svg)
+[![Platform](https://img.shields.io/cocoapods/p/Quaderno.svg?style=flat)](http://cocoadocs.org/docsets/Quaderno)
+[![Twitter](https://img.shields.io/badge/twitter-@quadernoapp-blue.svg?style=flat)](https://twitter.com/quadernoapp)
+
 Quaderno is a Swift framework that provides easy access to the [Quaderno API](https://github.com/recrea/quaderno-api).
 
 
