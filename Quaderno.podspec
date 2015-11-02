@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name               = 'QuadernoKit'
+  s.name               = 'Quaderno'
   s.version            = '0.0.2'
   s.license            = 'MIT'
   s.summary            = 'Swift wrapper for the Quaderno API.'
