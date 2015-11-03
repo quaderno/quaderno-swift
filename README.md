@@ -1,6 +1,6 @@
 # Quaderno
 
-[![Build Status](https://travis-ci.org/quaderno/quaderno-ios.svg)](https://travis-ci.org/quaderno/quaderno-ios)
+[![Build Status](https://travis-ci.org/quaderno/quaderno-swift.svg)](https://travis-ci.org/quaderno/quaderno-swift)
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/Quaderno.svg)](https://img.shields.io/cocoapods/v/Quaderno.svg)
 [![Platform](https://img.shields.io/cocoapods/p/Quaderno.svg?style=flat)](http://cocoadocs.org/docsets/Quaderno)
 [![Twitter](https://img.shields.io/badge/twitter-@quadernoapp-blue.svg?style=flat)](https://twitter.com/quadernoapp)
@@ -96,4 +96,4 @@ Follow Quaderno ([@quadernoapp](https://twitter.com/quadernoapp)) on Twitter.
 
 ## License
 
-Quaderno is released under the MIT license. See [LICENSE.txt](https://github.com/quaderno/quaderno-ios/blob/master/LICENSE.txt).
+Quaderno is released under the MIT license. See [LICENSE.txt](https://github.com/quaderno/quaderno-swift/blob/master/LICENSE.txt).

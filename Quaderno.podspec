@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     'Eliezer Talón'    => 'elitalon@gmail.com',
     'Carlos Hernández' => 'carlos@recreahq.com',
   }
-  s.source             = { :git => 'https://github.com/quaderno/quaderno-ios.git', :tag => s.version }
+  s.source             = { :git => 'https://github.com/quaderno/quaderno-swift.git', :tag => s.version }
 
   s.platform           = :ios, '9.0'
   s.requires_arc       = true
