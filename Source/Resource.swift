@@ -36,15 +36,6 @@ protocol Resource: URLStringConvertible {
   /// Path of the resource.
   static var path: String { get }
 
-  /**
-    Initializes a resource with a base URL string.
-
-    - parameter baseURLString: A string representing the base URL of the service.
-
-    - returns: A newly initialized resource.
-   */
-  init(baseURLString: String)
-
 }
 
 
