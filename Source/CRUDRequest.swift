@@ -1,5 +1,5 @@
 //
-// ResourceTests.swift
+// CRUDRequest.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -21,21 +21,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-@testable import Quaderno
+/**
+  Request definitions for resources in the service that support CRUD operations.
 
-import XCTest
+  - seealso:
+    - `CRUDResource`.
+    - [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
+*/
+public enum CRUDRequest {
 
-class ResourceTests: XCTestCase {
+  /// A request for creating a record.
+  case Create(record: Record)
 
-  // MARK: Set Up
+  /// A request for reading a single record.
+  case Read(id: Int)
 
-  let baseURLString = "https://quadernoapp.com/api/v1/"
+  /// A request for reading a collection of records.
+  case List(page: Int)
 
-  // MARK: Examples
+  /// A request for updating a record.
+  case Update(id: Int, record: Record)
 
-  func testThatPingConformsToURLStringConvertible() {
-    let resource = PingResource(baseURLString: baseURLString)
-    XCTAssertEqual(resource.URLString, "https://quadernoapp.com/api/v1/ping.json")
-  }
+  /// A request for deleting a record.
+  case Delete(id: Int)
 
 }

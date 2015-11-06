@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		3117FB2E1BE675970096D05A /* OHHTTPStubs+Quaderno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117FB2D1BE675970096D05A /* OHHTTPStubs+Quaderno.swift */; };
-		3117FB301BE692C00096D05A /* ResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117FB2F1BE692C00096D05A /* ResourceTests.swift */; };
 		3117FB321BE693B20096D05A /* ConnectionEntitlementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */; };
 		31A076871BE26FF800276DE1 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A076861BE26FF800276DE1 /* Client.swift */; };
 		31B979271BE2384800AD6234 /* Quaderno.h in Headers */ = {isa = PBXBuildFile; fileRef = 31B979261BE2384800AD6234 /* Quaderno.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		31B9792E1BE2384800AD6234 /* Quaderno.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B979231BE2384800AD6234 /* Quaderno.framework */; };
 		31B979331BE2384800AD6234 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B979321BE2384800AD6234 /* ClientTests.swift */; };
+		31C2E1821BECA33E005104BB /* CRUDResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1811BECA33E005104BB /* CRUDResource.swift */; };
+		31C2E1841BECA359005104BB /* CRUDRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1831BECA359005104BB /* CRUDRequest.swift */; };
+		31C2E1871BECA7A5005104BB /* Ping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1861BECA7A5005104BB /* Ping.swift */; };
+		31C2E1891BECA7FE005104BB /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1881BECA7FE005104BB /* Contact.swift */; };
+		31C2E18B1BECACCB005104BB /* PingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E18A1BECACCB005104BB /* PingTests.swift */; };
+		31C2E18E1BECB8D0005104BB /* ContactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E18D1BECB8D0005104BB /* ContactTests.swift */; };
 		31E08A571BE37D680080AE74 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E08A561BE37D680080AE74 /* Resource.swift */; };
 		31E08A591BE3C4B50080AE74 /* ConnectionEntitlements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E08A581BE3C4B50080AE74 /* ConnectionEntitlements.swift */; };
 		46687A3DA2EF6C6EEC4B8FDF /* Pods_QuadernoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DE6A3A56E75696AAD7111D /* Pods_QuadernoTests.framework */; };
@@ -34,7 +39,6 @@
 		0B20ABB1A21628A3D0539641 /* Pods-QuadernoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuadernoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuadernoTests/Pods-QuadernoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		252028C5EDD0749F182145E2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3117FB2D1BE675970096D05A /* OHHTTPStubs+Quaderno.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OHHTTPStubs+Quaderno.swift"; sourceTree = "<group>"; };
-		3117FB2F1BE692C00096D05A /* ResourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTests.swift; sourceTree = "<group>"; };
 		3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionEntitlementsTests.swift; sourceTree = "<group>"; };
 		31A076861BE26FF800276DE1 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		31B979231BE2384800AD6234 /* Quaderno.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Quaderno.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +47,12 @@
 		31B9792D1BE2384800AD6234 /* QuadernoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuadernoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		31B979321BE2384800AD6234 /* ClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
 		31B979341BE2384800AD6234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31C2E1811BECA33E005104BB /* CRUDResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUDResource.swift; sourceTree = "<group>"; };
+		31C2E1831BECA359005104BB /* CRUDRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUDRequest.swift; sourceTree = "<group>"; };
+		31C2E1861BECA7A5005104BB /* Ping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ping.swift; sourceTree = "<group>"; };
+		31C2E1881BECA7FE005104BB /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		31C2E18A1BECACCB005104BB /* PingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingTests.swift; sourceTree = "<group>"; };
+		31C2E18D1BECB8D0005104BB /* ContactTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTests.swift; sourceTree = "<group>"; };
 		31E08A561BE37D680080AE74 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		31E08A581BE3C4B50080AE74 /* ConnectionEntitlements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionEntitlements.swift; sourceTree = "<group>"; };
 		36BC52B699B8F08081F323F0 /* Pods-QuadernoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuadernoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuadernoTests/Pods-QuadernoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,7 +127,7 @@
 			children = (
 				31B979261BE2384800AD6234 /* Quaderno.h */,
 				31A076861BE26FF800276DE1 /* Client.swift */,
-				31E08A561BE37D680080AE74 /* Resource.swift */,
+				31C2E1801BECA30C005104BB /* Resources */,
 				31E08A581BE3C4B50080AE74 /* ConnectionEntitlements.swift */,
 				31B979491BE240DC00AD6234 /* Supporting Files */,
 			);
@@ -128,7 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				31B979321BE2384800AD6234 /* ClientTests.swift */,
-				3117FB2F1BE692C00096D05A /* ResourceTests.swift */,
+				31C2E18C1BECACD5005104BB /* Resources */,
 				3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */,
 				3117FB2D1BE675970096D05A /* OHHTTPStubs+Quaderno.swift */,
 				31B9794A1BE240E300AD6234 /* Supporting Files */,
@@ -150,6 +160,35 @@
 				31B979341BE2384800AD6234 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		31C2E1801BECA30C005104BB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				31E08A561BE37D680080AE74 /* Resource.swift */,
+				31C2E1861BECA7A5005104BB /* Ping.swift */,
+				31C2E1851BECA797005104BB /* CRUD */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		31C2E1851BECA797005104BB /* CRUD */ = {
+			isa = PBXGroup;
+			children = (
+				31C2E1831BECA359005104BB /* CRUDRequest.swift */,
+				31C2E1811BECA33E005104BB /* CRUDResource.swift */,
+				31C2E1881BECA7FE005104BB /* Contact.swift */,
+			);
+			name = CRUD;
+			sourceTree = "<group>";
+		};
+		31C2E18C1BECACD5005104BB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				31C2E18A1BECACCB005104BB /* PingTests.swift */,
+				31C2E18D1BECB8D0005104BB /* ContactTests.swift */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,6 +417,10 @@
 				31A076871BE26FF800276DE1 /* Client.swift in Sources */,
 				31E08A571BE37D680080AE74 /* Resource.swift in Sources */,
 				31E08A591BE3C4B50080AE74 /* ConnectionEntitlements.swift in Sources */,
+				31C2E1871BECA7A5005104BB /* Ping.swift in Sources */,
+				31C2E1841BECA359005104BB /* CRUDRequest.swift in Sources */,
+				31C2E1821BECA33E005104BB /* CRUDResource.swift in Sources */,
+				31C2E1891BECA7FE005104BB /* Contact.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,9 +428,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3117FB301BE692C00096D05A /* ResourceTests.swift in Sources */,
 				3117FB321BE693B20096D05A /* ConnectionEntitlementsTests.swift in Sources */,
 				31B979331BE2384800AD6234 /* ClientTests.swift in Sources */,
+				31C2E18E1BECB8D0005104BB /* ContactTests.swift in Sources */,
+				31C2E18B1BECACCB005104BB /* PingTests.swift in Sources */,
 				3117FB2E1BE675970096D05A /* OHHTTPStubs+Quaderno.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -134,7 +134,7 @@ extension OHHTTPStubs {
     - seealso: `PingResponse`
    */
   final class func stubPingRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
-    stubRequestsPassingTest({ request in return requestMatches(request, httpMethod: .GET, path: PingResource.path) }) { _ in
+    stubRequestsPassingTest({ request in return requestMatches(request, httpMethod: .GET, path: Ping().path) }) { _ in
       if let stubbedResponse = response {
         return stubbedResponse
       }

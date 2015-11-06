@@ -33,7 +33,7 @@ func noop<T>(value: T) {}
 // MARK:-
 
 /**
- An HTTP client responsible for making requests to a service exposing the Quaderno API.
+  An HTTP client responsible for making requests to a service exposing the Quaderno API.
  */
 public class Client {
 
@@ -81,7 +81,9 @@ public class Client {
     - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
    */
   public func ping(completion: (success: Bool) -> Void = noop) {
-    Alamofire.request(.GET, PingResource(baseURLString: baseURL))
+    let ping = Ping()
+
+    Alamofire.request(ping.method, ping.URIString(baseURLString: baseURL))
       .authenticate(user: authenticationToken, password: "")
       .validate()
       .responseJSON { response in
@@ -104,7 +106,9 @@ public class Client {
     - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting).
    */
   public func fetchConnectionEntitlements(completion: (entitlements: ConnectionEntitlements?) -> Void = noop) {
-    Alamofire.request(.GET, PingResource(baseURLString: baseURL))
+    let ping = Ping()
+
+    Alamofire.request(ping.method, ping.URIString(baseURLString: baseURL))
       .authenticate(user: authenticationToken, password: "")
       .validate()
       .responseJSON { response in
