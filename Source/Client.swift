@@ -45,6 +45,19 @@ public class Client {
   /// The token used to authenticate requests to the service.
   public let authenticationToken: String
 
+  /// The default encoding for every request.
+  let defaultEncoding = ParameterEncoding.JSON
+
+  /// HTTP headers to authorize every request.
+  lazy var authorizationHeaders: [String: String]? = { [unowned self] in
+    guard let credentialData = "\(self.authenticationToken):".dataUsingEncoding(NSUTF8StringEncoding) else {
+      return nil
+    }
+
+    let base64Credentials = credentialData.base64EncodedStringWithOptions([])
+    return ["Authorization": "Basic \(base64Credentials)"]
+  }()
+
   /**
     The entitlements granted to the current user for using the service.
 
@@ -83,8 +96,7 @@ public class Client {
   public func ping(completion: (success: Bool) -> Void = noop) {
     let ping = Ping()
 
-    Alamofire.request(ping.method, ping.URIString(baseURLString: baseURL))
-      .authenticate(user: authenticationToken, password: "")
+    Alamofire.request(ping.method, ping.URIString(baseURLString: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
       .validate()
       .responseJSON { response in
         switch response.result {
@@ -108,8 +120,7 @@ public class Client {
   public func fetchConnectionEntitlements(completion: (entitlements: ConnectionEntitlements?) -> Void = noop) {
     let ping = Ping()
 
-    Alamofire.request(ping.method, ping.URIString(baseURLString: baseURL))
-      .authenticate(user: authenticationToken, password: "")
+    Alamofire.request(ping.method, ping.URIString(baseURLString: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
       .validate()
       .responseJSON { response in
         self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)
