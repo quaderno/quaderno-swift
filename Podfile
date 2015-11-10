@@ -7,5 +7,7 @@ pod 'Alamofire', '~> 3.0'
 
 # Extra dependencies for testing
 target 'QuadernoTests' do
-  pod 'OHHTTPStubs', '~> 4.0'
+  OHHTTPStubsVersion = '~> 4.0'
+  pod 'OHHTTPStubs', OHHTTPStubsVersion
+  pod 'OHHTTPStubs/Swift', OHHTTPStubsVersion
 end
