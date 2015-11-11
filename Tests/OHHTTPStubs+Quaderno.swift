@@ -25,7 +25,7 @@ import Alamofire
 import OHHTTPStubs
 
 
-// MARK:- OHHTTPStubs Matchers
+// MARK: - OHHTTPStubs Matchers
 
 /**
   Matcher testing that the `NSURLRequest` is using a given HTTP method.
@@ -53,7 +53,7 @@ func containsPath(path: String) -> OHHTTPStubsTestBlock {
 }
 
 
-// MARK:-
+// MARK: -
 
 extension OHHTTPStubs {
 

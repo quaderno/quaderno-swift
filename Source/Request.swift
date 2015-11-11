@@ -28,11 +28,11 @@ import Alamofire
 public typealias RequestParameters = [String: AnyObject]
 
 
-// MARK: Request
+// MARK: - Request
 
-/*
+/**
   Requirements of a request to perform an operation over a resource.
-*/
+ */
 public protocol Request {
 
   /// The HTTP method to use when requesting a resource
@@ -55,19 +55,16 @@ public protocol Request {
 
 }
 
-
-// MARK:-
-
 extension Request {
 
-  var encoding: Alamofire.ParameterEncoding {
+  public var encoding: Alamofire.ParameterEncoding {
     return .JSON
   }
 
 }
 
 
-// MARK:-
+// MARK: -
 
 extension String {
 

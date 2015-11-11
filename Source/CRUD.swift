@@ -24,7 +24,7 @@
 import Alamofire
 
 
-// MARK: CRUD
+// MARK: - CRUD
 
 /**
   Requirements of a resource that supports CRUD operations.
@@ -33,7 +33,7 @@ import Alamofire
     - `Resource`.
     - [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
  */
-protocol CRUD {
+public protocol CRUD {
 
   typealias CRUDResource
 
@@ -86,26 +86,23 @@ protocol CRUD {
 }
 
 
-// MARK:- CRUDRequest
+// MARK: - CRUDRequest
 
 /**
-  Available CRUD requests.
+  Represents a request to perform a CRUD operation.
+
+  - `Create`: A request for creating a resource.
+  - `Read`: A request for reading a resource.
+  - `List`: A request for creating a collection of resources.
+  - `Update`: A request for updating a resource.
+  - `Delete`: A request for deleting a resource.
  */
 enum CRUDRequest<R: Resource>: Request {
 
-  /// A request for creating a resource.
   case Create(RequestParameters)
-
-  /// A request for reading a resource.
   case Read(Int)
-
-  /// A request for creating a collection of resources.
   case List(Int)
-
-  /// A request for updating a resource.
   case Update(Int, RequestParameters)
-
-  /// A request for deleting a resource.
   case Delete(Int)
 
   // MARK: Request
@@ -153,28 +150,25 @@ enum CRUDRequest<R: Resource>: Request {
 
 }
 
-
-// MARK:-
-
 extension CRUD where CRUDResource: Resource {
 
-  static func create(attributes: RequestParameters) -> Request {
+  public static func create(attributes: RequestParameters) -> Request {
     return CRUDRequest<CRUDResource>.Create(attributes)
   }
 
-  static func read(id: Int) -> Request {
+  public static func read(id: Int) -> Request {
     return CRUDRequest<CRUDResource>.Read(id)
   }
 
-  static func list(page: Int = 1) -> Request {
+  public static func list(page: Int = 1) -> Request {
     return CRUDRequest<CRUDResource>.List(page)
   }
 
-  static func update(id: Int, attributes: RequestParameters) -> Request {
+  public static func update(id: Int, attributes: RequestParameters) -> Request {
     return CRUDRequest<CRUDResource>.Update(id, attributes)
   }
 
-  static func delete(id: Int) -> Request {
+  public static func delete(id: Int) -> Request {
     return CRUDRequest<CRUDResource>.Delete(id)
   }
   

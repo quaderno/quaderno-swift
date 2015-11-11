@@ -48,9 +48,6 @@ protocol StubbedHTTPResponse {
 
 }
 
-
-// MARK:-
-
 extension StubbedHTTPResponse {
 
   var successCode: Int {
@@ -79,7 +76,7 @@ extension StubbedHTTPResponse {
 }
 
 
-// MARK:- Stubbed Responses
+// MARK: - Stubbed Responses
 
 
 /// A stubbed response for a `Ping` resource.

@@ -25,17 +25,16 @@
 /**
   A resource for managing contacts.
  */
-final class Contact: Resource {
+final public class Contact: Resource {
 
-  static let name = "contacts"
+  // MARK: Resource
+
+  public static let name = "contacts"
 
 }
 
-
-// MARK:- CRUD
-
 extension Contact: CRUD {
 
-  typealias CRUDResource = Contact
+  public typealias CRUDResource = Contact
 
 }

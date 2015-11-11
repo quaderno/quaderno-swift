@@ -22,11 +22,11 @@
 // THE SOFTWARE.
 
 
-// MARK: Resource
+// MARK: - Resource
 
-/*
+/**
   Requirements of a resource.
-*/
+ */
 public protocol Resource {
 
   /**

@@ -21,17 +21,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
 
-
-// MARK: SingleRequest
+// MARK: - SingleRequest
 
 /**
   Requirements of a resource that only supports one type of requests.
 
   - seealso: `Resource`.
  */
-protocol SingleRequest: Request {
+public protocol SingleRequest: Request {
 
   /**
     Returns a request for calling the resource.

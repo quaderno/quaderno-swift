@@ -24,13 +24,13 @@
 import Foundation
 import Alamofire
 
-// MARK: Helper Functions
+// MARK: - Helper Functions
 
 /// Dummy function to provide as default value for optional trailing closures.
 func noop<T>(value: T) {}
 
 
-// MARK:-
+// MARK: -
 
 /**
   An HTTP client responsible for making requests to a service exposing the Quaderno API.

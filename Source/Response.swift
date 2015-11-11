@@ -26,7 +26,7 @@
 public typealias ResponseObject = [String: AnyObject]
 
 
-// MARK: Response
+// MARK: - Response
 
 /**
   Represents a response returned as a result of a request to a resource. Any response except `Failure` is considered
@@ -48,7 +48,7 @@ public enum Response<Error: ErrorType> {
   case Failure(Error)
 
   /// Whether the response is considered successful.
-  var isSuccess: Bool {
+  public var isSuccess: Bool {
     switch self {
     case .Failure:
       return false
@@ -58,7 +58,7 @@ public enum Response<Error: ErrorType> {
   }
 
   /// Whether the response is considered a failed response.
-  var isFailure: Bool {
+  public var isFailure: Bool {
     return !isSuccess
   }
 
