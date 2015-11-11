@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ConnectionEntitlements Struct Reference</title>
+    <title>SingleRequest Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -9,8 +9,8 @@
     <script src="../js/jazzy.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/ConnectionEntitlements" class="dashAnchor"></a>
-    <a title="ConnectionEntitlements Struct Reference"></a>
+    <a name="//apple_ref/swift/Protocol/SingleRequest" class="dashAnchor"></a>
+    <a title="SingleRequest Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Quaderno Docs</a></p>
@@ -20,7 +20,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Quaderno Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ConnectionEntitlements Struct Reference
+        SingleRequest Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -92,14 +92,20 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ConnectionEntitlements</h1>
+            <h1>SingleRequest</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ConnectionEntitlements</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">SingleRequest</span><span class="p">:</span> <span class="kt">Request</span></code></pre>
 
                 </div>
               </div>
-            <p>The entitlements granted to a given user for connecting to the service.</p>
+            <p>Requirements of a resource that only supports one type of requests.</p>
+
+<div class="aside aside-seealso">
+          <p class="aside-title">Seealso</p>
+          <code><a href="../Protocols/Resource.html">Resource</a></code>.
+
+        </div>
 
           </section>
           <section class="section task-group-section">
@@ -108,9 +114,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV8Quaderno22ConnectionEntitlements13resetIntervalSi"></a>
-                    <a name="//apple_ref/swift/Property/resetInterval" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV8Quaderno22ConnectionEntitlements13resetIntervalSi">resetInterval</a>
+                    <a name="/s:ZFP8Quaderno13SingleRequest7requestuRq_S0__FMq_FT_PS_7Request_"></a>
+                    <a name="//apple_ref/swift/Method/request()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP8Quaderno13SingleRequest7requestuRq_S0__FMq_FT_PS_7Request_">request()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -118,43 +124,21 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The time interval in seconds until the counter of remaining requests is reset to the maximum allowed value.</p>
+                        <p>Returns a request for calling the resource.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">resetInterval</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">request</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Request</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vV8Quaderno22ConnectionEntitlements17remainingRequestsSi"></a>
-                    <a name="//apple_ref/swift/Property/remainingRequests" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV8Quaderno22ConnectionEntitlements17remainingRequestsSi">remainingRequests</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The number of remaining requests until the next counter reset.</p>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A request for calling the resource.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">remainingRequests</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>

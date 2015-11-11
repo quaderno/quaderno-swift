@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ConnectionEntitlements Struct Reference</title>
+    <title>Response Enum Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -9,8 +9,8 @@
     <script src="../js/jazzy.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/ConnectionEntitlements" class="dashAnchor"></a>
-    <a title="ConnectionEntitlements Struct Reference"></a>
+    <a name="//apple_ref/swift/Enum/Response" class="dashAnchor"></a>
+    <a title="Response Enum Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Quaderno Docs</a></p>
@@ -20,7 +20,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Quaderno Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ConnectionEntitlements Struct Reference
+        Response Enum Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -92,14 +92,22 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ConnectionEntitlements</h1>
+            <h1>Response</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ConnectionEntitlements</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Response</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">:</span> <span class="kt">ErrorType</span><span class="o">&gt;</span></code></pre>
 
                 </div>
               </div>
-            <p>The entitlements granted to a given user for connecting to the service.</p>
+            <p>Represents a response returned as a result of a request to a resource. Any response except <code>Failure</code> is considered
+successful.</p>
+
+<ul>
+<li><p><code>Record</code>: The request was successful and a single record was returned as a result.</p></li>
+<li><p><code>Collection</code>: The request was successful and a collection of records was returned as a result.</p></li>
+<li><p><code>Empty</code>: The request was successful but nothing was returned as a result.</p></li>
+<li><p><code>Failure</code>: The request failed and an error that caused the failure is reported.</p></li>
+</ul>
 
           </section>
           <section class="section task-group-section">
@@ -108,9 +116,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV8Quaderno22ConnectionEntitlements13resetIntervalSi"></a>
-                    <a name="//apple_ref/swift/Property/resetInterval" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV8Quaderno22ConnectionEntitlements13resetIntervalSi">resetInterval</a>
+                    <a name="/s:vO8Quaderno8Response9isSuccessSb"></a>
+                    <a name="//apple_ref/swift/Property/isSuccess" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vO8Quaderno8Response9isSuccessSb">isSuccess</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -118,14 +126,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The time interval in seconds until the counter of remaining requests is reset to the maximum allowed value.</p>
+                        <p>Whether the response is considered successful.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">resetInterval</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isSuccess</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -135,9 +143,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV8Quaderno22ConnectionEntitlements17remainingRequestsSi"></a>
-                    <a name="//apple_ref/swift/Property/remainingRequests" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV8Quaderno22ConnectionEntitlements17remainingRequestsSi">remainingRequests</a>
+                    <a name="/s:vO8Quaderno8Response9isFailureSb"></a>
+                    <a name="//apple_ref/swift/Property/isFailure" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vO8Quaderno8Response9isFailureSb">isFailure</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -145,14 +153,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The number of remaining requests until the next counter reset.</p>
+                        <p>Whether the response is considered a failed response.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">remainingRequests</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isFailure</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>

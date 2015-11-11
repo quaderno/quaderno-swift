@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ConnectionEntitlements Struct Reference</title>
+    <title>Contact Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -9,18 +9,18 @@
     <script src="../js/jazzy.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/ConnectionEntitlements" class="dashAnchor"></a>
-    <a title="ConnectionEntitlements Struct Reference"></a>
+    <a name="//apple_ref/swift/Class/Contact" class="dashAnchor"></a>
+    <a title="Contact Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Quaderno Docs</a></p>
+        <p><a href="../index.html">Quaderno Docs</a> (70% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="../index.html">Quaderno Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ConnectionEntitlements Struct Reference
+        Contact Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -33,10 +33,10 @@
                 <a href="../Classes/Client.html">Client</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes.html#/s:C8Quaderno7Contact">Contact</a>
+                <a href="../Classes/Contact.html">Contact</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes.html#/s:C8Quaderno4Ping">Ping</a>
+                <a href="../Classes/Ping.html">Ping</a>
               </li>
             </ul>
           </li>
@@ -52,16 +52,10 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Protocols/CRUD.html">CRUD</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Protocols/Request.html">Request</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Resource.html">Resource</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Protocols/SingleRequest.html">SingleRequest</a>
               </li>
             </ul>
           </li>
@@ -92,25 +86,32 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ConnectionEntitlements</h1>
+            <h1>Contact</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ConnectionEntitlements</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">final</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">Contact</span><span class="p">:</span> <span class="kt">Resource</span></code></pre>
 
                 </div>
               </div>
-            <p>The entitlements granted to a given user for connecting to the service.</p>
+            <p>A resource for managing contacts.</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Resource"></a>
+                <a name="//apple_ref/swift/Section/Resource" class="dashAnchor"></a>
+                <a href="#/Resource">
+                  <h3 class="section-name">Resource</h3>
+                </a>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV8Quaderno22ConnectionEntitlements13resetIntervalSi"></a>
-                    <a name="//apple_ref/swift/Property/resetInterval" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV8Quaderno22ConnectionEntitlements13resetIntervalSi">resetInterval</a>
+                    <a name="/s:ZvC8Quaderno7Contact4nameSS"></a>
+                    <a name="//apple_ref/swift/Variable/name" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvC8Quaderno7Contact4nameSS">name</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -118,41 +119,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The time interval in seconds until the counter of remaining requests is reset to the maximum allowed value.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">resetInterval</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:vV8Quaderno22ConnectionEntitlements17remainingRequestsSi"></a>
-                    <a name="//apple_ref/swift/Property/remainingRequests" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV8Quaderno22ConnectionEntitlements17remainingRequestsSi">remainingRequests</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The number of remaining requests until the next counter reset.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">remainingRequests</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">final</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">Contact</span><span class="p">:</span> <span class="kt">Resource</span></code></pre>
 
                         </div>
                       </div>

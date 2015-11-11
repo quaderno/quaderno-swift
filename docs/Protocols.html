@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Typealiases  Reference</title>
+    <title>Protocols  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset='utf-8'>
@@ -9,7 +9,7 @@
     <script src="js/jazzy.js" defer></script>
   </head>
   <body>
-    <a title="Typealiases  Reference"></a>
+    <a title="Protocols  Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="index.html">Quaderno Docs</a></p>
@@ -19,7 +19,7 @@
       <p id="breadcrumbs">
         <a href="index.html">Quaderno Reference</a>
         <img id="carat" src="img/carat.png" />
-        Typealiases  Reference
+        Protocols  Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -91,11 +91,95 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Typealiases</h1>
-            <p>The following typealiases are available globally.</p>
+            <h1>Protocols</h1>
+            <p>The following protocols are available globally.</p>
 
           </section>
           <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Resource"></a>
+                <a name="//apple_ref/swift/Section/Resource" class="dashAnchor"></a>
+                <a href="#/Resource">
+                  <h3 class="section-name">Resource</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P8Quaderno8Resource"></a>
+                    <a name="//apple_ref/swift/Protocol/Resource" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P8Quaderno8Resource">Resource</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Requirements of a resource.</p>
+
+                        <a href="Protocols/Resource.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Resource</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/SingleRequest"></a>
+                <a name="//apple_ref/swift/Section/SingleRequest" class="dashAnchor"></a>
+                <a href="#/SingleRequest">
+                  <h3 class="section-name">SingleRequest</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P8Quaderno13SingleRequest"></a>
+                    <a name="//apple_ref/swift/Protocol/SingleRequest" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P8Quaderno13SingleRequest">SingleRequest</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Requirements of a resource that only supports one type of requests.</p>
+
+<div class="aside aside-seealso">
+          <p class="aside-title">Seealso</p>
+          <code><a href="Protocols/Resource.html">Resource</a></code>.
+
+        </div>
+
+                        <a href="Protocols/SingleRequest.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">SingleRequest</span><span class="p">:</span> <span class="kt">Request</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
             <div class="task-group">
               <div class="task-name-container">
                 <a name="/Request"></a>
@@ -108,9 +192,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8Quaderno17RequestParameters"></a>
-                    <a name="//apple_ref/swift/Alias/RequestParameters" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8Quaderno17RequestParameters">RequestParameters</a>
+                    <a name="/s:P8Quaderno7Request"></a>
+                    <a name="//apple_ref/swift/Protocol/Request" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P8Quaderno7Request">Request</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -118,14 +202,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Alias for a dictionary representing the parameters sent along with a request.</p>
+                        <p>Requirements of a request to perform an operation over a resource.</p>
 
+                        <a href="Protocols/Request.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">RequestParameters</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Request</span></code></pre>
 
                         </div>
                       </div>
@@ -136,19 +221,19 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Response"></a>
-                <a name="//apple_ref/swift/Section/Response" class="dashAnchor"></a>
-                <a href="#/Response">
-                  <h3 class="section-name">Response</h3>
+                <a name="/CRUD"></a>
+                <a name="//apple_ref/swift/Section/CRUD" class="dashAnchor"></a>
+                <a href="#/CRUD">
+                  <h3 class="section-name">CRUD</h3>
                 </a>
               </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8Quaderno14ResponseObject"></a>
-                    <a name="//apple_ref/swift/Alias/ResponseObject" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8Quaderno14ResponseObject">ResponseObject</a>
+                    <a name="/s:P8Quaderno4CRUD"></a>
+                    <a name="//apple_ref/swift/Protocol/CRUD" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P8Quaderno4CRUD">CRUD</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -156,45 +241,24 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Alias for objects returned in response to requests.</p>
+                        <p>Requirements of a resource that supports CRUD operations.</p>
 
+<div class="aside aside-seealso">
+          <p class="aside-title">Seealso</p>
+          <ul>
+<li><code><a href="Protocols/Resource.html">Resource</a></code>.</li>
+<li><a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a>.</li>
+</ul>
+
+        </div>
+
+                        <a href="Protocols/CRUD.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ResponseObject</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:8Quaderno11HTTPHeaders"></a>
-                    <a name="//apple_ref/swift/Alias/HTTPHeaders" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8Quaderno11HTTPHeaders">HTTPHeaders</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Alias for an array of HTTP headers, as defined in <code>NSHTTPURLResponse</code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">HTTPHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">NSObject</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CRUD</span></code></pre>
 
                         </div>
                       </div>
