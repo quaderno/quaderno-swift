@@ -21,128 +21,160 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-@testable import Quaderno
-
+import Alamofire
 import OHHTTPStubs
 
 
-// MARK:- Response
-
-/// Alias to define a JSON response
-typealias JSONResponse = [String: AnyObject]
+// MARK: - OHHTTPStubs Matchers
 
 /**
-  Properties of a response returned after requesting a resource.
+  Matcher testing that the `NSURLRequest` is using a given HTTP method.
+
+  - parameter method: An HTTP method to query the request against.
+  - returns:          A matcher (OHHTTPStubsTestBlock) that succeeds only if the request is using the given method.
  */
-protocol Response {
-
-  /// The HTTP code returned when requesting the resource succeeds.
-  static var successCode: Int { get }
-
-  /// A stubbed JSON object returned when requesting the resource succeeds.
-  static var successJSON: JSONResponse { get }
-
-  /// The HTTP code returned when requesting the resource fails.
-  static var failureCode: Int { get }
-
-  /// A stubbed JSON object returned when requesting the resource fails.
-  static var failureJSON: JSONResponse { get }
-
-  /// The HTTP headers returned with every response.
-  static var httpHeaders: HTTPHeaders? { get }
-
+func isMethod(method: Alamofire.Method) -> OHHTTPStubsTestBlock {
+  return { $0.HTTPMethod == method.rawValue }
 }
 
 /**
-  Provides the default values returned in a response.
+  Matcher testing that the URL of a `NSURLRequest` has `path` as a suffix.
+
+  - parameter path: A path to query the request against.
+  - returns:        A matcher (OHHTTPStubsTestBlock) that succeeds only if the URL has `path` as a suffix.
  */
-extension Response {
-
-  static var successCode: Int {
-    return 200
+func containsPath(path: String) -> OHHTTPStubsTestBlock {
+  return { request in
+    guard let url = request.URL else {
+      return false
+    }
+    return url.absoluteString.hasSuffix(path)
   }
-
-  static var successJSON: JSONResponse {
-    return [
-      "status": "OK",
-    ]
-  }
-
-  static var failureCode: Int {
-    return 400
-  }
-
-  static var failureJSON: JSONResponse {
-    return [
-      "error": "An error has occurred",
-    ]
-  }
-
-  static var httpHeaders: HTTPHeaders? {
-    return [
-      ConnectionEntitlements.HTTPHeader.Reset.rawValue: "15",
-      ConnectionEntitlements.HTTPHeader.Remaining.rawValue: "100",
-    ]
-  }
-
 }
 
 
-// MARK:- Common Responses
-
-/// A stubbed default response for `PingResource`.
-struct PingResponse: Response {}
-
-
-// MARK:-
+// MARK: -
 
 extension OHHTTPStubs {
 
+  // MARK: Helpers
+
   /**
-    Available HTTP methods
-   */
-  enum HTTPMethod: String {
-    case GET
-    case POST
-    case PUT
-    case DELETE
+    Stubs a request that matches a given method and path, and provides a stubbed response.
+
+    - parameter method:   The HTTP method of the request to stub.
+    - parameter path:     The relative path of the request to stub.
+    - parameter response: A stubbed response to provide as the result of the request.
+  */
+  final class func stubRequest(method method: Alamofire.Method, path: String, response: OHHTTPStubsResponse) {
+    stub(isMethod(method) && containsPath(path)) { _ in return response }
   }
 
-  // MARK: Helper Functions
-
   /**
-    Returns whether a given request matches given method and path.
+    Stubs a response to provide as the result of a request.
 
-    - parameter request:    A request to query using method and path.
-    - parameter httpMethod: An HTTP method to query the request with.
-    - parameter path:       A relative path to query the request with.
+    - parameter response: A response to stub.
+    - parameter success:  Whether the response should be stubbed as successful.
 
-    - returns: Whether the request uses the given method and contains the given path.
+    - returns: A stubbed response to provide when stubbing requests.
+
+    - seealso: `stubRequest(method:path:response)`
    */
-  final class func requestMatches(request: NSURLRequest, httpMethod method: HTTPMethod, path: String) -> Bool {
-    return (request.HTTPMethod == method.rawValue && request.URL!.lastPathComponent == path)
+  final class func stubResponse(response: StubbedHTTPResponse, success: Bool) -> OHHTTPStubsResponse {
+    let responseObject = (success ? response.successJSON : response.failureJSON)
+
+    let JSONObject: AnyObject
+    switch responseObject {
+    case .Record(let record):
+      JSONObject = record
+    case .Collection(let list):
+      JSONObject = list
+    default:
+      JSONObject = []
+    }
+
+    let statusCode = (success ? response.successCode : response.failureCode)
+    return OHHTTPStubsResponse(JSONObject: JSONObject, statusCode: CInt(statusCode), headers: response.httpHeaders)
   }
 
   // MARK: Common Stubs
 
   /**
-    Stubs a request to `PingResource`.
+    Stubs a request to a `Ping` resource.
 
-    - parameter success: Whether the stubbed response should be successful.
-    - parameter response: An optional stubbed response that overrides the default one (`PingResponse`).
+    - parameter success:  Whether the stubbed response should be successful.
+    - parameter response: An optional stubbed response to overrides the default response.
 
-    - seealso: `PingResponse`
+    - seealso: `PingResponse`.
    */
   final class func stubPingRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
-    stubRequestsPassingTest({ request in return requestMatches(request, httpMethod: .GET, path: PingResource.path) }) { _ in
-      if let stubbedResponse = response {
-        return stubbedResponse
-      }
+    let pingResponse = response ?? stubResponse(PingResponse(), success: success)
+    stubRequest(method: .GET, path: "ping.json", response: pingResponse)
+  }
 
-      let JSONResponse = (success ? PingResponse.successJSON : PingResponse.failureJSON)
-      let statusCode = (success ? PingResponse.successCode : PingResponse.failureCode)
-      return OHHTTPStubsResponse(JSONObject: JSONResponse, statusCode: CInt(statusCode), headers: PingResponse.httpHeaders)
-    }
+  /**
+    Stubs a request for creating a `Contact` resource.
+
+    - parameter success:  Whether the stubbed response should be successful.
+    - parameter response: An optional stubbed response to overrides the default response.
+
+    - seealso: `CreateContactResponse`.
+   */
+  final class func stubCreateContactRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
+    let createContactResponse = response ?? stubResponse(CreateContactResponse(), success: success)
+    stubRequest(method: .POST, path: "contacts.json", response: createContactResponse)
+  }
+
+  /**
+    Stubs a request for reading a `Contact` resource.
+
+    - parameter success:  Whether the stubbed response should be successful.
+    - parameter response: An optional stubbed response to overrides the default response.
+
+    - seealso: `ReadContactResponse`.
+   */
+  final class func stubReadContactRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
+    let readContactResponse = response ?? stubResponse(ReadContactResponse(), success: success)
+    stubRequest(method: .GET, path: "contacts/1.json", response: readContactResponse)
+  }
+
+  /**
+    Stubs a request for listing a collection of `Contact` resources.
+
+    - parameter success:  Whether the stubbed response should be successful.
+    - parameter response: An optional stubbed response to overrides the default response.
+
+    - seealso: `ListContactResponse`.
+   */
+  final class func stubListContactRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
+    let listContactResponse = response ?? stubResponse(ListContactResponse(), success: success)
+    stubRequest(method: .GET, path: "contacts.json?page=1", response: listContactResponse)
+  }
+
+  /**
+    Stubs a request for updating a `Contact` resource.
+
+    - parameter success:  Whether the stubbed response should be successful.
+    - parameter response: An optional stubbed response to overrides the default response.
+
+    - seealso: `UpdateContactResponse`.
+   */
+  final class func stubUpdateContactRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
+    let updateContactResponse = response ?? stubResponse(UpdateContactResponse(), success: success)
+    stubRequest(method: .PUT, path: "contacts/1.json", response: updateContactResponse)
+  }
+
+  /**
+    Stubs a request for deleting a `Contact` resource.
+
+    - parameter success:  Whether the stubbed response should be successful.
+    - parameter response: An optional stubbed response to overrides the default response.
+
+    - seealso: `DeleteContactResponse`.
+   */
+  final class func stubDeleteContactRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
+    let deleteContactResponse = response ?? stubResponse(DeleteContactResponse(), success: success)
+    stubRequest(method: .DELETE, path: "contacts/1.json", response: deleteContactResponse)
   }
 
 }

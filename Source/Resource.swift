@@ -21,50 +21,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
 
-// MARK: Resource
+// MARK: - Resource
 
 /**
-  Requirements of a resource in the Quaderno API.
+  Requirements of a resource.
  */
-protocol Resource: URLStringConvertible {
-
-  /// Path of the resource.
-  var baseURLString: String { get }
-
-  /// Path of the resource.
-  static var path: String { get }
+public protocol Resource {
 
   /**
-    Initializes a resource with a base URL string.
+    Name of a resource.
 
-    - parameter baseURLString: A string representing the base URL of the service.
+    This value is used to build URIs that expose different operations over the same resource. For instance, all
+    operations pertaining to invoicing may use the name `"invoices"`, thus having these URIs:
 
-    - returns: A newly initialized resource.
+      - `https://quadernoapp.io/api/v1/invoices`
+      - `https://quadernoapp.io/api/v1/invoices/1.json`
+      - `https://quadernoapp.io/api/v1/invoices/deliver/24.json`
    */
-  init(baseURLString: String)
-
-}
-
-
-// MARK:- URLStringConvertible
-extension Resource {
-
-  var URLString: String {
-    return baseURLString + Self.path
-  }
-
-}
-
-
-// MARK:-
-
-/// A resource for checking the availability of the service.
-struct PingResource: Resource {
-
-  let baseURLString: String
-
-  static let path = "ping.json"
+  static var name: String { get }
 
 }

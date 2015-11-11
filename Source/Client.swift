@@ -24,16 +24,16 @@
 import Foundation
 import Alamofire
 
-// MARK: Helper Functions
+// MARK: - Helper Functions
 
 /// Dummy function to provide as default value for optional trailing closures.
 func noop<T>(value: T) {}
 
 
-// MARK:-
+// MARK: -
 
 /**
- An HTTP client responsible for making requests to a service exposing the Quaderno API.
+  An HTTP client responsible for making requests to a service exposing the Quaderno API.
  */
 public class Client {
 
@@ -44,6 +44,19 @@ public class Client {
 
   /// The token used to authenticate requests to the service.
   public let authenticationToken: String
+
+  /// The default encoding for every request.
+  let defaultEncoding = ParameterEncoding.JSON
+
+  /// HTTP headers to authorize every request.
+  lazy var authorizationHeaders: [String: String]? = { [unowned self] in
+    guard let credentialData = "\(self.authenticationToken):".dataUsingEncoding(NSUTF8StringEncoding) else {
+      return nil
+    }
+
+    let base64Credentials = credentialData.base64EncodedStringWithOptions([])
+    return ["Authorization": "Basic \(base64Credentials)"]
+  }()
 
   /**
     The entitlements granted to the current user for using the service.
@@ -81,8 +94,9 @@ public class Client {
     - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
    */
   public func ping(completion: (success: Bool) -> Void = noop) {
-    Alamofire.request(.GET, PingResource(baseURLString: baseURL))
-      .authenticate(user: authenticationToken, password: "")
+    let ping = Ping.request()
+
+    Alamofire.request(ping.method, ping.uri(baseURL: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
       .validate()
       .responseJSON { response in
         switch response.result {
@@ -104,12 +118,44 @@ public class Client {
     - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting).
    */
   public func fetchConnectionEntitlements(completion: (entitlements: ConnectionEntitlements?) -> Void = noop) {
-    Alamofire.request(.GET, PingResource(baseURLString: baseURL))
-      .authenticate(user: authenticationToken, password: "")
+    let ping = Ping.request()
+
+    Alamofire.request(ping.method, ping.uri(baseURL: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
       .validate()
       .responseJSON { response in
         self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)
         completion(entitlements: self.entitlements)
+    }
+  }
+
+  /**
+    Requests a resource.
+
+    - parameter request:    A concrete request to a resource.
+    - parameter completion: A closure called when the request finishes. The closure has a single parameter that contains
+    the result of the request.
+
+    - seealso:
+      - [API resources](https://github.com/quaderno/quaderno-api#api-resources).
+      - `Response`.
+   */
+  public func request(request: Request, completion: (response: Response<NSError>) -> Void = noop) {
+    Alamofire.request(request.method, request.uri(baseURL: baseURL), parameters: request.parameters, encoding: request.encoding, headers: authorizationHeaders)
+      .validate()
+      .responseJSON { response in
+        switch response.result {
+        case .Success(let value) where value is ResponseObject:
+          completion(response: Response.Record(value as! ResponseObject))
+        case .Success(let value) where value is [ResponseObject]:
+          completion(response: .Collection(value as! [ResponseObject]))
+        case .Success(let value) where value is NSNull:
+          completion(response: .Empty)
+        case .Failure(let error):
+          completion(response: .Failure(error))
+        default:
+          assertionFailure("Unexpected value returned: \(response.result)")
+          completion(response: .Empty)
+        }
     }
   }
 

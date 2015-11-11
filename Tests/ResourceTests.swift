@@ -24,18 +24,16 @@
 @testable import Quaderno
 
 import XCTest
+import Alamofire
+
 
 class ResourceTests: XCTestCase {
 
-  // MARK: Set Up
-
-  let baseURLString = "https://quadernoapp.com/api/v1/"
-
   // MARK: Examples
 
-  func testThatPingConformsToURLStringConvertible() {
-    let resource = PingResource(baseURLString: baseURLString)
-    XCTAssertEqual(resource.URLString, "https://quadernoapp.com/api/v1/ping.json")
+  func testThatAllResourcesProvideTheirNames() {
+    XCTAssertEqual(Ping.name, "ping")
+    XCTAssertEqual(Contact.name, "contacts")
   }
 
 }

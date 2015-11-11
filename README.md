@@ -1,6 +1,6 @@
 # Quaderno
 
-[![Build Status](https://travis-ci.org/quaderno/quaderno-ios.svg)](https://travis-ci.org/quaderno/quaderno-ios)
+[![Build Status](https://travis-ci.org/quaderno/quaderno-swift.svg)](https://travis-ci.org/quaderno/quaderno-swift)
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/Quaderno.svg)](https://img.shields.io/cocoapods/v/Quaderno.svg)
 [![Platform](https://img.shields.io/cocoapods/p/Quaderno.svg?style=flat)](http://cocoadocs.org/docsets/Quaderno)
 [![Twitter](https://img.shields.io/badge/twitter-@quadernoapp-blue.svg?style=flat)](https://twitter.com/quadernoapp)
@@ -29,7 +29,7 @@ Note that you need a valid account to use Quaderno.
 Add Quaderno to your Podfile if you are using CocoaPods:
 
 ```ruby
-pod "Quaderno", "~> 0.0.1"
+pod "Quaderno", "~> 0.1"
 ```
 
 Otherwise just drag the `.swift` source files under the `Source` directory into your project.
@@ -41,11 +41,68 @@ Otherwise just drag the `.swift` source files under the `Source` directory into 
 
 ## Usage
 
-### Import Module
+In order to make requests you need to instantiate at least one `Client` object, providing a base URL for building resource paths and your authentication token:
+
+```swift
+let client = Quaderno.Client(baseURL: "https://quadernoapp.io/api/v1/", authenticationToken: "my token")
+```
+
+All requests are done asynchronously, as explained in this [excerpt from Alamofire's README](https://github.com/Alamofire/Alamofire/blob/master/README.md):
+
+> Networking [...] is done _asynchronously_. Asynchronous programming may be a source of frustration to programmers unfamiliar with the concept, but there are [very good reasons](https://developer.apple.com/library/ios/qa/qa1693/_index.html) for doing it this way.
+
+> Rather than blocking execution to wait for a response from the server, a [callback](http://en.wikipedia.org/wiki/Callback_%28computer_programming%29) is specified to handle the response once it's received. The result of a request is only available inside the scope of a response handler. Any execution contingent on the response or data received from the server must be done within a handler.
+
+### Importing the Module
+
+Import the Quaderno module as you would normally include any Swift module:
 
 ```swift
 import Quaderno
 ```
+
+### Checking the Service Availability
+
+You can ping the service in order to check whether it is available:
+
+```swift
+let client = Quaderno.Client(/* ... */)
+client.ping() { success in
+  // success will be true if the service is available.
+}
+```
+
+### Check the Connection Entitlements
+
+You can check the entitlements for using the service of a given account:
+
+```swift
+let client = Quaderno.Client(/* ... */)
+client.fetchConnectionEntitlements { entitlements in
+  // entitlements will contain the usage limits.
+}
+```
+
+See [`ConnectionEntitlements`](https://github.com/quaderno/quaderno-swift/blob/master/Source/ConnectionEntitlements.swift) for further details.
+
+### Requesting Resources
+
+You can request any resource using the `request(_:completion)` function:
+
+```swift
+let client = Quaderno.Client(/* ... */)
+
+let readContact = Contact.read(48)
+client.request(readContact) { response in
+  // response will contain the result of the request.
+}
+```
+
+The first parameter must be an object conforming to the [`Request`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Request.swift) protocol. For convenience, Quaderno already provides a set of default resources conforming to it (e.g. `Ping`, `Contact`,...).
+
+Moreover, Quaderno also provides different behaviours for implementing common operations on different resources (e.g. `CRUD`, `SingleRequest`,...).
+
+For further details check also [`Resource`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Response.swift) and [`Response`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Response.swift).
 
 
 ## Persistence
@@ -96,4 +153,4 @@ Follow Quaderno ([@quadernoapp](https://twitter.com/quadernoapp)) on Twitter.
 
 ## License
 
-Quaderno is released under the MIT license. See [LICENSE.txt](https://github.com/quaderno/quaderno-ios/blob/master/LICENSE.txt).
+Quaderno is released under the MIT license. See [LICENSE.txt](https://github.com/quaderno/quaderno-swift/blob/master/LICENSE.txt).

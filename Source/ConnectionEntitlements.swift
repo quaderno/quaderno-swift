@@ -36,7 +36,7 @@ public struct ConnectionEntitlements {
 }
 
 
-// MARK:- Initializing From HTTP Headers
+// MARK: - Initializing From HTTP Headers
 
 /// Alias for an array of HTTP headers, as defined in `NSHTTPURLResponse`.
 typealias HTTPHeaders = [NSObject: AnyObject]
@@ -71,7 +71,7 @@ extension ConnectionEntitlements {
     - Reset:      Header containing the value for `resetInterval`
     - Remaining:  Header containing the value for `remainingRequests`.
    */
-  public enum HTTPHeader: String {
+  enum HTTPHeader: String {
 
     case Reset = "X-RateLimit-Reset"
     case Remaining = "X-RateLimit-Remaining"

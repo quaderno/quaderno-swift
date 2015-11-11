@@ -25,6 +25,7 @@
 
 import XCTest
 
+
 class ConnectionEntitlementsTests: XCTestCase {
 
   // MARK: Set Up
@@ -33,7 +34,10 @@ class ConnectionEntitlementsTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
-    expectedHTTPHeaders = PingResponse.httpHeaders
+    expectedHTTPHeaders = [
+      ConnectionEntitlements.HTTPHeader.Reset.rawValue: "15",
+      ConnectionEntitlements.HTTPHeader.Remaining.rawValue: "100",
+    ]
   }
 
   // MARK: Examples
@@ -63,7 +67,10 @@ class ConnectionEntitlementsTests: XCTestCase {
   }
 
   func testThatInitializationSucceedsWhenAllHTTPHeaderArePresent() {
-    XCTAssertNotNil(ConnectionEntitlements(httpHeaders: expectedHTTPHeaders))
+    let entitlements = ConnectionEntitlements(httpHeaders: expectedHTTPHeaders)
+    XCTAssertNotNil(entitlements)
+    XCTAssertEqual(entitlements?.resetInterval, 15)
+    XCTAssertEqual(entitlements?.remainingRequests, 100)
   }
 
 }
