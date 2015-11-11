@@ -71,7 +71,7 @@ extension ConnectionEntitlements {
     - Reset:      Header containing the value for `resetInterval`
     - Remaining:  Header containing the value for `remainingRequests`.
    */
-  public enum HTTPHeader: String {
+  enum HTTPHeader: String {
 
     case Reset = "X-RateLimit-Reset"
     case Remaining = "X-RateLimit-Remaining"
