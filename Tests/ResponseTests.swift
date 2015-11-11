@@ -1,5 +1,5 @@
 //
-// PingTests.swift
+// ResponseTests.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -27,20 +27,30 @@ import XCTest
 import Alamofire
 
 
-class PingTests: XCTestCase {
+class ResponseTests: XCTestCase {
 
-  // MARK: SingleRequest
+  func testThatRecordIsConsideredASuccessfulResponse() {
+    let response = Quaderno.Response<NSError>.Record(["foo": "bar"])
+    XCTAssert(response.isSuccess)
+    XCTAssertFalse(response.isFailure)
+  }
 
-  func testThatBehavesAsSingleRequest() {
-    let request = Ping.request()
+  func testThatCollectionIsConsideredASuccessfulResponse() {
+    let response = Quaderno.Response<NSError>.Collection([["foo": "bar"]])
+    XCTAssert(response.isSuccess)
+    XCTAssertFalse(response.isFailure)
+  }
 
-    XCTAssertEqual(request.method, Alamofire.Method.GET)
-    XCTAssertNil(request.parameters)
+  func testThatEmptyIsConsideredASuccessfulResponse() {
+    let response = Quaderno.Response<NSError>.Empty
+    XCTAssert(response.isSuccess)
+    XCTAssertFalse(response.isFailure)
+  }
 
-    let baseURL = "https://quadernoapp.com/api/v1/"
-    let uri = request.uri(baseURL: baseURL)
-    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/ping.json")
-    XCTAssertNotNil(NSURL(string: uri))
+  func testThatFailureIsConsideredAnUnsuccessfulResponse() {
+    let response = Quaderno.Response<NSError>.Failure(NSError(domain: "", code: 1, userInfo: nil))
+    XCTAssert(response.isFailure)
+    XCTAssertFalse(response.isSuccess)
   }
 
 }

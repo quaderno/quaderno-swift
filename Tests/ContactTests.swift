@@ -1,6 +1,5 @@
 //
-//  ContactTests.swift
-//  Quaderno
+// ContactTests.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -30,105 +29,66 @@ import Alamofire
 
 class ContactTests: XCTestCase {
 
-  // MARK: Test Subjects
-
-  var createContact: Contact!
-
-  var readContact: Contact!
-
-  var listContact: Contact!
-
-  var updateContact: Contact!
-
-  var deleteContact: Contact!
-
-  var contactResources: [Contact]!
-
   // MARK: Set Up
 
-  /// Dummy base URL.
-  let baseURLString = "https://quadernoapp.com/api/v1/"
+  /// Common base URL for all requests
+  let baseURL = "https://quadernoapp.com/api/v1/"
 
-  /// Shortcut for `Method` enumeration.
-  let method = Alamofire.Method
+  // MARK: CRUD
 
-  // Sample record
-  var contactParameters: Record?
+  func testThatProvidesACreateRequest() {
+    let request = Contact.create(["first_name": "John"])
 
-  override func setUp() {
-    super.setUp()
+    XCTAssertEqual(request.method, Method.POST)
+    XCTAssertNotNil(request.parameters)
 
-    contactParameters = Record()
-
-    createContact = Contact(request: .Create(record: contactParameters!))
-    readContact = Contact(request: .Read(id: 1))
-    listContact = Contact(request: .List(page: 1))
-    updateContact = Contact(request: .Update(id: 1, record: contactParameters!))
-    deleteContact = Contact(request: .Delete(id: 1))
-
-    contactResources = [createContact, readContact, listContact, updateContact, deleteContact]
+    let uri = request.uri(baseURL: baseURL)
+    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/contacts.json")
+    XCTAssertNotNil(NSURL(string: uri))
   }
 
-  // MARK: Examples
+  func testThatProvidesAReadRequest() {
+    let request = Contact.read(1)
 
-  func testThatContentTypeExtensionIsJSON() {
-    contactResources.forEach { resource in
-      XCTAssertEqual(resource.contentTypeExtension, ".json")
-    }
+    XCTAssertEqual(request.method, Method.GET)
+    XCTAssertNil(request.parameters)
+
+    let uri = request.uri(baseURL: baseURL)
+    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/contacts/1.json")
+    XCTAssertNotNil(NSURL(string: uri))
   }
 
-  func testThatURIStringIsValid() {
-    var uriString: String
+  func testThatProvidesAListRequest() {
+    let request = Contact.list(1)
 
-    uriString = createContact.URIString(baseURLString: baseURLString)
-    XCTAssertEqual(uriString, "https://quadernoapp.com/api/v1/contacts.json")
-    XCTAssertNotNil(NSURL(string: uriString))
+    XCTAssertEqual(request.method, Method.GET)
+    XCTAssertNil(request.parameters)
 
-    uriString = readContact.URIString(baseURLString: baseURLString)
-    XCTAssertEqual(uriString, "https://quadernoapp.com/api/v1/contacts/1.json")
-    XCTAssertNotNil(NSURL(string: uriString))
-
-    uriString = listContact.URIString(baseURLString: baseURLString)
-    XCTAssertEqual(uriString, "https://quadernoapp.com/api/v1/contacts.json")
-    XCTAssertNotNil(NSURL(string: uriString))
-
-    uriString = updateContact.URIString(baseURLString: baseURLString)
-    XCTAssertEqual(uriString, "https://quadernoapp.com/api/v1/contacts/1.json")
-    XCTAssertNotNil(NSURL(string: uriString))
-
-    uriString = deleteContact.URIString(baseURLString: baseURLString)
-    XCTAssertEqual(uriString, "https://quadernoapp.com/api/v1/contacts/1.json")
-    XCTAssertNotNil(NSURL(string: uriString))
+    let uri = request.uri(baseURL: baseURL)
+    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/contacts.json?page=1")
+    XCTAssertNotNil(NSURL(string: uri))
   }
 
-  func testThatTheExpectedName() {
-    contactResources.forEach { resource in
-      XCTAssertEqual(resource.name, "contacts")
-    }
+  func testThatProvidesAnUpdateRequest() {
+    let request = Contact.update(1, attributes: ["first_name": "John"])
+
+    XCTAssertEqual(request.method, Method.PUT)
+    XCTAssertNotNil(request.parameters)
+
+    let uri = request.uri(baseURL: baseURL)
+    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/contacts/1.json")
+    XCTAssertNotNil(NSURL(string: uri))
   }
 
-  func testThatProvidesTheExpectedPath() {
-    XCTAssertEqual(createContact.path, "contacts.json")
-    XCTAssertEqual(readContact.path, "contacts/1.json")
-    XCTAssertEqual(listContact.path, "contacts.json")
-    XCTAssertEqual(updateContact.path, "contacts/1.json")
-    XCTAssertEqual(deleteContact.path, "contacts/1.json")
-  }
+  func testThatProvidesADeleteRequest() {
+    let request = Contact.delete(1)
 
-  func testThatProvidesTheExpectedMethod() {
-    XCTAssertEqual(createContact.method, method.POST)
-    XCTAssertEqual(readContact.method, method.GET)
-    XCTAssertEqual(listContact.method, method.GET)
-    XCTAssertEqual(updateContact.method, method.PUT)
-    XCTAssertEqual(deleteContact.method, method.DELETE)
-  }
+    XCTAssertEqual(request.method, Method.DELETE)
+    XCTAssertNil(request.parameters)
 
-  func testThatProvidesTheExpectedParameters() {
-    XCTAssertNotNil(createContact.parameters)
-    XCTAssertNil(readContact.parameters)
-    XCTAssertEqual(listContact.parameters?["page"] as? Int, 1)
-    XCTAssertNotNil(updateContact.parameters)
-    XCTAssertNil(deleteContact.parameters)
+    let uri = request.uri(baseURL: baseURL)
+    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/contacts/1.json")
+    XCTAssertNotNil(NSURL(string: uri))
   }
 
 }

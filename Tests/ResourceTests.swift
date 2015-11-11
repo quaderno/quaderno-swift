@@ -1,5 +1,5 @@
 //
-// PingTests.swift
+// ResourceTests.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -27,20 +27,13 @@ import XCTest
 import Alamofire
 
 
-class PingTests: XCTestCase {
+class ResourceTests: XCTestCase {
 
-  // MARK: SingleRequest
+  // MARK: Examples
 
-  func testThatBehavesAsSingleRequest() {
-    let request = Ping.request()
-
-    XCTAssertEqual(request.method, Alamofire.Method.GET)
-    XCTAssertNil(request.parameters)
-
-    let baseURL = "https://quadernoapp.com/api/v1/"
-    let uri = request.uri(baseURL: baseURL)
-    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/ping.json")
-    XCTAssertNotNil(NSURL(string: uri))
+  func testThatAllResourcesProvideTheirNames() {
+    XCTAssertEqual(Ping.name, "ping")
+    XCTAssertEqual(Contact.name, "contacts")
   }
 
 }

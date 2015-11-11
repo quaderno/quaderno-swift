@@ -9,17 +9,24 @@
 /* Begin PBXBuildFile section */
 		3117FB2E1BE675970096D05A /* OHHTTPStubs+Quaderno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117FB2D1BE675970096D05A /* OHHTTPStubs+Quaderno.swift */; };
 		3117FB321BE693B20096D05A /* ConnectionEntitlementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */; };
+		3139A1671BF1472D003D6D66 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E08A561BE37D680080AE74 /* Resource.swift */; };
+		3139A16B1BF14D54003D6D66 /* CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3139A16A1BF14D54003D6D66 /* CRUD.swift */; };
+		3139A16D1BF14E82003D6D66 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1831BECA359005104BB /* Request.swift */; };
+		3139A16E1BF14EB0003D6D66 /* Ping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1861BECA7A5005104BB /* Ping.swift */; };
+		3139A16F1BF14EB3003D6D66 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1881BECA7FE005104BB /* Contact.swift */; };
+		3139A1711BF1528D003D6D66 /* SingleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3139A1701BF1528D003D6D66 /* SingleRequest.swift */; };
+		317E9C451BF2452E00A1C331 /* Response+Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C441BF2452E00A1C331 /* Response+Stubs.swift */; };
+		317E9C471BF2490500A1C331 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C461BF2490500A1C331 /* StringTests.swift */; };
+		317E9C481BF24A1900A1C331 /* PingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E18A1BECACCB005104BB /* PingTests.swift */; };
+		317E9C491BF257CA00A1C331 /* ContactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E18D1BECB8D0005104BB /* ContactTests.swift */; };
+		317E9C4B1BF284C700A1C331 /* ResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C4A1BF284C700A1C331 /* ResourceTests.swift */; };
+		317E9C4D1BF2860600A1C331 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C4C1BF2860600A1C331 /* RequestTests.swift */; };
+		317E9C4F1BF29B7500A1C331 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C4E1BF29B7500A1C331 /* Response.swift */; };
+		317E9C511BF29E1200A1C331 /* ResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C501BF29E1200A1C331 /* ResponseTests.swift */; };
 		31A076871BE26FF800276DE1 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A076861BE26FF800276DE1 /* Client.swift */; };
+		31A09A001BF35DFE006EA9F0 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B979321BE2384800AD6234 /* ClientTests.swift */; };
 		31B979271BE2384800AD6234 /* Quaderno.h in Headers */ = {isa = PBXBuildFile; fileRef = 31B979261BE2384800AD6234 /* Quaderno.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		31B9792E1BE2384800AD6234 /* Quaderno.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B979231BE2384800AD6234 /* Quaderno.framework */; };
-		31B979331BE2384800AD6234 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B979321BE2384800AD6234 /* ClientTests.swift */; };
-		31C2E1821BECA33E005104BB /* CRUDResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1811BECA33E005104BB /* CRUDResource.swift */; };
-		31C2E1841BECA359005104BB /* CRUDRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1831BECA359005104BB /* CRUDRequest.swift */; };
-		31C2E1871BECA7A5005104BB /* Ping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1861BECA7A5005104BB /* Ping.swift */; };
-		31C2E1891BECA7FE005104BB /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1881BECA7FE005104BB /* Contact.swift */; };
-		31C2E18B1BECACCB005104BB /* PingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E18A1BECACCB005104BB /* PingTests.swift */; };
-		31C2E18E1BECB8D0005104BB /* ContactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E18D1BECB8D0005104BB /* ContactTests.swift */; };
-		31E08A571BE37D680080AE74 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E08A561BE37D680080AE74 /* Resource.swift */; };
 		31E08A591BE3C4B50080AE74 /* ConnectionEntitlements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E08A581BE3C4B50080AE74 /* ConnectionEntitlements.swift */; };
 		46687A3DA2EF6C6EEC4B8FDF /* Pods_QuadernoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DE6A3A56E75696AAD7111D /* Pods_QuadernoTests.framework */; };
 		A842C097C31EC07DE68AFFE5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9EA620B0C662597238132E9 /* Pods.framework */; };
@@ -40,6 +47,14 @@
 		252028C5EDD0749F182145E2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3117FB2D1BE675970096D05A /* OHHTTPStubs+Quaderno.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OHHTTPStubs+Quaderno.swift"; sourceTree = "<group>"; };
 		3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionEntitlementsTests.swift; sourceTree = "<group>"; };
+		3139A16A1BF14D54003D6D66 /* CRUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
+		3139A1701BF1528D003D6D66 /* SingleRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRequest.swift; sourceTree = "<group>"; };
+		317E9C441BF2452E00A1C331 /* Response+Stubs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Response+Stubs.swift"; sourceTree = "<group>"; };
+		317E9C461BF2490500A1C331 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		317E9C4A1BF284C700A1C331 /* ResourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTests.swift; sourceTree = "<group>"; };
+		317E9C4C1BF2860600A1C331 /* RequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
+		317E9C4E1BF29B7500A1C331 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		317E9C501BF29E1200A1C331 /* ResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseTests.swift; sourceTree = "<group>"; };
 		31A076861BE26FF800276DE1 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		31B979231BE2384800AD6234 /* Quaderno.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Quaderno.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		31B979261BE2384800AD6234 /* Quaderno.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quaderno.h; sourceTree = "<group>"; };
@@ -47,8 +62,7 @@
 		31B9792D1BE2384800AD6234 /* QuadernoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuadernoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		31B979321BE2384800AD6234 /* ClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
 		31B979341BE2384800AD6234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		31C2E1811BECA33E005104BB /* CRUDResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUDResource.swift; sourceTree = "<group>"; };
-		31C2E1831BECA359005104BB /* CRUDRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUDRequest.swift; sourceTree = "<group>"; };
+		31C2E1831BECA359005104BB /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		31C2E1861BECA7A5005104BB /* Ping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ping.swift; sourceTree = "<group>"; };
 		31C2E1881BECA7FE005104BB /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		31C2E18A1BECACCB005104BB /* PingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingTests.swift; sourceTree = "<group>"; };
@@ -102,6 +116,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3139A16C1BF14D58003D6D66 /* Behaviours */ = {
+			isa = PBXGroup;
+			children = (
+				3139A16A1BF14D54003D6D66 /* CRUD.swift */,
+				3139A1701BF1528D003D6D66 /* SingleRequest.swift */,
+			);
+			name = Behaviours;
+			sourceTree = "<group>";
+		};
+		317E9C431BF2451000A1C331 /* Response Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				317E9C441BF2452E00A1C331 /* Response+Stubs.swift */,
+				3117FB2D1BE675970096D05A /* OHHTTPStubs+Quaderno.swift */,
+			);
+			name = "Response Stubs";
+			sourceTree = "<group>";
+		};
 		31B979191BE2384800AD6234 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +159,10 @@
 			children = (
 				31B979261BE2384800AD6234 /* Quaderno.h */,
 				31A076861BE26FF800276DE1 /* Client.swift */,
+				31E08A561BE37D680080AE74 /* Resource.swift */,
+				31C2E1831BECA359005104BB /* Request.swift */,
+				317E9C4E1BF29B7500A1C331 /* Response.swift */,
+				3139A16C1BF14D58003D6D66 /* Behaviours */,
 				31C2E1801BECA30C005104BB /* Resources */,
 				31E08A581BE3C4B50080AE74 /* ConnectionEntitlements.swift */,
 				31B979491BE240DC00AD6234 /* Supporting Files */,
@@ -137,10 +173,14 @@
 		31B979311BE2384800AD6234 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				31B979321BE2384800AD6234 /* ClientTests.swift */,
-				31C2E18C1BECACD5005104BB /* Resources */,
 				3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */,
-				3117FB2D1BE675970096D05A /* OHHTTPStubs+Quaderno.swift */,
+				317E9C461BF2490500A1C331 /* StringTests.swift */,
+				31B979321BE2384800AD6234 /* ClientTests.swift */,
+				317E9C4A1BF284C700A1C331 /* ResourceTests.swift */,
+				317E9C4C1BF2860600A1C331 /* RequestTests.swift */,
+				317E9C501BF29E1200A1C331 /* ResponseTests.swift */,
+				31C2E18C1BECACD5005104BB /* Resources */,
+				317E9C431BF2451000A1C331 /* Response Stubs */,
 				31B9794A1BE240E300AD6234 /* Supporting Files */,
 			);
 			path = Tests;
@@ -165,21 +205,10 @@
 		31C2E1801BECA30C005104BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				31E08A561BE37D680080AE74 /* Resource.swift */,
 				31C2E1861BECA7A5005104BB /* Ping.swift */,
-				31C2E1851BECA797005104BB /* CRUD */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		31C2E1851BECA797005104BB /* CRUD */ = {
-			isa = PBXGroup;
-			children = (
-				31C2E1831BECA359005104BB /* CRUDRequest.swift */,
-				31C2E1811BECA33E005104BB /* CRUDResource.swift */,
 				31C2E1881BECA7FE005104BB /* Contact.swift */,
 			);
-			name = CRUD;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		31C2E18C1BECACD5005104BB /* Resources */ = {
@@ -414,13 +443,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3139A1671BF1472D003D6D66 /* Resource.swift in Sources */,
+				3139A1711BF1528D003D6D66 /* SingleRequest.swift in Sources */,
+				3139A16D1BF14E82003D6D66 /* Request.swift in Sources */,
 				31A076871BE26FF800276DE1 /* Client.swift in Sources */,
-				31E08A571BE37D680080AE74 /* Resource.swift in Sources */,
+				3139A16F1BF14EB3003D6D66 /* Contact.swift in Sources */,
+				317E9C4F1BF29B7500A1C331 /* Response.swift in Sources */,
+				3139A16E1BF14EB0003D6D66 /* Ping.swift in Sources */,
 				31E08A591BE3C4B50080AE74 /* ConnectionEntitlements.swift in Sources */,
-				31C2E1871BECA7A5005104BB /* Ping.swift in Sources */,
-				31C2E1841BECA359005104BB /* CRUDRequest.swift in Sources */,
-				31C2E1821BECA33E005104BB /* CRUDResource.swift in Sources */,
-				31C2E1891BECA7FE005104BB /* Contact.swift in Sources */,
+				3139A16B1BF14D54003D6D66 /* CRUD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,11 +459,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				317E9C511BF29E1200A1C331 /* ResponseTests.swift in Sources */,
+				317E9C4D1BF2860600A1C331 /* RequestTests.swift in Sources */,
+				317E9C451BF2452E00A1C331 /* Response+Stubs.swift in Sources */,
+				317E9C4B1BF284C700A1C331 /* ResourceTests.swift in Sources */,
+				317E9C481BF24A1900A1C331 /* PingTests.swift in Sources */,
+				317E9C471BF2490500A1C331 /* StringTests.swift in Sources */,
+				31A09A001BF35DFE006EA9F0 /* ClientTests.swift in Sources */,
 				3117FB321BE693B20096D05A /* ConnectionEntitlementsTests.swift in Sources */,
-				31B979331BE2384800AD6234 /* ClientTests.swift in Sources */,
-				31C2E18E1BECB8D0005104BB /* ContactTests.swift in Sources */,
-				31C2E18B1BECACCB005104BB /* PingTests.swift in Sources */,
 				3117FB2E1BE675970096D05A /* OHHTTPStubs+Quaderno.swift in Sources */,
+				317E9C491BF257CA00A1C331 /* ContactTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

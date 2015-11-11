@@ -21,17 +21,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+
 /**
   A resource for managing contacts.
  */
-public struct Contact: CRUDResource {
+final class Contact: Resource {
 
-  // MARK: Resource
+  static let name = "contacts"
 
-  public let name = "contacts"
+}
 
-  // MARK: CRUDResource
 
-  public let request: CRUDRequest
+// MARK:- CRUD
+
+extension Contact: CRUD {
+
+  typealias CRUDResource = Contact
 
 }

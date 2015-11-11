@@ -1,5 +1,5 @@
 //
-// PingTests.swift
+// SingleRequest.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -21,26 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-@testable import Quaderno
-
-import XCTest
 import Alamofire
 
 
-class PingTests: XCTestCase {
+// MARK: SingleRequest
 
-  // MARK: SingleRequest
+/**
+  Requirements of a resource that only supports one type of requests.
 
-  func testThatBehavesAsSingleRequest() {
-    let request = Ping.request()
+  - seealso: `Resource`.
+ */
+protocol SingleRequest: Request {
 
-    XCTAssertEqual(request.method, Alamofire.Method.GET)
-    XCTAssertNil(request.parameters)
-
-    let baseURL = "https://quadernoapp.com/api/v1/"
-    let uri = request.uri(baseURL: baseURL)
-    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/ping.json")
-    XCTAssertNotNil(NSURL(string: uri))
-  }
+  /**
+    Returns a request for calling the resource.
+   
+    - returns: A request for calling the resource.
+   */
+  static func request() -> Request
 
 }

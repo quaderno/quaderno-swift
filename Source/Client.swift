@@ -94,9 +94,9 @@ public class Client {
     - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
    */
   public func ping(completion: (success: Bool) -> Void = noop) {
-    let ping = Ping()
+    let ping = Ping.request()
 
-    Alamofire.request(ping.method, ping.URIString(baseURLString: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
+    Alamofire.request(ping.method, ping.uri(baseURL: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
       .validate()
       .responseJSON { response in
         switch response.result {
@@ -118,13 +118,44 @@ public class Client {
     - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting).
    */
   public func fetchConnectionEntitlements(completion: (entitlements: ConnectionEntitlements?) -> Void = noop) {
-    let ping = Ping()
+    let ping = Ping.request()
 
-    Alamofire.request(ping.method, ping.URIString(baseURLString: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
+    Alamofire.request(ping.method, ping.uri(baseURL: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
       .validate()
       .responseJSON { response in
         self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)
         completion(entitlements: self.entitlements)
+    }
+  }
+
+  /**
+    Requests a resource.
+
+    - parameter request:    A concrete request to a resource.
+    - parameter completion: A closure called when the request finishes. The closure has a single parameter that contains
+    the result of the request.
+
+    - seealso:
+      - [API resources](https://github.com/quaderno/quaderno-api#api-resources).
+      - `Response`.
+   */
+  public func request(request: Request, completion: (response: Response<NSError>) -> Void = noop) {
+    Alamofire.request(request.method, request.uri(baseURL: baseURL), parameters: request.parameters, encoding: request.encoding, headers: authorizationHeaders)
+      .validate()
+      .responseJSON { response in
+        switch response.result {
+        case .Success(let value) where value is ResponseObject:
+          completion(response: Response.Record(value as! ResponseObject))
+        case .Success(let value) where value is [ResponseObject]:
+          completion(response: .Collection(value as! [ResponseObject]))
+        case .Success(let value) where value is NSNull:
+          completion(response: .Empty)
+        case .Failure(let error):
+          completion(response: .Failure(error))
+        default:
+          assertionFailure("Unexpected value returned: \(response.result)")
+          completion(response: .Empty)
+        }
     }
   }
 

@@ -1,5 +1,5 @@
 //
-// PingTests.swift
+// RequestTests.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -26,21 +26,37 @@
 import XCTest
 import Alamofire
 
+class RequestTests: XCTestCase {
 
-class PingTests: XCTestCase {
+  // MARK: Set Up
 
-  // MARK: SingleRequest
+  var requests: [Quaderno.Request]!
 
-  func testThatBehavesAsSingleRequest() {
-    let request = Ping.request()
+  override func setUp() {
+    super.setUp()
 
-    XCTAssertEqual(request.method, Alamofire.Method.GET)
-    XCTAssertNil(request.parameters)
+    requests = [
+      Ping.request(),
 
-    let baseURL = "https://quadernoapp.com/api/v1/"
-    let uri = request.uri(baseURL: baseURL)
-    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/ping.json")
-    XCTAssertNotNil(NSURL(string: uri))
+      Contact.create(["first_name": "John"]),
+      Contact.read(1),
+      Contact.list(1),
+      Contact.update(1, attributes: ["first_name": "John"]),
+      Contact.delete(1),
+    ]
+  }
+
+  // MARK: Examples
+
+  func testThatAllRequestsProvideTheirEncoding() {
+    requests.forEach { request in
+      switch (request.encoding) {
+      case .JSON:
+        XCTAssert(true)
+      default:
+        XCTFail()
+      }
+    }
   }
 
 }

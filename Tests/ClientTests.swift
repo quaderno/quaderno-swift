@@ -37,11 +37,10 @@ class ClientTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
-    httpClient = Client(baseURL: "https://quadernoapp.com/api/v1/", authenticationToken: "My token")
+    httpClient = Client(baseURL: "https://example.com/api/v2/", authenticationToken: "My token")
   }
 
   override func tearDown() {
-    httpClient = nil
     OHHTTPStubs.removeAllStubs()
     super.tearDown()
   }
@@ -75,7 +74,7 @@ class ClientTests: XCTestCase {
   // MARK: Connection Entitlements
 
   func testThatFetchingConnectionEntitlementsReturnsNilWhenHeadersAreInvalid() {
-    let response = OHHTTPStubsResponse(JSONObject: PingResponse.successJSON, statusCode: CInt(PingResponse.successCode), headers: nil)
+    let response = OHHTTPStubsResponse(JSONObject: [], statusCode: 200, headers: nil)
     OHHTTPStubs.stubPingRequest(success: true, response: response)
 
     let expectation = expectationWithDescription("ping finishes")
@@ -95,6 +94,110 @@ class ClientTests: XCTestCase {
       XCTAssertNotNil(entitlements)
       XCTAssertNotNil(self.httpClient.entitlements)
       expectation.fulfill()
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
+  // MARK: Requesting Resources
+
+  func testThatCreatingResourcesReturnsTheCreatedRecordWhenSucceeds() {
+    OHHTTPStubs.stubCreateContactRequest(success: true)
+
+    let expectation = expectationWithDescription("creating a contact finishes")
+    let resource = Contact.create(["first_name": "John"])
+    httpClient.request(resource) { response in
+      XCTAssert(response.isSuccess)
+      switch response{
+      case .Record:
+        expectation.fulfill()
+      default:
+        XCTFail("Unexpected response when creating a resource")
+      }
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
+  func testThatReadingResourcesReturnsTheRecordWhenSucceeds() {
+    OHHTTPStubs.stubReadContactRequest(success: true)
+
+    let expectation = expectationWithDescription("reading a contact finishes")
+    let resource = Contact.read(1)
+    httpClient.request(resource) { response in
+      XCTAssert(response.isSuccess)
+      switch response{
+      case .Record:
+        expectation.fulfill()
+      default:
+        XCTFail("Unexpected response when reading a resource")
+      }
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
+  func testThatListingResourcesReturnsAnArrayOfRecordsWhenSucceeds() {
+    OHHTTPStubs.stubListContactRequest(success: true)
+
+    let expectation = expectationWithDescription("listing contacts finishes")
+    let resource = Contact.list(1)
+    httpClient.request(resource) { response in
+      XCTAssert(response.isSuccess)
+      switch response{
+      case .Collection:
+        expectation.fulfill()
+      default:
+        XCTFail("Unexpected response when listing resources")
+      }
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
+  func testThatUpdatingResourcesReturnsTheRecordWhenSucceeds() {
+    OHHTTPStubs.stubUpdateContactRequest(success: true)
+
+    let expectation = expectationWithDescription("updating a contact finishes")
+    let resource = Contact.update(1, attributes: ["first_name": "John"])
+    httpClient.request(resource) { response in
+      XCTAssert(response.isSuccess)
+      switch response{
+      case .Record:
+        expectation.fulfill()
+      default:
+        XCTFail("Unexpected response when updating a resource")
+      }
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
+  func testThatDeletingResourcesReturnsEmptyWhenSucceeds() {
+    OHHTTPStubs.stubDeleteContactRequest(success: true)
+
+    let expectation = expectationWithDescription("deleting a contact finishes")
+    let resource = Contact.delete(1)
+    httpClient.request(resource) { response in
+      XCTAssert(response.isSuccess)
+      switch response{
+      case .Empty:
+        expectation.fulfill()
+      default:
+        XCTFail("Unexpected response when deleting a resource")
+      }
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
+  func testThatRequestingResourcesReturnsErrorWhenFails() {
+    OHHTTPStubs.stubDeleteContactRequest(success: false)
+
+    let expectation = expectationWithDescription("deleting a contact finishes")
+    let resource = Contact.delete(1)
+    httpClient.request(resource) { response in
+      XCTAssert(response.isFailure)
+      switch response{
+      case .Failure:
+        expectation.fulfill()
+      default:
+        XCTFail("Unexpected response when deleting a resource")
+      }
     }
     waitForExpectationsWithTimeout(1, handler: nil)
   }

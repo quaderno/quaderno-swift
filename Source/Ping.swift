@@ -27,18 +27,35 @@ import Alamofire
 /**
   A resource for checking the availability of the service.
  */
-public struct Ping: Resource {
+final class Ping: Resource {
 
-  // MARK: Resource
+  static let name = "ping"
 
-  public let name = "ping"
+}
 
-  public var path: String {
-    return name + contentTypeExtension
+
+// MARK:- SingleRequest
+
+extension Ping: SingleRequest {
+
+  // MARK: Request
+
+  var method: Alamofire.Method {
+    return .GET
   }
 
-  public let method = Method.GET
+  var parameters: RequestParameters? {
+    return nil
+  }
 
-  public let parameters: Record? = nil
+  func uri(baseURL baseURL: String) -> String {
+    return (baseURL + Ping.name).appendJSONSuffix()
+  }
+
+  // MARK: SingleRequest
+
+  static func request() -> Request {
+    return Ping()
+  }
 
 }

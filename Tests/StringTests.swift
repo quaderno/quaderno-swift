@@ -1,5 +1,5 @@
 //
-// PingTests.swift
+// StringTests.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -24,23 +24,18 @@
 @testable import Quaderno
 
 import XCTest
-import Alamofire
 
 
-class PingTests: XCTestCase {
+class StringTests: XCTestCase {
 
-  // MARK: SingleRequest
+  // MARK: Examples
 
-  func testThatBehavesAsSingleRequest() {
-    let request = Ping.request()
+  func testThatStringAppendsJSONSuffixWhenIsNotPresent() {
+    XCTAssertEqual("example".appendJSONSuffix(), "example.json")
+  }
 
-    XCTAssertEqual(request.method, Alamofire.Method.GET)
-    XCTAssertNil(request.parameters)
-
-    let baseURL = "https://quadernoapp.com/api/v1/"
-    let uri = request.uri(baseURL: baseURL)
-    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/ping.json")
-    XCTAssertNotNil(NSURL(string: uri))
+  func testThatStringDoesNotAppendJSONSuffixWhenIsPresent() {
+    XCTAssertEqual("example.json".appendJSONSuffix(), "example.json")
   }
 
 }

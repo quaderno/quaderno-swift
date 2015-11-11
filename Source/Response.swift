@@ -1,5 +1,5 @@
 //
-// CRUDRequest.swift
+// Response.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -21,28 +21,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+
+/// Alias for objects returned in response to requests.
+public typealias ResponseObject = [String: AnyObject]
+
+
+// MARK: Response
+
 /**
-  Request definitions for resources in the service that support CRUD operations.
+  Represents a response returned as a result of a request to a resource. Any response except `Failure` is considered
+  successful.
 
-  - seealso:
-    - `CRUDResource`.
-    - [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
-*/
-public enum CRUDRequest {
+  - `Record`: The request was successful and a single record was returned as a result.
+ 
+  - `Collection`: The request was successful and a collection of records was returned as a result.
 
-  /// A request for creating a record.
-  case Create(record: Record)
+  - `Empty`: The request was successful but nothing was returned as a result.
+  
+  - `Failure`: The request failed and an error that caused the failure is reported.
+ */
+public enum Response<Error: ErrorType> {
 
-  /// A request for reading a single record.
-  case Read(id: Int)
+  case Record(ResponseObject)
+  case Collection([ResponseObject])
+  case Empty
+  case Failure(Error)
 
-  /// A request for reading a collection of records.
-  case List(page: Int)
+  /// Whether the response is considered successful.
+  var isSuccess: Bool {
+    switch self {
+    case .Failure:
+      return false
+    default:
+      return true
+    }
+  }
 
-  /// A request for updating a record.
-  case Update(id: Int, record: Record)
-
-  /// A request for deleting a record.
-  case Delete(id: Int)
+  /// Whether the response is considered a failed response.
+  var isFailure: Bool {
+    return !isSuccess
+  }
 
 }
