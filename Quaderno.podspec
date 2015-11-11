@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name               = 'Quaderno'
-  s.version            = '0.0.2'
+  s.version            = '0.1.0'
   s.license            = 'MIT'
   s.summary            = 'Swift wrapper for the Quaderno API.'
   s.homepage           = 'https://www.quaderno.io'
