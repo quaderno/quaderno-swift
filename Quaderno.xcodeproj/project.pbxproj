@@ -27,6 +27,8 @@
 		31938A8C1BF5041500147F0C /* InvoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31938A8B1BF5041500147F0C /* InvoiceTests.swift */; };
 		31938A8E1BF5047B00147F0C /* ItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31938A8D1BF5047B00147F0C /* ItemTests.swift */; };
 		31938A911BF504BA00147F0C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31938A901BF504BA00147F0C /* Item.swift */; };
+		31938A931BF508AF00147F0C /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31938A921BF508AF00147F0C /* Credit.swift */; };
+		31938A951BF508EA00147F0C /* CreditTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31938A941BF508EA00147F0C /* CreditTests.swift */; };
 		31A076871BE26FF800276DE1 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A076861BE26FF800276DE1 /* Client.swift */; };
 		31A09A001BF35DFE006EA9F0 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B979321BE2384800AD6234 /* ClientTests.swift */; };
 		31B979271BE2384800AD6234 /* Quaderno.h in Headers */ = {isa = PBXBuildFile; fileRef = 31B979261BE2384800AD6234 /* Quaderno.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +65,8 @@
 		31938A8B1BF5041500147F0C /* InvoiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceTests.swift; sourceTree = "<group>"; };
 		31938A8D1BF5047B00147F0C /* ItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTests.swift; sourceTree = "<group>"; };
 		31938A901BF504BA00147F0C /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		31938A921BF508AF00147F0C /* Credit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
+		31938A941BF508EA00147F0C /* CreditTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditTests.swift; sourceTree = "<group>"; };
 		31A076861BE26FF800276DE1 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		31B979231BE2384800AD6234 /* Quaderno.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Quaderno.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		31B979261BE2384800AD6234 /* Quaderno.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quaderno.h; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				31C2E1881BECA7FE005104BB /* Contact.swift */,
+				31938A921BF508AF00147F0C /* Credit.swift */,
 				310F1F221BF36FED001C9335 /* Invoice.swift */,
 				31938A901BF504BA00147F0C /* Item.swift */,
 				31C2E1861BECA7A5005104BB /* Ping.swift */,
@@ -225,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				31C2E18D1BECB8D0005104BB /* ContactTests.swift */,
+				31938A941BF508EA00147F0C /* CreditTests.swift */,
 				31938A8B1BF5041500147F0C /* InvoiceTests.swift */,
 				31938A8D1BF5047B00147F0C /* ItemTests.swift */,
 				31C2E18A1BECACCB005104BB /* PingTests.swift */,
@@ -464,6 +470,7 @@
 				317E9C4F1BF29B7500A1C331 /* Response.swift in Sources */,
 				3139A16E1BF14EB0003D6D66 /* Ping.swift in Sources */,
 				31E08A591BE3C4B50080AE74 /* ConnectionEntitlements.swift in Sources */,
+				31938A931BF508AF00147F0C /* Credit.swift in Sources */,
 				3139A16B1BF14D54003D6D66 /* CRUD.swift in Sources */,
 				310F1F231BF36FED001C9335 /* Invoice.swift in Sources */,
 			);
@@ -479,6 +486,7 @@
 				317E9C4B1BF284C700A1C331 /* ResourceTests.swift in Sources */,
 				31938A8C1BF5041500147F0C /* InvoiceTests.swift in Sources */,
 				317E9C481BF24A1900A1C331 /* PingTests.swift in Sources */,
+				31938A951BF508EA00147F0C /* CreditTests.swift in Sources */,
 				317E9C471BF2490500A1C331 /* StringTests.swift in Sources */,
 				31A09A001BF35DFE006EA9F0 /* ClientTests.swift in Sources */,
 				31938A8E1BF5047B00147F0C /* ItemTests.swift in Sources */,
