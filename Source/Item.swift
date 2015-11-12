@@ -1,5 +1,5 @@
 //
-// Contact.swift
+// Item.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -23,20 +23,21 @@
 
 
 /**
-  A resource for managing contacts.
+  A resource for managing items.
 
-  - seealso: [Contacts](https://github.com/quaderno/quaderno-api/blob/master/sections/contacts.md).
+  - seealso: [Items](https://github.com/quaderno/quaderno-api/blob/master/sections/items.md).
  */
-final public class Contact: Resource {
+final class Item: Resource {
 
-  // MARK: Resource
-
-  public static let name = "contacts"
+  static let name = "items"
 
 }
 
-extension Contact: CRUD {
 
-  public typealias CRUDResource = Contact
+// MARK:- CRUD
+
+extension Item: CRUD {
+
+  typealias CRUDResource = Item
 
 }
