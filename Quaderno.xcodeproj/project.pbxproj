@@ -16,6 +16,8 @@
 		3139A16E1BF14EB0003D6D66 /* Ping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1861BECA7A5005104BB /* Ping.swift */; };
 		3139A16F1BF14EB3003D6D66 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1881BECA7FE005104BB /* Contact.swift */; };
 		3139A1711BF1528D003D6D66 /* SingleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3139A1701BF1528D003D6D66 /* SingleRequest.swift */; };
+		317C08311BF5EB930080F561 /* Estimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C08301BF5EB930080F561 /* Estimate.swift */; };
+		317C08331BF5ECD20080F561 /* EstimateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C08321BF5ECD20080F561 /* EstimateTests.swift */; };
 		317E9C451BF2452E00A1C331 /* Response+Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C441BF2452E00A1C331 /* Response+Stubs.swift */; };
 		317E9C471BF2490500A1C331 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C461BF2490500A1C331 /* StringTests.swift */; };
 		317E9C481BF24A1900A1C331 /* PingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E18A1BECACCB005104BB /* PingTests.swift */; };
@@ -56,6 +58,8 @@
 		3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionEntitlementsTests.swift; sourceTree = "<group>"; };
 		3139A16A1BF14D54003D6D66 /* CRUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
 		3139A1701BF1528D003D6D66 /* SingleRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRequest.swift; sourceTree = "<group>"; };
+		317C08301BF5EB930080F561 /* Estimate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Estimate.swift; sourceTree = "<group>"; };
+		317C08321BF5ECD20080F561 /* EstimateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimateTests.swift; sourceTree = "<group>"; };
 		317E9C441BF2452E00A1C331 /* Response+Stubs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Response+Stubs.swift"; sourceTree = "<group>"; };
 		317E9C461BF2490500A1C331 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		317E9C4A1BF284C700A1C331 /* ResourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTests.swift; sourceTree = "<group>"; };
@@ -219,6 +223,7 @@
 			children = (
 				31C2E1881BECA7FE005104BB /* Contact.swift */,
 				31938A921BF508AF00147F0C /* Credit.swift */,
+				317C08301BF5EB930080F561 /* Estimate.swift */,
 				310F1F221BF36FED001C9335 /* Invoice.swift */,
 				31938A901BF504BA00147F0C /* Item.swift */,
 				31C2E1861BECA7A5005104BB /* Ping.swift */,
@@ -231,6 +236,7 @@
 			children = (
 				31C2E18D1BECB8D0005104BB /* ContactTests.swift */,
 				31938A941BF508EA00147F0C /* CreditTests.swift */,
+				317C08321BF5ECD20080F561 /* EstimateTests.swift */,
 				31938A8B1BF5041500147F0C /* InvoiceTests.swift */,
 				31938A8D1BF5047B00147F0C /* ItemTests.swift */,
 				31C2E18A1BECACCB005104BB /* PingTests.swift */,
@@ -471,6 +477,7 @@
 				3139A16E1BF14EB0003D6D66 /* Ping.swift in Sources */,
 				31E08A591BE3C4B50080AE74 /* ConnectionEntitlements.swift in Sources */,
 				31938A931BF508AF00147F0C /* Credit.swift in Sources */,
+				317C08311BF5EB930080F561 /* Estimate.swift in Sources */,
 				3139A16B1BF14D54003D6D66 /* CRUD.swift in Sources */,
 				310F1F231BF36FED001C9335 /* Invoice.swift in Sources */,
 			);
@@ -485,6 +492,7 @@
 				317E9C451BF2452E00A1C331 /* Response+Stubs.swift in Sources */,
 				317E9C4B1BF284C700A1C331 /* ResourceTests.swift in Sources */,
 				31938A8C1BF5041500147F0C /* InvoiceTests.swift in Sources */,
+				317C08331BF5ECD20080F561 /* EstimateTests.swift in Sources */,
 				317E9C481BF24A1900A1C331 /* PingTests.swift in Sources */,
 				31938A951BF508EA00147F0C /* CreditTests.swift in Sources */,
 				317E9C471BF2490500A1C331 /* StringTests.swift in Sources */,
