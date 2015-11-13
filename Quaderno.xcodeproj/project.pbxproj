@@ -18,6 +18,8 @@
 		3139A1711BF1528D003D6D66 /* SingleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3139A1701BF1528D003D6D66 /* SingleRequest.swift */; };
 		317C08311BF5EB930080F561 /* Estimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C08301BF5EB930080F561 /* Estimate.swift */; };
 		317C08331BF5ECD20080F561 /* EstimateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C08321BF5ECD20080F561 /* EstimateTests.swift */; };
+		317C08351BF5EE0E0080F561 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C08341BF5EE0E0080F561 /* Expense.swift */; };
+		317C08371BF5EE870080F561 /* ExpenseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C08361BF5EE870080F561 /* ExpenseTests.swift */; };
 		317E9C451BF2452E00A1C331 /* Response+Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C441BF2452E00A1C331 /* Response+Stubs.swift */; };
 		317E9C471BF2490500A1C331 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C461BF2490500A1C331 /* StringTests.swift */; };
 		317E9C481BF24A1900A1C331 /* PingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E18A1BECACCB005104BB /* PingTests.swift */; };
@@ -60,6 +62,8 @@
 		3139A1701BF1528D003D6D66 /* SingleRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRequest.swift; sourceTree = "<group>"; };
 		317C08301BF5EB930080F561 /* Estimate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Estimate.swift; sourceTree = "<group>"; };
 		317C08321BF5ECD20080F561 /* EstimateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimateTests.swift; sourceTree = "<group>"; };
+		317C08341BF5EE0E0080F561 /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		317C08361BF5EE870080F561 /* ExpenseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseTests.swift; sourceTree = "<group>"; };
 		317E9C441BF2452E00A1C331 /* Response+Stubs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Response+Stubs.swift"; sourceTree = "<group>"; };
 		317E9C461BF2490500A1C331 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		317E9C4A1BF284C700A1C331 /* ResourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTests.swift; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				31C2E1881BECA7FE005104BB /* Contact.swift */,
 				31938A921BF508AF00147F0C /* Credit.swift */,
 				317C08301BF5EB930080F561 /* Estimate.swift */,
+				317C08341BF5EE0E0080F561 /* Expense.swift */,
 				310F1F221BF36FED001C9335 /* Invoice.swift */,
 				31938A901BF504BA00147F0C /* Item.swift */,
 				31C2E1861BECA7A5005104BB /* Ping.swift */,
@@ -237,6 +242,7 @@
 				31C2E18D1BECB8D0005104BB /* ContactTests.swift */,
 				31938A941BF508EA00147F0C /* CreditTests.swift */,
 				317C08321BF5ECD20080F561 /* EstimateTests.swift */,
+				317C08361BF5EE870080F561 /* ExpenseTests.swift */,
 				31938A8B1BF5041500147F0C /* InvoiceTests.swift */,
 				31938A8D1BF5047B00147F0C /* ItemTests.swift */,
 				31C2E18A1BECACCB005104BB /* PingTests.swift */,
@@ -475,6 +481,7 @@
 				3139A16F1BF14EB3003D6D66 /* Contact.swift in Sources */,
 				317E9C4F1BF29B7500A1C331 /* Response.swift in Sources */,
 				3139A16E1BF14EB0003D6D66 /* Ping.swift in Sources */,
+				317C08351BF5EE0E0080F561 /* Expense.swift in Sources */,
 				31E08A591BE3C4B50080AE74 /* ConnectionEntitlements.swift in Sources */,
 				31938A931BF508AF00147F0C /* Credit.swift in Sources */,
 				317C08311BF5EB930080F561 /* Estimate.swift in Sources */,
@@ -499,6 +506,7 @@
 				31A09A001BF35DFE006EA9F0 /* ClientTests.swift in Sources */,
 				31938A8E1BF5047B00147F0C /* ItemTests.swift in Sources */,
 				3117FB321BE693B20096D05A /* ConnectionEntitlementsTests.swift in Sources */,
+				317C08371BF5EE870080F561 /* ExpenseTests.swift in Sources */,
 				3117FB2E1BE675970096D05A /* OHHTTPStubs+Quaderno.swift in Sources */,
 				317E9C491BF257CA00A1C331 /* ContactTests.swift in Sources */,
 			);
