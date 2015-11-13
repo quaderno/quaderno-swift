@@ -131,9 +131,9 @@ The entry point for the project is the `Quaderno.xcworkspace` file, which contai
 
 ###Documentation
 
-The source code is documented using the markup formatting commands defined by Apple.
+The source code is fully documented using the markup formatting commands defined by Apple.
 
-An HTML version of the documentation generated with [jazzy](https://github.com/realm/jazzy) is also available under the `docs` directory.
+An [HTML version of the documentation](http://cocoadocs.org/docsets/Quaderno) can be found at [CocoaDocs](http://cocoadocs.org).
 
 
 ## More Information

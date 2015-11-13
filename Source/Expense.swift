@@ -1,5 +1,5 @@
 //
-// Contact.swift
+// Expense.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -23,20 +23,20 @@
 
 
 /**
-  A resource for managing contacts.
+  A resource for managing expenses.
 
-  - seealso: [Contacts](https://github.com/quaderno/quaderno-api/blob/master/sections/contacts.md).
+  - seealso: [Expenses](https://github.com/quaderno/quaderno-api/blob/master/sections/expenses.md).
  */
-final public class Contact: Resource {
+final public class Expense: Resource {
 
   // MARK: Resource
 
-  public static let name = "contacts"
+  public static let name = "expenses"
 
 }
 
-extension Contact: CRUD {
+extension Expense: CRUD {
 
-  public typealias CRUDResource = Contact
+  public typealias CRUDResource = Expense
 
 }

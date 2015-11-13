@@ -1,5 +1,5 @@
 //
-// Contact.swift
+// Estimate.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -23,20 +23,20 @@
 
 
 /**
-  A resource for managing contacts.
+  A resource for managing estimates.
 
-  - seealso: [Contacts](https://github.com/quaderno/quaderno-api/blob/master/sections/contacts.md).
+  - seealso: [Estimates](https://github.com/quaderno/quaderno-api/blob/master/sections/estimates.md).
  */
-final public class Contact: Resource {
+final public class Estimate: Resource {
 
   // MARK: Resource
 
-  public static let name = "contacts"
+  public static let name = "estimates"
 
 }
 
-extension Contact: CRUD {
+extension Estimate: CRUD {
 
-  public typealias CRUDResource = Contact
+  public typealias CRUDResource = Estimate
 
 }

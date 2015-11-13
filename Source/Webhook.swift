@@ -1,5 +1,5 @@
 //
-// Contact.swift
+// Webhook.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -23,20 +23,20 @@
 
 
 /**
-  A resource for managing contacts.
+  A resource for managing credits.
 
-  - seealso: [Contacts](https://github.com/quaderno/quaderno-api/blob/master/sections/contacts.md).
+  - seealso: [Webhooks](https://github.com/quaderno/quaderno-api/blob/master/sections/webhooks.md).
  */
-final public class Contact: Resource {
+final public class Webhook: Resource {
 
   // MARK: Resource
 
-  public static let name = "contacts"
+  public static let name = "webhooks"
 
 }
 
-extension Contact: CRUD {
+extension Webhook: CRUD {
 
-  public typealias CRUDResource = Contact
+  public typealias CRUDResource = Webhook
 
 }

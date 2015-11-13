@@ -1,5 +1,5 @@
 //
-// Contact.swift
+// Credit.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -23,20 +23,20 @@
 
 
 /**
-  A resource for managing contacts.
+  A resource for managing credits.
 
-  - seealso: [Contacts](https://github.com/quaderno/quaderno-api/blob/master/sections/contacts.md).
+  - seealso: [Credits](https://github.com/quaderno/quaderno-api/blob/master/sections/credits.md).
  */
-final public class Contact: Resource {
+final public class Credit: Resource {
 
   // MARK: Resource
 
-  public static let name = "contacts"
+  public static let name = "credits"
 
 }
 
-extension Contact: CRUD {
+extension Credit: CRUD {
 
-  public typealias CRUDResource = Contact
+  public typealias CRUDResource = Credit
 
 }

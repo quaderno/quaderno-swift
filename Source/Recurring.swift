@@ -1,5 +1,5 @@
 //
-// Contact.swift
+// Recurring.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -23,20 +23,20 @@
 
 
 /**
-  A resource for managing contacts.
+  A resource for managing recurring.
 
-  - seealso: [Contacts](https://github.com/quaderno/quaderno-api/blob/master/sections/contacts.md).
+  - seealso: [Recurring](https://github.com/quaderno/quaderno-api/blob/master/sections/recurring.md).
  */
-final public class Contact: Resource {
+final public class Recurring: Resource {
 
   // MARK: Resource
 
-  public static let name = "contacts"
+  public static let name = "recurring"
 
 }
 
-extension Contact: CRUD {
+extension Recurring: CRUD {
 
-  public typealias CRUDResource = Contact
+  public typealias CRUDResource = Recurring
 
 }
