@@ -26,7 +26,7 @@
   A resource for managing estimates.
 
   - seealso: [Estimates](https://github.com/quaderno/quaderno-api/blob/master/sections/estimates.md).
-*/
+ */
 final public class Estimate: Resource {
 
   // MARK: Resource

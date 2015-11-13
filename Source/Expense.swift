@@ -26,7 +26,7 @@
   A resource for managing expenses.
 
   - seealso: [Expenses](https://github.com/quaderno/quaderno-api/blob/master/sections/expenses.md).
-*/
+ */
 final public class Expense: Resource {
 
   // MARK: Resource

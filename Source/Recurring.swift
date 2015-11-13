@@ -1,5 +1,5 @@
 //
-// Credit.swift
+// Recurring.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -23,20 +23,20 @@
 
 
 /**
-  A resource for managing credits.
+  A resource for managing recurring.
 
-  - seealso: [Credits](https://github.com/quaderno/quaderno-api/blob/master/sections/credits.md).
+  - seealso: [Recurring](https://github.com/quaderno/quaderno-api/blob/master/sections/recurring.md).
  */
-final public class Credit: Resource {
+final public class Recurring: Resource {
 
   // MARK: Resource
 
-  public static let name = "credits"
+  public static let name = "recurring"
 
 }
 
-extension Credit: CRUD {
+extension Recurring: CRUD {
 
-  public typealias CRUDResource = Credit
+  public typealias CRUDResource = Recurring
 
 }
