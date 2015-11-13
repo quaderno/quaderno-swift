@@ -22,6 +22,9 @@ Unreleased.
   - `Invoice`.
   - `Item`.
 
+#### Removed
+
+- Included HTML documentation. We rely now in the documentation generated automatically by [CocoaDocs](http://cocoadocs.org).
 
 ## [0.1.0](https://github.com/quaderno/quaderno-swift/releases/tag/0.1.0)
 
