@@ -27,17 +27,17 @@
 
   - seealso: [Items](https://github.com/quaderno/quaderno-api/blob/master/sections/items.md).
  */
-final class Item: Resource {
+public struct Item: Resource {
 
-  static let name = "items"
+  // MARK: Resource
+
+  public static let name = "items"
 
 }
 
 
-// MARK:- CRUD
-
 extension Item: CRUD {
 
-  typealias CRUDResource = Item
+  public typealias CRUDResource = Item
 
 }

@@ -27,7 +27,7 @@
 
   - seealso: [Estimates](https://github.com/quaderno/quaderno-api/blob/master/sections/estimates.md).
  */
-final public class Estimate: Resource {
+public struct Estimate: Resource {
 
   // MARK: Resource
 
@@ -38,5 +38,11 @@ final public class Estimate: Resource {
 extension Estimate: CRUD {
 
   public typealias CRUDResource = Estimate
+
+}
+
+extension Estimate: Deliverable {
+
+  public typealias DeliverableResource = Estimate
 
 }

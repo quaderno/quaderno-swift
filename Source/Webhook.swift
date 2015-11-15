@@ -27,7 +27,7 @@
 
   - seealso: [Webhooks](https://github.com/quaderno/quaderno-api/blob/master/sections/webhooks.md).
  */
-final public class Webhook: Resource {
+public struct Webhook: Resource {
 
   // MARK: Resource
 

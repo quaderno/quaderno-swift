@@ -101,4 +101,17 @@ class CreditTests: XCTestCase {
     XCTAssertNotNil(NSURL(string: uri))
   }
 
+  // MARK: Deliverable
+
+  func testThatProvidesADeliverRequest() {
+    let request = Credit.deliver(1)
+
+    XCTAssertEqual(request.method, Method.GET)
+    XCTAssertNil(request.parameters)
+
+    let uri = request.uri(baseURL: baseURL)
+    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/credits/1/deliver.json")
+    XCTAssertNotNil(NSURL(string: uri))
+  }
+
 }

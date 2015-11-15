@@ -27,7 +27,7 @@
 
   - seealso: [Expenses](https://github.com/quaderno/quaderno-api/blob/master/sections/expenses.md).
  */
-final public class Expense: Resource {
+public struct Expense: Resource {
 
   // MARK: Resource
 

@@ -29,7 +29,7 @@ import Alamofire
 
   - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
  */
-final public class Ping: Resource {
+public struct Ping: Resource {
 
   // MARK: Resource
 

@@ -27,7 +27,7 @@
 
   - seealso: [Recurring](https://github.com/quaderno/quaderno-api/blob/master/sections/recurring.md).
  */
-final public class Recurring: Resource {
+public struct Recurring: Resource {
 
   // MARK: Resource
 

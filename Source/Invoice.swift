@@ -27,17 +27,22 @@
 
   - seealso: [Invoices](https://github.com/quaderno/quaderno-api/blob/master/sections/invoices.md).
  */
-final class Invoice: Resource {
+public struct Invoice: Resource {
 
-  static let name = "invoices"
+  // MARK: Resource
+
+  public static let name = "invoices"
 
 }
 
-
-// MARK:- CRUD
-
 extension Invoice: CRUD {
 
-  typealias CRUDResource = Invoice
+  public typealias CRUDResource = Invoice
+
+}
+
+extension Invoice: Deliverable {
+
+  public typealias DeliverableResource = Invoice
 
 }
