@@ -27,7 +27,7 @@
 
   - seealso: [Contacts](https://github.com/quaderno/quaderno-api/blob/master/sections/contacts.md).
  */
-final public class Contact: Resource {
+public struct Contact: Resource {
 
   // MARK: Resource
 

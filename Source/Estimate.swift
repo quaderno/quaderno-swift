@@ -27,7 +27,7 @@
 
   - seealso: [Estimates](https://github.com/quaderno/quaderno-api/blob/master/sections/estimates.md).
  */
-final public class Estimate: Resource {
+public struct Estimate: Resource {
 
   // MARK: Resource
 

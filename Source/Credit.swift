@@ -27,7 +27,7 @@
 
   - seealso: [Credits](https://github.com/quaderno/quaderno-api/blob/master/sections/credits.md).
  */
-final public class Credit: Resource {
+public struct Credit: Resource {
 
   // MARK: Resource
 
