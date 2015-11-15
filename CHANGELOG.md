@@ -3,9 +3,29 @@ All notable changes to this project will be documented in this file. `Quaderno` 
 
 #### 0.x Releases
 - `0.0.x` Releases - [0.0.1](#001) | [0.0.2](#002)
-- `0.x.x` Releases - [0.1.0](#010) | [0.2.0](#020)
+- `0.x.x` Releases - [0.1.0](#010) | [0.2.0](#020) | [0.3.0](#030)
 
 ---
+
+## [0.3.0](https://github.com/quaderno/quaderno-swift/releases/tag/0.3.0)
+
+Unreleased.
+
+#### Added
+
+- A `Deliverable` protocol for those resources that support delivery operations:
+  - `Estimate`.
+  - `Credit`.
+  - `Invoice`.
+
+#### Changed
+
+- Resources are now implemented as struct instead of classes.
+
+#### Fixed
+
+- Access control for resources. Some previously declared as internal are now public.
+
 
 ## [0.2.0](https://github.com/quaderno/quaderno-swift/releases/tag/0.2.0)
 
@@ -25,6 +45,7 @@ Unreleased.
 #### Removed
 
 - Included HTML documentation. We rely now in the documentation generated automatically by [CocoaDocs](http://cocoadocs.org).
+
 
 ## [0.1.0](https://github.com/quaderno/quaderno-swift/releases/tag/0.1.0)
 
