@@ -40,3 +40,9 @@ extension Credit: CRUD {
   public typealias CRUDResource = Credit
 
 }
+
+extension Credit: Deliverable {
+
+  public typealias DeliverableResource = Credit
+
+}

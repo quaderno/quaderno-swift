@@ -41,3 +41,8 @@ extension Invoice: CRUD {
 
 }
 
+extension Invoice: Deliverable {
+
+  public typealias DeliverableResource = Invoice
+
+}

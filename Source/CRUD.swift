@@ -150,6 +150,7 @@ enum CRUDRequest<R: Resource>: Request {
 
 }
 
+
 extension CRUD where CRUDResource: Resource {
 
   public static func create(attributes: RequestParameters) -> Request {

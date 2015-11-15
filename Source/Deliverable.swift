@@ -1,5 +1,5 @@
 //
-// Estimate.swift
+// Deliverable.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -21,28 +21,67 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Alamofire
+
+
+// MARK: - Deliverable
 
 /**
-  A resource for managing estimates.
-
-  - seealso: [Estimates](https://github.com/quaderno/quaderno-api/blob/master/sections/estimates.md).
+  Requirements of a resource that can be delivered.
+  
+  - seealso: `Resource`.
  */
-public struct Estimate: Resource {
+public protocol Deliverable {
 
-  // MARK: Resource
+  typealias DeliverableResource
 
-  public static let name = "estimates"
+  /**
+    Creates a request for delivering a resource.
+
+    - parameter id: The identifier of a resource.
+
+    - returns: A request for delivering a resource.
+   */
+  static func deliver(id: Int) -> Request
 
 }
 
-extension Estimate: CRUD {
 
-  public typealias CRUDResource = Estimate
+// MARK:-
+
+/**
+  A struct to represent a request for delivering a resource.
+
+  - seealso:
+    - `Resource`.
+    - `Deliverable`.
+ */
+struct DeliveryRequest<R: Resource>: Request {
+
+  /// The identifier of a resource to deliver.
+  let id: Int
+
+  // MARK: Request
+
+  var method: Alamofire.Method {
+    return .GET
+  }
+
+  var parameters: RequestParameters? {
+    return nil
+  }
+
+  func uri(baseURL baseURL: String) -> String {
+    return (baseURL + R.name + "/\(id)/deliver").appendJSONSuffix()
+  }
 
 }
 
-extension Estimate: Deliverable {
 
-  public typealias DeliverableResource = Estimate
+extension Deliverable where DeliverableResource: Resource {
+
+  public static func deliver(id: Int) -> Request {
+    return DeliveryRequest<DeliverableResource>(id: id)
+  }
 
 }
