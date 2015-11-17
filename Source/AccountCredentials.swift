@@ -1,5 +1,5 @@
 //
-// ConnectionEntitlements.swift
+// AccountCredentials.swift
 //
 // Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
@@ -21,57 +21,61 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 /**
-  The entitlements granted to a given user for connecting to the service.
+  The credentials of an account entitled to use the service.
  */
-public struct ConnectionEntitlements {
+public struct AccountCredentials {
 
-  /// The time interval in seconds until the counter of remaining requests is reset to the maximum allowed value.
-  public let resetInterval: Int
+  /// The identity of a user.
+  public let id: Int
 
-  /// The number of remaining requests until the next counter reset.
-  public let remainingRequests: Int
+  /// The name of a user.
+  public let name: String
+
+  /// The email of a user.
+  public let email: String
+
+  /// The base URL assigned to an account, for making requests to the service.
+  public let baseURL: String
 
 }
 
 
-// MARK: - Initializing From HTTP Headers
-
-/// Alias for an array of HTTP headers, as defined in `NSHTTPURLResponse`.
-typealias HTTPHeaders = [NSObject: AnyObject]
+// MARK: - Initializing From a JSON Response
 
 
-extension ConnectionEntitlements {
+extension AccountCredentials {
 
   /**
-    Initializes connection entitlements with an array of HTTP headers.
+    Initializes an instance with a JSON object.
 
     - precondition: All expected headers must be present. Otherwise initialization fails.
 
-    - parameter httpHeaders: An array of HTTP headers, typically coming from a `NSHTTPURLResponse` object.
+    - parameter jsonDictionary: A dictionary representing a JSON object, typically coming from a service response.
 
-    - returns: A newly initialized connection entitlements.
+    - returns: A newly initialized instance.
    */
-  init?(httpHeaders: HTTPHeaders?) {
-    guard let resetIntervalValue = httpHeaders?["X-RateLimit-Reset"] as? String else {
+  init?(jsonDictionary: ResponseObject?) {
+    guard let id = jsonDictionary?["id"] as? Int else {
       return nil
     }
 
-    guard let resetInterval = Int(resetIntervalValue) else {
+    guard let name = jsonDictionary?["name"] as? String else {
       return nil
     }
 
-    guard let remainingRequestsValue = httpHeaders?["X-RateLimit-Remaining"] as? String else {
+    guard let email = jsonDictionary?["email"] as? String else {
       return nil
     }
 
-    guard let remainingRequests = Int(remainingRequestsValue) else {
+    guard let baseURL = jsonDictionary?["href"] as? String else {
       return nil
     }
 
-    self.resetInterval = resetInterval
-    self.remainingRequests = remainingRequests
+    self.id = id
+    self.name = name
+    self.email = email
+    self.baseURL = baseURL
   }
 
 }

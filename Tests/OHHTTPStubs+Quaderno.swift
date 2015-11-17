@@ -113,6 +113,19 @@ extension OHHTTPStubs {
   }
 
   /**
+    Stubs a request to a `Authorization` resource.
+
+    - parameter success:  Whether the stubbed response should be successful.
+    - parameter response: An optional stubbed response to overrides the default response.
+
+    - seealso: `AuthorizationResponse`.
+   */
+  final class func stubAuthorizationRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
+    let authorizationResponse = response ?? stubResponse(AuthorizationResponse(), success: success)
+    stubRequest(method: .GET, path: "authorization.json", response: authorizationResponse)
+  }
+
+  /**
     Stubs a request for creating a `Contact` resource.
 
     - parameter success:  Whether the stubbed response should be successful.

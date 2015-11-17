@@ -94,17 +94,13 @@ public class Client {
     - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
    */
   public func ping(completion: (success: Bool) -> Void = noop) {
-    let ping = Ping.request()
-
-    Alamofire.request(ping.method, ping.uri(baseURL: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
-      .validate()
-      .responseJSON { response in
-        switch response.result {
-        case .Success:
-          completion(success: true)
-        case .Failure:
-          completion(success: false)
-        }
+    request(Ping()) { response -> Void in
+      switch response {
+      case .Failure:
+        completion(success: false)
+      default:
+        completion(success: true)
+      }
     }
   }
 
@@ -127,6 +123,30 @@ public class Client {
         completion(entitlements: self.entitlements)
     }
   }
+
+  // MARK: Getting Account Credentials
+
+  /**
+    Fetches the account credentials for using the service.
+
+    - parameter completion: A closure called when the request finishes.
+
+    - seealso: [Authentication](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md).
+   */
+  public func fetchAccountCredentials(completion: (accountCredentials: AccountCredentials?) -> Void = noop) {
+    request(Authorization()) { response in
+      let accountCredentials: AccountCredentials?
+      switch response {
+      case .Record(let result):
+        accountCredentials = AccountCredentials(jsonDictionary: result)
+      default:
+        accountCredentials = nil
+      }
+      completion(accountCredentials: accountCredentials)
+    }
+  }
+
+  // MARK: Requesting Resources
 
   /**
     Requests a resource.

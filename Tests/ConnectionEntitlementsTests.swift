@@ -35,8 +35,8 @@ class ConnectionEntitlementsTests: XCTestCase {
   override func setUp() {
     super.setUp()
     expectedHTTPHeaders = [
-      ConnectionEntitlements.HTTPHeader.Reset.rawValue: "15",
-      ConnectionEntitlements.HTTPHeader.Remaining.rawValue: "100",
+      "X-RateLimit-Reset": "15",
+      "X-RateLimit-Remaining": "100",
     ]
   }
 
@@ -47,22 +47,22 @@ class ConnectionEntitlementsTests: XCTestCase {
   }
 
   func testThatInitializationFailsWhenResetHTTPHeaderIsMissing() {
-    expectedHTTPHeaders[ConnectionEntitlements.HTTPHeader.Reset.rawValue] = nil
+    expectedHTTPHeaders["X-RateLimit-Reset"] = nil
     XCTAssertNil(ConnectionEntitlements(httpHeaders: expectedHTTPHeaders))
   }
 
   func testThatInitializationFailsWhenRemainingHTTPHeaderIsMissing() {
-    expectedHTTPHeaders[ConnectionEntitlements.HTTPHeader.Remaining.rawValue] = nil
+    expectedHTTPHeaders["X-RateLimit-Remaining"] = nil
     XCTAssertNil(ConnectionEntitlements(httpHeaders: expectedHTTPHeaders))
   }
 
   func testThatInitializationFailsWhenResetHTTPHeaderIsInvalid() {
-    expectedHTTPHeaders[ConnectionEntitlements.HTTPHeader.Reset.rawValue] = NSData()
+    expectedHTTPHeaders["X-RateLimit-Reset"] = NSData()
     XCTAssertNil(ConnectionEntitlements(httpHeaders: expectedHTTPHeaders))
   }
 
   func testThatInitializationFailsWhenRemainingHTTPHeaderIsInvalid() {
-    expectedHTTPHeaders[ConnectionEntitlements.HTTPHeader.Remaining.rawValue] = NSData()
+    expectedHTTPHeaders["X-RateLimit-Remaining"] = NSData()
     XCTAssertNil(ConnectionEntitlements(httpHeaders: expectedHTTPHeaders))
   }
 

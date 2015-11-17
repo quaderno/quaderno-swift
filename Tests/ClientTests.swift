@@ -98,6 +98,31 @@ class ClientTests: XCTestCase {
     waitForExpectationsWithTimeout(1, handler: nil)
   }
 
+  // MARK: Account Credentials
+
+  func testThatFetchingAccountCredentialsReturnsNilWhenJSONIsInvalid() {
+    let response = OHHTTPStubsResponse(JSONObject: [], statusCode: 200, headers: nil)
+    OHHTTPStubs.stubAuthorizationRequest(success: true, response: response)
+
+    let expectation = expectationWithDescription("authorization finishes")
+    httpClient.fetchAccountCredentials { credentials in
+      XCTAssertNil(credentials)
+      expectation.fulfill()
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
+  func testThatFetchingAccountCredentialsReturnsCredentialsWhenJSONIsValid() {
+    OHHTTPStubs.stubAuthorizationRequest(success: true)
+
+    let expectation = expectationWithDescription("authorization finishes")
+    httpClient.fetchAccountCredentials { credentials in
+      XCTAssertNotNil(credentials)
+      expectation.fulfill()
+    }
+    waitForExpectationsWithTimeout(1, handler: nil)
+  }
+
   // MARK: Requesting Resources
 
   func testThatCreatingResourcesReturnsTheCreatedRecordWhenSucceeds() {
