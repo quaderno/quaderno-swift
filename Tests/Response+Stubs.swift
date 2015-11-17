@@ -68,8 +68,8 @@ extension StubbedHTTPResponse {
 
   var httpHeaders: HTTPHeaders? {
     return [
-      ConnectionEntitlements.HTTPHeader.Reset.rawValue: "15",
-      ConnectionEntitlements.HTTPHeader.Remaining.rawValue: "100",
+      "X-RateLimit-Reset": "15",
+      "X-RateLimit-Remaining": "100",
     ]
   }
 

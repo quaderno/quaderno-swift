@@ -42,41 +42,7 @@ public struct ConnectionEntitlements {
 typealias HTTPHeaders = [NSObject: AnyObject]
 
 
-/**
-  Returns the equivalent integer of an HTTP header value.
-
-  This method is intended for parsing HTTP header values that are integers but are returned as string.
-
-  - parameter value: An HTTP header value to parse.
-
-  - returns: The equivalent integer value, if any.
- */
-private func parseHTTPHeaderValueAsInteger(value: AnyObject) -> Int? {
-  switch value {
-  case _ where value is String:
-    return Int(value as! String)
-  case _ where value is Int:
-    return value as? Int
-  default:
-    return nil
-  }
-}
-
-
 extension ConnectionEntitlements {
-
-  /**
-    HTTP headers containing the values for connection entitlements.
-
-    - Reset:      Header containing the value for `resetInterval`
-    - Remaining:  Header containing the value for `remainingRequests`.
-   */
-  enum HTTPHeader: String {
-
-    case Reset = "X-RateLimit-Reset"
-    case Remaining = "X-RateLimit-Remaining"
-
-  }
 
   /**
     Initializes connection entitlements with an array of HTTP headers.
@@ -88,23 +54,19 @@ extension ConnectionEntitlements {
     - returns: A newly initialized connection entitlements.
    */
   init?(httpHeaders: HTTPHeaders?) {
-    guard let headers = httpHeaders else {
+    guard let resetIntervalValue = httpHeaders?["X-RateLimit-Reset"] as? String else {
       return nil
     }
 
-    guard let resetIntervalValue = headers[HTTPHeader.Reset.rawValue] else {
+    guard let resetInterval = Int(resetIntervalValue) else {
       return nil
     }
 
-    guard let remainingRequestsValue = headers[HTTPHeader.Remaining.rawValue] else {
+    guard let remainingRequestsValue = httpHeaders?["X-RateLimit-Remaining"] as? String else {
       return nil
     }
 
-    guard let resetInterval = parseHTTPHeaderValueAsInteger(resetIntervalValue) else {
-      return nil
-    }
-
-    guard let remainingRequests = parseHTTPHeaderValueAsInteger(remainingRequestsValue) else {
+    guard let remainingRequests = Int(remainingRequestsValue) else {
       return nil
     }
 
