@@ -94,17 +94,13 @@ public class Client {
     - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
    */
   public func ping(completion: (success: Bool) -> Void = noop) {
-    let ping = Ping.request()
-
-    Alamofire.request(ping.method, ping.uri(baseURL: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
-      .validate()
-      .responseJSON { response in
-        switch response.result {
-        case .Success:
-          completion(success: true)
-        case .Failure:
-          completion(success: false)
-        }
+    request(Ping()) { response -> Void in
+      switch response {
+      case .Failure:
+        completion(success: false)
+      default:
+        completion(success: true)
+      }
     }
   }
 
