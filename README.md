@@ -72,9 +72,23 @@ client.ping() { success in
 }
 ```
 
-### Check the Connection Entitlements
+### Fetching the Account Credentials
 
-You can check the entitlements for using the service of a given account:
+You can fetch the account credentials for a given user:
+
+```swift
+let client = Quaderno.Client(/* ... */)
+client.fetchAccountCredentials { credentials in
+  // credentials will contain the account credentials.
+}
+```
+
+See [`AccountCredentials`](https://github.com/quaderno/quaderno-swift/blob/master/Source/AccountCredentials.swift) for further details.
+
+
+### Checking the Connection Entitlements
+
+You can check the entitlements of a given account for using the service:
 
 ```swift
 let client = Quaderno.Client(/* ... */)
