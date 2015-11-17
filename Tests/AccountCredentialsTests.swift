@@ -30,7 +30,7 @@ class AccountCredentialsTests: XCTestCase {
 
   // MARK: Set Up
 
-  var expectedJSON: [String: AnyObject]!
+  var expectedJSON: ResponseObject!
 
   override func setUp() {
     super.setUp()

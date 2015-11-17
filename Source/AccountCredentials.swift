@@ -43,6 +43,7 @@ public struct AccountCredentials {
 
 // MARK: - Initializing From a JSON Response
 
+
 extension AccountCredentials {
 
   /**
@@ -54,7 +55,7 @@ extension AccountCredentials {
 
     - returns: A newly initialized instance.
    */
-  init?(jsonDictionary: [String: AnyObject]?) {
+  init?(jsonDictionary: ResponseObject?) {
     guard let id = jsonDictionary?["id"] as? Int else {
       return nil
     }
