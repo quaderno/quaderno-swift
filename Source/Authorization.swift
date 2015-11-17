@@ -25,9 +25,11 @@ import Alamofire
 
 
 /**
- A resource for fetching the details of a user account.
+  A resource for fetching the details of a user account.
 
- - seealso: [Authorization](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md).
+  - seealso:
+    - [Authentication](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md).
+    - `AccountCredentials`.
  */
 public struct Authorization: Resource {
 

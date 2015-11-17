@@ -11,6 +11,8 @@
 		310F1F231BF36FED001C9335 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310F1F221BF36FED001C9335 /* Invoice.swift */; };
 		3110B8E11BFB7A1C005B0893 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110B8E01BFB7A1C005B0893 /* Authorization.swift */; };
 		3110B8E41BFB7B9B005B0893 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110B8E21BFB7B63005B0893 /* AuthorizationTests.swift */; };
+		3110B8E61BFB7D72005B0893 /* AccountCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110B8E51BFB7D72005B0893 /* AccountCredentials.swift */; };
+		3110B8E91BFB832C005B0893 /* AccountCredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110B8E71BFB820B005B0893 /* AccountCredentialsTests.swift */; };
 		3117FB2E1BE675970096D05A /* OHHTTPStubs+Quaderno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117FB2D1BE675970096D05A /* OHHTTPStubs+Quaderno.swift */; };
 		3117FB321BE693B20096D05A /* ConnectionEntitlementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */; };
 		3139A1671BF1472D003D6D66 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E08A561BE37D680080AE74 /* Resource.swift */; };
@@ -66,6 +68,8 @@
 		310F1F221BF36FED001C9335 /* Invoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
 		3110B8E01BFB7A1C005B0893 /* Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		3110B8E21BFB7B63005B0893 /* AuthorizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationTests.swift; sourceTree = "<group>"; };
+		3110B8E51BFB7D72005B0893 /* AccountCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCredentials.swift; sourceTree = "<group>"; };
+		3110B8E71BFB820B005B0893 /* AccountCredentialsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCredentialsTests.swift; sourceTree = "<group>"; };
 		3117FB2D1BE675970096D05A /* OHHTTPStubs+Quaderno.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OHHTTPStubs+Quaderno.swift"; sourceTree = "<group>"; };
 		3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionEntitlementsTests.swift; sourceTree = "<group>"; };
 		3139A16A1BF14D54003D6D66 /* CRUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 				317E9C4E1BF29B7500A1C331 /* Response.swift */,
 				3139A16C1BF14D58003D6D66 /* Behaviours */,
 				31C2E1801BECA30C005104BB /* Resources */,
+				3110B8E51BFB7D72005B0893 /* AccountCredentials.swift */,
 				31E08A581BE3C4B50080AE74 /* ConnectionEntitlements.swift */,
 				31B979491BE240DC00AD6234 /* Supporting Files */,
 			);
@@ -209,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */,
+				3110B8E71BFB820B005B0893 /* AccountCredentialsTests.swift */,
 				317E9C461BF2490500A1C331 /* StringTests.swift */,
 				31B979321BE2384800AD6234 /* ClientTests.swift */,
 				317E9C4A1BF284C700A1C331 /* ResourceTests.swift */,
@@ -509,6 +515,7 @@
 				317C08391BF5EF200080F561 /* Recurring.swift in Sources */,
 				31938A931BF508AF00147F0C /* Credit.swift in Sources */,
 				317C08311BF5EB930080F561 /* Estimate.swift in Sources */,
+				3110B8E61BFB7D72005B0893 /* AccountCredentials.swift in Sources */,
 				3110B8E11BFB7A1C005B0893 /* Authorization.swift in Sources */,
 				3139A16B1BF14D54003D6D66 /* CRUD.swift in Sources */,
 				310F1F231BF36FED001C9335 /* Invoice.swift in Sources */,
@@ -520,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				317E9C511BF29E1200A1C331 /* ResponseTests.swift in Sources */,
+				3110B8E91BFB832C005B0893 /* AccountCredentialsTests.swift in Sources */,
 				3110B8E41BFB7B9B005B0893 /* AuthorizationTests.swift in Sources */,
 				317E9C4D1BF2860600A1C331 /* RequestTests.swift in Sources */,
 				317C083F1BF5F3D40080F561 /* WebhookTests.swift in Sources */,

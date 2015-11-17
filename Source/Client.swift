@@ -128,6 +128,30 @@ public class Client {
     }
   }
 
+  // MARK: Getting Account Credentials
+
+  /**
+    Fetches the account credentials for using the service.
+
+    - parameter completion: A closure called when the request finishes.
+
+    - seealso: [Authentication](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md).
+   */
+  public func fetchAccountCredentials(completion: (accountCredentials: AccountCredentials?) -> Void = noop) {
+    request(Authorization()) { response in
+      let accountCredentials: AccountCredentials?
+      switch response {
+      case .Record(let result):
+        accountCredentials = AccountCredentials(jsonDictionary: result)
+      default:
+        accountCredentials = nil
+      }
+      completion(accountCredentials: accountCredentials)
+    }
+  }
+
+  // MARK: Requesting Resources
+
   /**
     Requests a resource.
 

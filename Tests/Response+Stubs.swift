@@ -82,6 +82,20 @@ extension StubbedHTTPResponse {
 /// A stubbed response for a `Ping` resource.
 struct PingResponse: StubbedHTTPResponse {}
 
+/// A stubbed response for an `Authorization` resource.
+struct AuthorizationResponse: StubbedHTTPResponse {
+
+  var successJSON: Response<NSError> {
+    return .Record([
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "href": "https://myaccount.quadernoapp.com/api/v1/",
+    ])
+  }
+
+}
+
 /// A stubbed response for creating a `Contact` resource.
 struct CreateContactResponse: StubbedHTTPResponse {
 
