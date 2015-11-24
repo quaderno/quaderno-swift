@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31082B6C1C04B99900719A6A /* Tax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31082B6B1C04B99900719A6A /* Tax.swift */; };
+		31082B6E1C04E83100719A6A /* TaxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31082B6D1C04E83100719A6A /* TaxTests.swift */; };
 		310F1F211BF36FE1001C9335 /* Deliverable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310F1F201BF36FE1001C9335 /* Deliverable.swift */; };
 		310F1F231BF36FED001C9335 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310F1F221BF36FED001C9335 /* Invoice.swift */; };
 		3110B8E11BFB7A1C005B0893 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110B8E01BFB7A1C005B0893 /* Authorization.swift */; };
@@ -64,6 +66,8 @@
 /* Begin PBXFileReference section */
 		0B20ABB1A21628A3D0539641 /* Pods-QuadernoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuadernoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuadernoTests/Pods-QuadernoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		252028C5EDD0749F182145E2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		31082B6B1C04B99900719A6A /* Tax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tax.swift; sourceTree = "<group>"; };
+		31082B6D1C04E83100719A6A /* TaxTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaxTests.swift; sourceTree = "<group>"; };
 		310F1F201BF36FE1001C9335 /* Deliverable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deliverable.swift; sourceTree = "<group>"; };
 		310F1F221BF36FED001C9335 /* Invoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
 		3110B8E01BFB7A1C005B0893 /* Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				31938A901BF504BA00147F0C /* Item.swift */,
 				31C2E1861BECA7A5005104BB /* Ping.swift */,
 				317C08381BF5EF200080F561 /* Recurring.swift */,
+				31082B6B1C04B99900719A6A /* Tax.swift */,
 				317C083C1BF5F38F0080F561 /* Webhook.swift */,
 			);
 			name = Resources;
@@ -272,6 +277,7 @@
 				31938A8D1BF5047B00147F0C /* ItemTests.swift */,
 				31C2E18A1BECACCB005104BB /* PingTests.swift */,
 				317C083A1BF5EF750080F561 /* RecurringTests.swift */,
+				31082B6D1C04E83100719A6A /* TaxTests.swift */,
 				317C083E1BF5F3D40080F561 /* WebhookTests.swift */,
 			);
 			name = Resources;
@@ -517,6 +523,7 @@
 				317C08311BF5EB930080F561 /* Estimate.swift in Sources */,
 				3110B8E61BFB7D72005B0893 /* AccountCredentials.swift in Sources */,
 				3110B8E11BFB7A1C005B0893 /* Authorization.swift in Sources */,
+				31082B6C1C04B99900719A6A /* Tax.swift in Sources */,
 				3139A16B1BF14D54003D6D66 /* CRUD.swift in Sources */,
 				310F1F231BF36FED001C9335 /* Invoice.swift in Sources */,
 			);
@@ -543,6 +550,7 @@
 				31938A8E1BF5047B00147F0C /* ItemTests.swift in Sources */,
 				3117FB321BE693B20096D05A /* ConnectionEntitlementsTests.swift in Sources */,
 				317C08371BF5EE870080F561 /* ExpenseTests.swift in Sources */,
+				31082B6E1C04E83100719A6A /* TaxTests.swift in Sources */,
 				3117FB2E1BE675970096D05A /* OHHTTPStubs+Quaderno.swift in Sources */,
 				317E9C491BF257CA00A1C331 /* ContactTests.swift in Sources */,
 			);
