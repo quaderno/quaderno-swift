@@ -29,21 +29,33 @@ import Alamofire
 /**
   Requirements of a resource that can be paid.
   
-  - seealso: `Resource`.
+  - seealso:
+    - `Resource`.
+    - [Payments](https://github.com/quaderno/quaderno-api/blob/master/sections/payments.md).
  */
 public protocol Payable {
 
   typealias PayableResource
 
   /**
-    Creates a request for paying a resource.
+    Creates a request for making a payment.
 
-    - parameter id:      The identifier of a resource.
-    - parameter details: The details of the payment.
+    - parameter documentId: The identifier of a resource associated with the payment.
+    - parameter details:    The details of the payment.
 
-    - returns: A request for paying a resource.
+    - returns: A request for making a payment.
    */
-  static func pay(id: Int, details: RequestParameters) -> Request
+  static func pay(documentId: Int, details: RequestParameters) -> Request
+
+  /**
+    Creates a request for cancelling a payment.
+
+    - parameter paymentId:  The identifier of a payment.
+    - parameter documentId: The identifier of a resource associated with the payment.
+
+    - returns: A request for cancelling a payment.
+   */
+  static func cancelPayment(paymentId: Int, documentId: Int) -> Request
 
 }
 
@@ -59,19 +71,36 @@ public protocol Payable {
  */
 struct PaymentRequest<R: Resource>: Request {
 
-  /// The identifier of a resource to pay.
-  let id: Int
+  /// The identifier of a document associated with a payment
+  let documentId: Int
+
+  /// The identifier of a payment.
+  let id: Int?
+
+  /// Whether the request represents a payment to be made.
+  var isPayment: Bool {
+    return id == nil && parameters != nil
+  }
 
   // MARK: Request
 
   var method: Alamofire.Method {
-    return .POST
+    if isPayment {
+      return .POST
+    } else {
+      return .DELETE
+    }
   }
 
   let parameters: RequestParameters?
 
   func uri(baseURL baseURL: String) -> String {
-    return (baseURL + R.name + "/\(id)/payments").appendJSONSuffix()
+    if isPayment {
+      return (baseURL + R.name + "/\(documentId)/payments").appendJSONSuffix()
+    } else {
+      precondition(id != nil, "Payment identifier must not be nil")
+      return (baseURL + R.name + "/\(documentId)/payments/\(id!)").appendJSONSuffix()
+    }
   }
 
 }
@@ -79,8 +108,12 @@ struct PaymentRequest<R: Resource>: Request {
 
 extension Payable where PayableResource: Resource {
 
-  public static func pay(id: Int, details: RequestParameters) -> Request {
-    return PaymentRequest<PayableResource>(id: id, parameters: details)
+  public static func pay(documentId: Int, details: RequestParameters) -> Request {
+    return PaymentRequest<PayableResource>(documentId: documentId, id: nil, parameters: details)
+  }
+
+  public static func cancelPayment(paymentId: Int, documentId: Int) -> Request {
+    return PaymentRequest<PayableResource>(documentId: documentId, id: paymentId, parameters: nil)
   }
 
 }

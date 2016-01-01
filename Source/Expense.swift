@@ -40,3 +40,9 @@ extension Expense: CRUD {
   public typealias CRUDResource = Expense
 
 }
+
+extension Expense: Payable {
+
+  public typealias PayableResource = Expense
+
+}
