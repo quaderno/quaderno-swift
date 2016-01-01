@@ -114,4 +114,17 @@ class InvoiceTests: XCTestCase {
     XCTAssertNotNil(NSURL(string: uri))
   }
 
+  // MARK: Payable
+
+  func testThatProvidesAPayableRequest() {
+    let request = Invoice.pay(1, details: ["amount": "56.60", "payment_method": "credit_card"])
+
+    XCTAssertEqual(request.method, Method.POST)
+    XCTAssertNotNil(request.parameters)
+
+    let uri = request.uri(baseURL: baseURL)
+    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/invoices/1/payments.json")
+    XCTAssertNotNil(NSURL(string: uri))
+  }
+
 }
