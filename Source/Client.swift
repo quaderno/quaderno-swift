@@ -104,26 +104,6 @@ public class Client {
     }
   }
 
-  /**
-    Fetches the connection entitlements for using the service with the current account.
-
-    - parameter completion: A closure called when the request finishes.
-
-    - postcondition: The value of `entitlements` is updated when the request finishes.
-
-    - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting).
-   */
-  public func fetchConnectionEntitlements(completion: (entitlements: ConnectionEntitlements?) -> Void = noop) {
-    let ping = Ping.request()
-
-    Alamofire.request(ping.method, ping.uri(baseURL: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
-      .validate()
-      .responseJSON { response in
-        self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)
-        completion(entitlements: self.entitlements)
-    }
-  }
-
   // MARK: Getting Account Credentials
 
   /**
@@ -163,6 +143,8 @@ public class Client {
     Alamofire.request(request.method, request.uri(baseURL: baseURL), parameters: request.parameters, encoding: request.encoding, headers: authorizationHeaders)
       .validate()
       .responseJSON { response in
+        self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)
+
         switch response.result {
         case .Success(let value) where value is ResponseObject:
           completion(response: Response.Record(value as! ResponseObject))
