@@ -84,7 +84,7 @@ public class Client {
     self.authenticationToken = authenticationToken
   }
 
-  // MARK: Checking Service Availability
+  // MARK: Making Requests
 
   /**
     Checks availability of the service.
@@ -104,16 +104,14 @@ public class Client {
     }
   }
 
-  // MARK: Getting Account Credentials
-
   /**
-    Fetches the account credentials for using the service.
+    Fetches the account details for using the service.
 
     - parameter completion: A closure called when the request finishes.
 
-    - seealso: [Authentication](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md).
+    - seealso: [Authorization](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md#authorization).
    */
-  public func fetchAccountCredentials(completion: (accountCredentials: AccountCredentials?) -> Void = noop) {
+  public func account(completion: (accountCredentials: AccountCredentials?) -> Void = noop) {
     request(Authorization()) { response in
       let accountCredentials: AccountCredentials?
       switch response {
@@ -125,8 +123,6 @@ public class Client {
       completion(accountCredentials: accountCredentials)
     }
   }
-
-  // MARK: Requesting Resources
 
   /**
     Requests a resource.
