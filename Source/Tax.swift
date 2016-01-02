@@ -21,8 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
-
 
 /**
   A resource for calculating taxes.
@@ -56,7 +54,7 @@ public struct Tax: Resource {
 
     // MARK: Request
 
-    var method: Alamofire.Method {
+    var method: HTTPMethod {
       return .GET
     }
 

@@ -21,8 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
-
 
 // MARK: - Payable
 
@@ -84,7 +82,7 @@ struct PaymentRequest<R: Resource>: Request {
 
   // MARK: Request
 
-  var method: Alamofire.Method {
+  var method: HTTPMethod {
     if isPayment {
       return .POST
     } else {

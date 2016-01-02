@@ -27,6 +27,9 @@ import Alamofire
 /// Alias for a dictionary representing the parameters sent along with a request.
 public typealias RequestParameters = [String: AnyObject]
 
+/// Alias for HTTP method in Alamofire to avoid explicit dependency.
+public typealias HTTPMethod = Alamofire.Method
+
 
 // MARK: - Request
 
@@ -36,7 +39,7 @@ public typealias RequestParameters = [String: AnyObject]
 public protocol Request {
 
   /// The HTTP method to use when requesting a resource
-  var method: Alamofire.Method { get }
+  var method: HTTPMethod { get }
 
   /// Parameters to use when requesting a resource.
   var parameters: RequestParameters? { get }

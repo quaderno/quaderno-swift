@@ -21,8 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
-
 
 // MARK: - Deliverable
 
@@ -63,7 +61,7 @@ struct DeliveryRequest<R: Resource>: Request {
 
   // MARK: Request
 
-  var method: Alamofire.Method {
+  var method: HTTPMethod {
     return .GET
   }
 

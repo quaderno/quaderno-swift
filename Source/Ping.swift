@@ -21,8 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
-
 
 /**
   A resource for checking the availability of the service.
@@ -39,7 +37,7 @@ struct Ping: Resource {
 
 extension Ping: Request {
 
-  var method: Alamofire.Method {
+  var method: HTTPMethod {
     return .GET
   }
 

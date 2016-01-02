@@ -35,7 +35,6 @@ public struct Item: Resource {
 
 }
 
-
 extension Item: CRUD {
 
   public typealias CRUDResource = Item
