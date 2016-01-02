@@ -46,3 +46,9 @@ extension Invoice: Deliverable {
   public typealias DeliverableResource = Invoice
 
 }
+
+extension Invoice: Payable {
+
+  public typealias PayableResource = Invoice
+
+}

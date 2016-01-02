@@ -84,7 +84,7 @@ public class Client {
     self.authenticationToken = authenticationToken
   }
 
-  // MARK: Checking Service Availability
+  // MARK: Making Requests
 
   /**
     Checks availability of the service.
@@ -105,35 +105,13 @@ public class Client {
   }
 
   /**
-    Fetches the connection entitlements for using the service with the current account.
+    Fetches the account details for using the service.
 
     - parameter completion: A closure called when the request finishes.
 
-    - postcondition: The value of `entitlements` is updated when the request finishes.
-
-    - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting).
+    - seealso: [Authorization](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md#authorization).
    */
-  public func fetchConnectionEntitlements(completion: (entitlements: ConnectionEntitlements?) -> Void = noop) {
-    let ping = Ping.request()
-
-    Alamofire.request(ping.method, ping.uri(baseURL: baseURL), parameters: nil, encoding: defaultEncoding, headers: authorizationHeaders)
-      .validate()
-      .responseJSON { response in
-        self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)
-        completion(entitlements: self.entitlements)
-    }
-  }
-
-  // MARK: Getting Account Credentials
-
-  /**
-    Fetches the account credentials for using the service.
-
-    - parameter completion: A closure called when the request finishes.
-
-    - seealso: [Authentication](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md).
-   */
-  public func fetchAccountCredentials(completion: (accountCredentials: AccountCredentials?) -> Void = noop) {
+  public func account(completion: (accountCredentials: AccountCredentials?) -> Void = noop) {
     request(Authorization()) { response in
       let accountCredentials: AccountCredentials?
       switch response {
@@ -145,8 +123,6 @@ public class Client {
       completion(accountCredentials: accountCredentials)
     }
   }
-
-  // MARK: Requesting Resources
 
   /**
     Requests a resource.
@@ -163,6 +139,8 @@ public class Client {
     Alamofire.request(request.method, request.uri(baseURL: baseURL), parameters: request.parameters, encoding: request.encoding, headers: authorizationHeaders)
       .validate()
       .responseJSON { response in
+        self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)
+
         switch response.result {
         case .Success(let value) where value is ResponseObject:
           completion(response: Response.Record(value as! ResponseObject))

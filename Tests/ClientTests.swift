@@ -73,25 +73,23 @@ class ClientTests: XCTestCase {
 
   // MARK: Connection Entitlements
 
-  func testThatFetchingConnectionEntitlementsReturnsNilWhenHeadersAreInvalid() {
+  func testThatEntitlementsAreUnknownWhenHeadersAreInvalid() {
     let response = OHHTTPStubsResponse(JSONObject: [], statusCode: 200, headers: nil)
     OHHTTPStubs.stubPingRequest(success: true, response: response)
 
     let expectation = expectationWithDescription("ping finishes")
-    httpClient.fetchConnectionEntitlements { entitlements in
-      XCTAssertNil(entitlements)
+    httpClient.ping { success in
       XCTAssertNil(self.httpClient.entitlements)
       expectation.fulfill()
     }
     waitForExpectationsWithTimeout(1, handler: nil)
   }
 
-  func testThatFetchingConnectionEntitlementsReturnsEntitlementsWhenHeadersAreValid() {
+  func testThatEntitlementsAreKnownWhenHeadersAreValid() {
     OHHTTPStubs.stubPingRequest(success: true)
 
     let expectation = expectationWithDescription("ping finishes")
-    httpClient.fetchConnectionEntitlements { entitlements in
-      XCTAssertNotNil(entitlements)
+    httpClient.ping { success in
       XCTAssertNotNil(self.httpClient.entitlements)
       expectation.fulfill()
     }
@@ -100,23 +98,23 @@ class ClientTests: XCTestCase {
 
   // MARK: Account Credentials
 
-  func testThatFetchingAccountCredentialsReturnsNilWhenJSONIsInvalid() {
+  func testThatAccountReturnsNilWhenJSONIsInvalid() {
     let response = OHHTTPStubsResponse(JSONObject: [], statusCode: 200, headers: nil)
     OHHTTPStubs.stubAuthorizationRequest(success: true, response: response)
 
     let expectation = expectationWithDescription("authorization finishes")
-    httpClient.fetchAccountCredentials { credentials in
+    httpClient.account { credentials in
       XCTAssertNil(credentials)
       expectation.fulfill()
     }
     waitForExpectationsWithTimeout(1, handler: nil)
   }
 
-  func testThatFetchingAccountCredentialsReturnsCredentialsWhenJSONIsValid() {
+  func testThatAccountReturnsCredentialsWhenJSONIsValid() {
     OHHTTPStubs.stubAuthorizationRequest(success: true)
 
     let expectation = expectationWithDescription("authorization finishes")
-    httpClient.fetchAccountCredentials { credentials in
+    httpClient.account { credentials in
       XCTAssertNotNil(credentials)
       expectation.fulfill()
     }

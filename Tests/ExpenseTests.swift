@@ -101,4 +101,28 @@ class ExpenseTests: XCTestCase {
     XCTAssertNotNil(NSURL(string: uri))
   }
 
+  // MARK: Payable
+
+  func testThatCanBePaid() {
+    let request = Expense.pay(1, details: ["amount": "56.60", "payment_method": "credit_card"])
+
+    XCTAssertEqual(request.method, Method.POST)
+    XCTAssertNotNil(request.parameters)
+
+    let uri = request.uri(baseURL: baseURL)
+    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/expenses/1/payments.json")
+    XCTAssertNotNil(NSURL(string: uri))
+  }
+
+  func testThatCanCancelPayments() {
+    let request = Expense.cancelPayment(1, documentId: 2)
+
+    XCTAssertEqual(request.method, Method.DELETE)
+    XCTAssertNil(request.parameters)
+
+    let uri = request.uri(baseURL: baseURL)
+    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/expenses/2/payments/1.json")
+    XCTAssertNotNil(NSURL(string: uri))
+  }
+
 }
