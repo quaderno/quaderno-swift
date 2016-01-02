@@ -36,7 +36,6 @@
 		317E9C481BF24A1900A1C331 /* PingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E18A1BECACCB005104BB /* PingTests.swift */; };
 		317E9C491BF257CA00A1C331 /* ContactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E18D1BECB8D0005104BB /* ContactTests.swift */; };
 		317E9C4B1BF284C700A1C331 /* ResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C4A1BF284C700A1C331 /* ResourceTests.swift */; };
-		317E9C4D1BF2860600A1C331 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C4C1BF2860600A1C331 /* RequestTests.swift */; };
 		317E9C4F1BF29B7500A1C331 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C4E1BF29B7500A1C331 /* Response.swift */; };
 		317E9C511BF29E1200A1C331 /* ResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E9C501BF29E1200A1C331 /* ResponseTests.swift */; };
 		318D1ABB1C36FCC30005599A /* Payable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318D1ABA1C36FCC30005599A /* Payable.swift */; };
@@ -90,7 +89,6 @@
 		317E9C441BF2452E00A1C331 /* Response+Stubs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Response+Stubs.swift"; sourceTree = "<group>"; };
 		317E9C461BF2490500A1C331 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		317E9C4A1BF284C700A1C331 /* ResourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTests.swift; sourceTree = "<group>"; };
-		317E9C4C1BF2860600A1C331 /* RequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
 		317E9C4E1BF29B7500A1C331 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		317E9C501BF29E1200A1C331 /* ResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseTests.swift; sourceTree = "<group>"; };
 		318D1ABA1C36FCC30005599A /* Payable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payable.swift; sourceTree = "<group>"; };
@@ -225,7 +223,6 @@
 				317E9C461BF2490500A1C331 /* StringTests.swift */,
 				31B979321BE2384800AD6234 /* ClientTests.swift */,
 				317E9C4A1BF284C700A1C331 /* ResourceTests.swift */,
-				317E9C4C1BF2860600A1C331 /* RequestTests.swift */,
 				317E9C501BF29E1200A1C331 /* ResponseTests.swift */,
 				31C2E18C1BECACD5005104BB /* Resources */,
 				317E9C431BF2451000A1C331 /* Response Stubs */,
@@ -540,7 +537,6 @@
 				317E9C511BF29E1200A1C331 /* ResponseTests.swift in Sources */,
 				3110B8E91BFB832C005B0893 /* AccountCredentialsTests.swift in Sources */,
 				3110B8E41BFB7B9B005B0893 /* AuthorizationTests.swift in Sources */,
-				317E9C4D1BF2860600A1C331 /* RequestTests.swift in Sources */,
 				317C083F1BF5F3D40080F561 /* WebhookTests.swift in Sources */,
 				317E9C451BF2452E00A1C331 /* Response+Stubs.swift in Sources */,
 				317C083B1BF5EF750080F561 /* RecurringTests.swift in Sources */,

@@ -136,7 +136,7 @@ public class Client {
       - `Response`.
    */
   public func request(request: Request, completion: (response: Response<NSError>) -> Void = noop) {
-    Alamofire.request(request.method, request.uri(baseURL: baseURL), parameters: request.parameters, encoding: request.encoding, headers: authorizationHeaders)
+    Alamofire.request(request.method, request.uri(baseURL: baseURL), parameters: request.parameters, encoding: .JSON, headers: authorizationHeaders)
       .validate()
       .responseJSON { response in
         self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)

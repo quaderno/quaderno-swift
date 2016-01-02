@@ -38,9 +38,6 @@ public protocol Request {
   /// The HTTP method to use when requesting a resource
   var method: Alamofire.Method { get }
 
-  /// The method to use for encoding the parameters of a request.
-  var encoding: Alamofire.ParameterEncoding { get }
-
   /// Parameters to use when requesting a resource.
   var parameters: RequestParameters? { get }
 
@@ -52,14 +49,6 @@ public protocol Request {
     - returns: A string representing the URI of a resource.
    */
   func uri(baseURL baseURL: String) -> String
-
-}
-
-extension Request {
-
-  public var encoding: Alamofire.ParameterEncoding {
-    return .JSON
-  }
 
 }
 
