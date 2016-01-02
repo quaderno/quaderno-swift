@@ -175,6 +175,15 @@
 			name = "Response Stubs";
 			sourceTree = "<group>";
 		};
+		3191E3C71C386CDA001E075B /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				3110B8E01BFB7A1C005B0893 /* Authorization.swift */,
+				31C2E1861BECA7A5005104BB /* Ping.swift */,
+			);
+			name = Internal;
+			sourceTree = "<group>";
+		};
 		31B979191BE2384800AD6234 = {
 			isa = PBXGroup;
 			children = (
@@ -247,14 +256,13 @@
 		31C2E1801BECA30C005104BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3110B8E01BFB7A1C005B0893 /* Authorization.swift */,
+				3191E3C71C386CDA001E075B /* Internal */,
 				31C2E1881BECA7FE005104BB /* Contact.swift */,
 				31938A921BF508AF00147F0C /* Credit.swift */,
 				317C08301BF5EB930080F561 /* Estimate.swift */,
 				317C08341BF5EE0E0080F561 /* Expense.swift */,
 				310F1F221BF36FED001C9335 /* Invoice.swift */,
 				31938A901BF504BA00147F0C /* Item.swift */,
-				31C2E1861BECA7A5005104BB /* Ping.swift */,
 				317C08381BF5EF200080F561 /* Recurring.swift */,
 				31082B6B1C04B99900719A6A /* Tax.swift */,
 				317C083C1BF5F38F0080F561 /* Webhook.swift */,
