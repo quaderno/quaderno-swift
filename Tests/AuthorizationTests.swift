@@ -29,10 +29,10 @@ import Alamofire
 
 class AuthorizationTests: XCTestCase {
 
-  // MARK: SingleRequest
+  // MARK: Request
 
-  func testThatBehavesAsSingleRequest() {
-    let request = Authorization.request()
+  func testThatBehavesAsRequest() {
+    let request = Authorization()
 
     XCTAssertEqual(request.method, Alamofire.Method.GET)
     XCTAssertNil(request.parameters)

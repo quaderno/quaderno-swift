@@ -37,7 +37,7 @@ struct Ping: Resource {
 
 }
 
-extension Ping: SingleRequest {
+extension Ping: Request {
 
   var method: Alamofire.Method {
     return .GET
@@ -49,10 +49,6 @@ extension Ping: SingleRequest {
 
   func uri(baseURL baseURL: String) -> String {
     return (baseURL + Ping.name).appendJSONSuffix()
-  }
-
-  static func request() -> Request {
-    return Ping()
   }
 
 }

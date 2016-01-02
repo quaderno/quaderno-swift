@@ -29,10 +29,10 @@ import Alamofire
 
 class PingTests: XCTestCase {
 
-  // MARK: SingleRequest
+  // MARK: Request
 
-  func testThatBehavesAsSingleRequest() {
-    let request = Ping.request()
+  func testThatBehavesAsRequest() {
+    let request = Ping()
 
     XCTAssertEqual(request.method, Alamofire.Method.GET)
     XCTAssertNil(request.parameters)

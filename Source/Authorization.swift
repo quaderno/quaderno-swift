@@ -39,7 +39,7 @@ struct Authorization: Resource {
 
 }
 
-extension Authorization: SingleRequest {
+extension Authorization: Request {
 
   var method: Alamofire.Method {
     return .GET
@@ -52,10 +52,6 @@ extension Authorization: SingleRequest {
   func uri(baseURL baseURL: String) -> String {
     // Custom base URL is ignored for this request as per API requirements.
     return ("https://quadernoapp.com/api/v1/" + Authorization.name).appendJSONSuffix()
-  }
-
-  static func request() -> Request {
-    return Authorization()
   }
 
 }
