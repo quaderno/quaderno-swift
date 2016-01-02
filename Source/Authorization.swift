@@ -31,30 +31,30 @@ import Alamofire
     - [Authentication](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md).
     - `AccountCredentials`.
  */
-public struct Authorization: Resource {
+struct Authorization: Resource {
 
   // MARK: Resource
 
-  public static let name = "authorization"
+  static let name = "authorization"
 
 }
 
 extension Authorization: SingleRequest {
 
-  public var method: Alamofire.Method {
+  var method: Alamofire.Method {
     return .GET
   }
 
-  public var parameters: RequestParameters? {
+  var parameters: RequestParameters? {
     return nil
   }
 
-  public func uri(baseURL baseURL: String) -> String {
+  func uri(baseURL baseURL: String) -> String {
     // Custom base URL is ignored for this request as per API requirements.
     return ("https://quadernoapp.com/api/v1/" + Authorization.name).appendJSONSuffix()
   }
 
-  public static func request() -> Request {
+  static func request() -> Request {
     return Authorization()
   }
 

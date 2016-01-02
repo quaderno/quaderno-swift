@@ -29,29 +29,29 @@ import Alamofire
 
   - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
  */
-public struct Ping: Resource {
+struct Ping: Resource {
 
   // MARK: Resource
 
-  public static let name = "ping"
+  static let name = "ping"
 
 }
 
 extension Ping: SingleRequest {
 
-  public var method: Alamofire.Method {
+  var method: Alamofire.Method {
     return .GET
   }
 
-  public var parameters: RequestParameters? {
+  var parameters: RequestParameters? {
     return nil
   }
 
-  public func uri(baseURL baseURL: String) -> String {
+  func uri(baseURL baseURL: String) -> String {
     return (baseURL + Ping.name).appendJSONSuffix()
   }
 
-  public static func request() -> Request {
+  static func request() -> Request {
     return Ping()
   }
 
