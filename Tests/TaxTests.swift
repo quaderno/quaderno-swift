@@ -30,7 +30,8 @@ import Alamofire
 class TaxTests: XCTestCase {
 
   func testThatCalculatingTaxesReturnsAValidRequest() {
-    let request = Tax.calculate(country: "ES")
+    let transaction = Tax.TransactionDetails(country: "ES")
+    let request = Tax.calculate(transaction)
 
     XCTAssertEqual(request.method, Alamofire.Method.GET)
     XCTAssertNotNil(request.parameters)
@@ -42,7 +43,8 @@ class TaxTests: XCTestCase {
   }
 
   func testThatDefaultValuesForCalculatingTaxesAreValid() {
-    let request = Tax.calculate(country: "ES")
+    let transaction = Tax.TransactionDetails(country: "ES")
+    let request = Tax.calculate(transaction)
 
     guard let parameters = request.parameters else {
       XCTFail("Unexpected nil parameters for request")
@@ -52,11 +54,12 @@ class TaxTests: XCTestCase {
     XCTAssertEqual(parameters["country"] as? String, "ES")
     XCTAssertNil(parameters["postal_code"])
     XCTAssertNil(parameters["vat_number"])
-    XCTAssertEqual(parameters["transaction_type"] as? String, Tax.Transaction.Service.rawValue)
+    XCTAssertEqual(parameters["transaction_type"] as? String, Tax.TransactionType.Service.rawValue)
   }
 
   func testThatGivenParametersForCalculatingTaxesAreHonoured() {
-    let request = Tax.calculate(country: "ES", transactionType: .Standard, postalCode: "1234", vatNumber: "4321")
+    let transaction = Tax.TransactionDetails(country: "ES", postalCode: "1234", vatNumber: "4321", type: .Standard)
+    let request = Tax.calculate(transaction)
 
     guard let parameters = request.parameters else {
       XCTFail("Unexpected nil parameters for request")
@@ -66,7 +69,7 @@ class TaxTests: XCTestCase {
     XCTAssertEqual(parameters["country"] as? String, "ES")
     XCTAssertEqual(parameters["postal_code"] as? String, "1234")
     XCTAssertEqual(parameters["vat_number"] as? String, "4321")
-    XCTAssertEqual(parameters["transaction_type"] as? String, Tax.Transaction.Standard.rawValue)
+    XCTAssertEqual(parameters["transaction_type"] as? String, Tax.TransactionType.Standard.rawValue)
   }
 
 }

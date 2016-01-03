@@ -101,13 +101,13 @@ public protocol Payable {
 }
 
 
-// MARK:-
+// MARK: - PaymentRequest
 
 /**
-  A struct to represent a request for paying a resource.
+  A request for paying a resource.
 
   - seealso:
-    - `Resource`.
+    - `Request`.
     - `Payable`.
     - `PaymentData`.
  */
@@ -159,6 +159,8 @@ struct PaymentRequest<R: Resource>: Request {
 
 }
 
+
+// MARK: -
 
 extension Payable where PayableResource: Resource {
 
