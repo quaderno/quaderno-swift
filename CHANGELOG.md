@@ -3,9 +3,46 @@ All notable changes to this project will be documented in this file. `Quaderno` 
 
 #### 0.x Releases
 - `0.0.x` Releases - [0.0.1](#001) | [0.0.2](#002)
-- `0.x.x` Releases - [0.1.0](#010) | [0.2.0](#020) | [0.3.0](#030) | [0.4.0](#040) | [0.5.0](#050)
+- `0.x.x` Releases - [0.1.0](#010) | [0.2.0](#020) | [0.3.0](#030) | [0.4.0](#040) | [0.5.0](#050) | [0.6.0](#060)
+- `1.x.x` Releases - [1.0.0](#100)
 
 ---
+
+## [1.0.0](https://github.com/quaderno/quaderno-swift/releases/tag/1.0.0)
+
+Released on 2016-01-04.
+
+#### Changed
+
+- `Authorization` and `Ping` have been made `internal`, as they do not need to be `public`.
+- Explicit parameters for making payments and calculating taxes have been replaced with types:
+  - `PaymentData`.
+  - `TransactionDetails`.
+- `Transaction` has been renamed to `TransactionType`.
+
+#### Removed
+
+- Encoding of requests are no longer customisable. We use `JSON` everywhere.
+
+
+## [0.6.0](https://github.com/quaderno/quaderno-swift/releases/tag/0.6.0)
+
+Unreleased.
+
+#### Added
+
+- A `Payable` protocol for those resource that can be paid:
+  - `Expense`
+  - `Invoice`
+
+#### Changed
+
+- `fetchAccountCredentials` has been renamed to `account`.
+
+#### Removed
+
+- `fetchConnectionEntitlements` has been removed. The `entitlements` property in `Ciient` is now updated after completing every request.
+
 
 ## [0.5.0](https://github.com/quaderno/quaderno-swift/releases/tag/0.5.0)
 

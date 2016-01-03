@@ -1,7 +1,7 @@
 //
 // ExpenseTests.swift
 //
-// Copyright (c) 2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -104,7 +104,8 @@ class ExpenseTests: XCTestCase {
   // MARK: Payable
 
   func testThatCanBePaid() {
-    let request = Expense.pay(1, details: ["amount": "56.60", "payment_method": "credit_card"])
+    let payment = PaymentData(amount: "56.60", method: .CreditCard)
+    let request = Expense.pay(1, details: payment)
 
     XCTAssertEqual(request.method, Method.POST)
     XCTAssertNotNil(request.parameters)

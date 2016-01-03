@@ -1,7 +1,7 @@
 //
 // Authorization.swift
 //
-// Copyright (c) 2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
-
 
 /**
   A resource for fetching the details of a user account.
@@ -31,31 +29,27 @@ import Alamofire
     - [Authentication](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md).
     - `AccountCredentials`.
  */
-public struct Authorization: Resource {
+struct Authorization: Resource {
 
   // MARK: Resource
 
-  public static let name = "authorization"
+  static let name = "authorization"
 
 }
 
-extension Authorization: SingleRequest {
+extension Authorization: Request {
 
-  public var method: Alamofire.Method {
+  var method: HTTPMethod {
     return .GET
   }
 
-  public var parameters: RequestParameters? {
+  var parameters: RequestParameters? {
     return nil
   }
 
-  public func uri(baseURL baseURL: String) -> String {
+  func uri(baseURL baseURL: String) -> String {
     // Custom base URL is ignored for this request as per API requirements.
     return ("https://quadernoapp.com/api/v1/" + Authorization.name).appendJSONSuffix()
-  }
-
-  public static func request() -> Request {
-    return Authorization()
   }
 
 }

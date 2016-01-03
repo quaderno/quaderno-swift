@@ -10,7 +10,7 @@ Quaderno is a Swift framework that provides easy access to the [Quaderno API](ht
 
 ## Why Using It?
 
-You can implement your own client for the [Quaderno API](https://github.com/quaderno/quaderno-api). However, using Quaderno gives you instant access to the same interface without messing around with low-level HTTP requests and JSON-encoded data.
+You can implement your own client for the [Quaderno API](https://github.com/quaderno/quaderno-api). However, using [Quaderno](https://github.com/quaderno/quaderno-swift) gives you instant access to the same interface without messing around with low-level HTTP requests and JSON-encoded data.
 
 Note that you need a valid account to use Quaderno.
 
@@ -29,7 +29,7 @@ Note that you need a valid account to use Quaderno.
 Add Quaderno to your Podfile if you are using CocoaPods:
 
 ```ruby
-pod "Quaderno", "~> 0.1"
+pod "Quaderno", "~> 1.0.0"
 ```
 
 Otherwise just drag the `.swift` source files under the `Source` directory into your project.
@@ -41,7 +41,7 @@ Otherwise just drag the `.swift` source files under the `Source` directory into 
 
 ## Usage
 
-In order to make requests you need to instantiate at least one `Client` object, providing a base URL for building resource paths and your authentication token:
+In order to make requests you need to instantiate at least one `Client` object, providing a base URI for building resource paths and your authentication token:
 
 ```swift
 let client = Quaderno.Client(baseURL: "https://quadernoapp.io/api/v1/", authenticationToken: "my token")
@@ -78,26 +78,12 @@ You can fetch the account credentials for a given user:
 
 ```swift
 let client = Quaderno.Client(/* ... */)
-client.fetchAccountCredentials { credentials in
+client.account { credentials in
   // credentials will contain the account credentials.
 }
 ```
 
 See [`AccountCredentials`](https://github.com/quaderno/quaderno-swift/blob/master/Source/AccountCredentials.swift) for further details.
-
-
-### Checking the Connection Entitlements
-
-You can check the entitlements of a given account for using the service:
-
-```swift
-let client = Quaderno.Client(/* ... */)
-client.fetchConnectionEntitlements { entitlements in
-  // entitlements will contain the usage limits.
-}
-```
-
-See [`ConnectionEntitlements`](https://github.com/quaderno/quaderno-swift/blob/master/Source/ConnectionEntitlements.swift) for further details.
 
 ### Requesting Resources
 
@@ -117,6 +103,12 @@ The first parameter must be an object conforming to the [`Request`](https://gith
 Moreover, Quaderno also provides different behaviours for implementing common operations on different resources (e.g. `CRUD`, `SingleRequest`,...).
 
 For further details check also [`Resource`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Response.swift) and [`Response`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Response.swift).
+
+### Connection Entitlements
+
+You can check the entitlements for using the service (e.g. the rate limit) by inspecting the `entitlements` property of `Client`.
+
+See [`ConnectionEntitlements`](https://github.com/quaderno/quaderno-swift/blob/master/Source/ConnectionEntitlements.swift) for further details.
 
 
 ## Persistence

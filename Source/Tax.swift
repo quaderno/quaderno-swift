@@ -1,7 +1,7 @@
 //
 // Tax.swift
 //
-// Copyright (c) 2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
-import Alamofire
 
 
 /**
@@ -44,7 +42,7 @@ public struct Tax: Resource {
     - `Book`: A transaction.
     - `Standard`: A transaction.
   */
-  public enum Transaction: String {
+  public enum TransactionType: String {
     case Service = "eservice"
     case Book = "ebook"
     case Standard = "standard"
@@ -52,47 +50,92 @@ public struct Tax: Resource {
 
   // MARK: Calculating Taxes
 
+  /**
+    A request for calculating taxes.
+
+    - seealso:
+      - `Request`.
+      - `TaxData`.
+  */
   struct CalculateRequest: Request {
+
+    /// The transaction details to calcutate taxes for.
+    let transactionDetails: TransactionDetails
 
     // MARK: Request
 
-    var method: Alamofire.Method {
+    var method: HTTPMethod {
       return .GET
+    }
+
+    var parameters: RequestParameters? {
+      var parameters: RequestParameters = [
+        "country": transactionDetails.country,
+        "transaction_type": transactionDetails.type.rawValue,
+      ]
+
+      if let postalCode = transactionDetails.postalCode {
+        parameters["postal_code"] = postalCode
+      }
+
+      if let vatNumber = transactionDetails.vatNumber {
+        parameters["vat_number"] = vatNumber
+      }
+
+      return parameters
     }
 
     func uri(baseURL baseURL: String) -> String {
       return (baseURL + Tax.name + "/calculate").appendJSONSuffix()
     }
 
-    let parameters: RequestParameters?
+  }
+
+  /**
+    The details of a transaction suitable for calculating its taxes.
+   */
+  public struct TransactionDetails {
+
+    /// A two-letter string representing a country code as defined by [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+    let country: String
+
+    /// The postal code of a customer.
+    let postalCode: String?
+
+    /// The VAT number of a customer.
+    let vatNumber: String?
+
+    /// The type of transaction. The default value is `Service`.
+    let type: TransactionType
+
+    /**
+      Initializes the details of a transaction.
+
+      - parameter country:    The country code.
+      - parameter postalCode: The postal code.
+      - parameter vatNumber:  The VAT number.
+      - parameter type:       The transaction type.
+
+      - returns: A newly initialized transaction.
+     */
+    init(country: String, postalCode: String? = nil, vatNumber: String? = nil, type: TransactionType = .Service) {
+      self.country = country
+      self.postalCode = postalCode
+      self.vatNumber = vatNumber
+      self.type = type
+    }
 
   }
 
   /**
     Creates a request for calculating the taxes to apply to a given customer.
 
-    - parameter country: A two-letter string representing a country code as defined by [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-    - parameter postalCode: The postal code of a customer.
-    - parameter vatNumber: The VAT number of a customer.
-    - parameter transactionType: The type of transaction. The default value is `Service`.
+    - parameter transactionDetails: The details of a transaction.
 
     - returns: A request for calculating the taxes.
    */
-  public static func calculate(country country: String, postalCode: String? = nil, vatNumber: String? = nil, transactionType: Transaction = .Service) -> Request {
-    var parameters: RequestParameters = [
-      "country": country,
-      "transaction_type": transactionType.rawValue,
-    ]
-
-    if postalCode != nil {
-      parameters["postal_code"] = postalCode
-    }
-
-    if vatNumber != nil {
-      parameters["vat_number"] = vatNumber
-    }
-
-    return CalculateRequest(parameters: parameters)
+  public static func calculate(transactionDetails: TransactionDetails) -> Request {
+    return CalculateRequest(transactionDetails: transactionDetails)
   }
 
 }

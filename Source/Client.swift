@@ -1,7 +1,7 @@
 //
 // Client.swift
 //
-// Copyright (c) 2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -136,7 +136,7 @@ public class Client {
       - `Response`.
    */
   public func request(request: Request, completion: (response: Response<NSError>) -> Void = noop) {
-    Alamofire.request(request.method, request.uri(baseURL: baseURL), parameters: request.parameters, encoding: request.encoding, headers: authorizationHeaders)
+    Alamofire.request(request.method, request.uri(baseURL: baseURL), parameters: request.parameters, encoding: .JSON, headers: authorizationHeaders)
       .validate()
       .responseJSON { response in
         self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)

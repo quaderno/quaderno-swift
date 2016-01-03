@@ -1,7 +1,7 @@
 //
 // Ping.swift
 //
-// Copyright (c) 2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,38 +21,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
-
 
 /**
   A resource for checking the availability of the service.
 
   - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
  */
-public struct Ping: Resource {
+struct Ping: Resource {
 
   // MARK: Resource
 
-  public static let name = "ping"
+  static let name = "ping"
 
 }
 
-extension Ping: SingleRequest {
+extension Ping: Request {
 
-  public var method: Alamofire.Method {
+  var method: HTTPMethod {
     return .GET
   }
 
-  public var parameters: RequestParameters? {
+  var parameters: RequestParameters? {
     return nil
   }
 
-  public func uri(baseURL baseURL: String) -> String {
+  func uri(baseURL baseURL: String) -> String {
     return (baseURL + Ping.name).appendJSONSuffix()
-  }
-
-  public static func request() -> Request {
-    return Ping()
   }
 
 }

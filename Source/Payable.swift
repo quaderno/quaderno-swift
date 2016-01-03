@@ -21,7 +21,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
+
+// MARK: - PaymentData
+
+/**
+  The details of a payment.
+
+  - seealso: [Payments](https://github.com/quaderno/quaderno-api/blob/master/sections/payments.md).
+ */
+public struct PaymentData {
+
+  /**
+    Represents the method used to execute a payment.
+
+    - `CreditCard`
+    - `Cash`
+    - `WireTransfer`
+    - `DirectDebit`
+    - `Check`
+    - `PromissoryNote`
+    - `IOU`
+    - `PayPal`
+    - `Other`
+   */
+  public enum Method: String {
+
+    case CreditCard = "credit_card"
+    case Cash = "cash"
+    case WireTransfer = "wire_transfer"
+    case DirectDebit = "direct_debit"
+    case Check = "check"
+    case PromissoryNote = "promissory_note"
+    case IOU = "iou"
+    case PayPal = "paypal"
+    case Other = "other"
+
+  }
+
+  /// The amount to be paid
+  let amount: String
+
+  /// The method used to execute the payment.
+  let method: Method
+
+}
 
 
 // MARK: - Payable
@@ -29,9 +72,7 @@ import Alamofire
 /**
   Requirements of a resource that can be paid.
   
-  - seealso:
-    - `Resource`.
-    - [Payments](https://github.com/quaderno/quaderno-api/blob/master/sections/payments.md).
+  - seealso: [Payments](https://github.com/quaderno/quaderno-api/blob/master/sections/payments.md).
  */
 public protocol Payable {
 
@@ -45,7 +86,7 @@ public protocol Payable {
 
     - returns: A request for making a payment.
    */
-  static func pay(documentId: Int, details: RequestParameters) -> Request
+  static func pay(documentId: Int, details: PaymentData) -> Request
 
   /**
     Creates a request for cancelling a payment.
@@ -60,14 +101,15 @@ public protocol Payable {
 }
 
 
-// MARK:-
+// MARK: - PaymentRequest
 
 /**
-  A struct to represent a request for paying a resource.
+  A request for paying a resource.
 
   - seealso:
-    - `Resource`.
+    - `Request`.
     - `Payable`.
+    - `PaymentData`.
  */
 struct PaymentRequest<R: Resource>: Request {
 
@@ -82,9 +124,12 @@ struct PaymentRequest<R: Resource>: Request {
     return id == nil && parameters != nil
   }
 
+  /// The details of the payment
+  let details: PaymentData?
+
   // MARK: Request
 
-  var method: Alamofire.Method {
+  var method: HTTPMethod {
     if isPayment {
       return .POST
     } else {
@@ -92,7 +137,16 @@ struct PaymentRequest<R: Resource>: Request {
     }
   }
 
-  let parameters: RequestParameters?
+  var parameters: RequestParameters? {
+    guard let paymentData = details else {
+      return nil
+    }
+
+    return [
+      "amount": paymentData.amount,
+      "payment_method": paymentData.method.rawValue
+    ]
+  }
 
   func uri(baseURL baseURL: String) -> String {
     if isPayment {
@@ -106,14 +160,16 @@ struct PaymentRequest<R: Resource>: Request {
 }
 
 
+// MARK: -
+
 extension Payable where PayableResource: Resource {
 
-  public static func pay(documentId: Int, details: RequestParameters) -> Request {
-    return PaymentRequest<PayableResource>(documentId: documentId, id: nil, parameters: details)
+  public static func pay(documentId: Int, details: PaymentData) -> Request {
+    return PaymentRequest<PayableResource>(documentId: documentId, id: nil, details: details)
   }
 
   public static func cancelPayment(paymentId: Int, documentId: Int) -> Request {
-    return PaymentRequest<PayableResource>(documentId: documentId, id: paymentId, parameters: nil)
+    return PaymentRequest<PayableResource>(documentId: documentId, id: paymentId, details: nil)
   }
 
 }

@@ -1,7 +1,7 @@
 //
 // PingTests.swift
 //
-// Copyright (c) 2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,10 +29,10 @@ import Alamofire
 
 class PingTests: XCTestCase {
 
-  // MARK: SingleRequest
+  // MARK: Request
 
-  func testThatBehavesAsSingleRequest() {
-    let request = Ping.request()
+  func testThatBehavesAsRequest() {
+    let request = Ping()
 
     XCTAssertEqual(request.method, Alamofire.Method.GET)
     XCTAssertNil(request.parameters)

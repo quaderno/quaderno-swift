@@ -1,7 +1,7 @@
 //
 // Request.swift
 //
-// Copyright (c) 2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,9 @@ import Alamofire
 /// Alias for a dictionary representing the parameters sent along with a request.
 public typealias RequestParameters = [String: AnyObject]
 
+/// Alias for HTTP method in Alamofire to avoid explicit dependency.
+public typealias HTTPMethod = Alamofire.Method
+
 
 // MARK: - Request
 
@@ -36,10 +39,7 @@ public typealias RequestParameters = [String: AnyObject]
 public protocol Request {
 
   /// The HTTP method to use when requesting a resource
-  var method: Alamofire.Method { get }
-
-  /// The method to use for encoding the parameters of a request.
-  var encoding: Alamofire.ParameterEncoding { get }
+  var method: HTTPMethod { get }
 
   /// Parameters to use when requesting a resource.
   var parameters: RequestParameters? { get }
@@ -52,14 +52,6 @@ public protocol Request {
     - returns: A string representing the URI of a resource.
    */
   func uri(baseURL baseURL: String) -> String
-
-}
-
-extension Request {
-
-  public var encoding: Alamofire.ParameterEncoding {
-    return .JSON
-  }
 
 }
 
