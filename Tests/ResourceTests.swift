@@ -24,7 +24,6 @@
 @testable import Quaderno
 
 import XCTest
-import Alamofire
 
 
 class ResourceTests: XCTestCase {

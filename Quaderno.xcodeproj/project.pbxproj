@@ -22,6 +22,7 @@
 		3139A16D1BF14E82003D6D66 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1831BECA359005104BB /* Request.swift */; };
 		3139A16E1BF14EB0003D6D66 /* Ping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1861BECA7A5005104BB /* Ping.swift */; };
 		3139A16F1BF14EB3003D6D66 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E1881BECA7FE005104BB /* Contact.swift */; };
+		316B4D7A1C393C4B00C6D0A9 /* PaymentDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316B4D791C393C4B00C6D0A9 /* PaymentDataTests.swift */; };
 		317C08311BF5EB930080F561 /* Estimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C08301BF5EB930080F561 /* Estimate.swift */; };
 		317C08331BF5ECD20080F561 /* EstimateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C08321BF5ECD20080F561 /* EstimateTests.swift */; };
 		317C08351BF5EE0E0080F561 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317C08341BF5EE0E0080F561 /* Expense.swift */; };
@@ -76,6 +77,7 @@
 		3117FB2D1BE675970096D05A /* OHHTTPStubs+Quaderno.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OHHTTPStubs+Quaderno.swift"; sourceTree = "<group>"; };
 		3117FB311BE693B20096D05A /* ConnectionEntitlementsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionEntitlementsTests.swift; sourceTree = "<group>"; };
 		3139A16A1BF14D54003D6D66 /* CRUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
+		316B4D791C393C4B00C6D0A9 /* PaymentDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentDataTests.swift; sourceTree = "<group>"; };
 		317C08301BF5EB930080F561 /* Estimate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Estimate.swift; sourceTree = "<group>"; };
 		317C08321BF5ECD20080F561 /* EstimateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimateTests.swift; sourceTree = "<group>"; };
 		317C08341BF5EE0E0080F561 /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				31B979321BE2384800AD6234 /* ClientTests.swift */,
 				317E9C4A1BF284C700A1C331 /* ResourceTests.swift */,
 				317E9C501BF29E1200A1C331 /* ResponseTests.swift */,
+				316B4D791C393C4B00C6D0A9 /* PaymentDataTests.swift */,
 				31C2E18C1BECACD5005104BB /* Resources */,
 				317E9C431BF2451000A1C331 /* Response Stubs */,
 				31B9794A1BE240E300AD6234 /* Supporting Files */,
@@ -550,6 +553,7 @@
 				317E9C481BF24A1900A1C331 /* PingTests.swift in Sources */,
 				31938A951BF508EA00147F0C /* CreditTests.swift in Sources */,
 				317E9C471BF2490500A1C331 /* StringTests.swift in Sources */,
+				316B4D7A1C393C4B00C6D0A9 /* PaymentDataTests.swift in Sources */,
 				31A09A001BF35DFE006EA9F0 /* ClientTests.swift in Sources */,
 				31938A8E1BF5047B00147F0C /* ItemTests.swift in Sources */,
 				3117FB321BE693B20096D05A /* ConnectionEntitlementsTests.swift in Sources */,

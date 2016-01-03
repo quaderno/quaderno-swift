@@ -104,7 +104,8 @@ class ExpenseTests: XCTestCase {
   // MARK: Payable
 
   func testThatCanBePaid() {
-    let request = Expense.pay(1, details: ["amount": "56.60", "payment_method": "credit_card"])
+    let payment = PaymentData(amount: "56.60", method: .CreditCard)
+    let request = Expense.pay(1, details: payment)
 
     XCTAssertEqual(request.method, Method.POST)
     XCTAssertNotNil(request.parameters)
