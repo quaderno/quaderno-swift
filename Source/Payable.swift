@@ -76,7 +76,7 @@ public struct PaymentData {
  */
 public protocol Payable {
 
-  typealias PayableResource
+  associatedtype PayableResource
 
   /**
     Creates a request for making a payment.

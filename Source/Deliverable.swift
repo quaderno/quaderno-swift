@@ -31,7 +31,7 @@
  */
 public protocol Deliverable {
 
-  typealias DeliverableResource
+  associatedtype DeliverableResource
 
   /**
     Creates a request for delivering a resource.

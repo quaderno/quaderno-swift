@@ -33,7 +33,7 @@
  */
 public protocol CRUD {
 
-  typealias CRUDResource
+  associatedtype CRUDResource
 
   /**
     Creates a request for creating a resource.
