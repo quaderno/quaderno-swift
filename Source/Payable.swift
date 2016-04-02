@@ -154,7 +154,7 @@ struct PaymentRequest<R: Resource>: Request {
     if isPayment {
       return (baseURL + R.name + "/\(documentId)/payments").appendJSONSuffix()
     } else {
-      precondition(id != nil, "Payment identifier must not be nil")
+      assert(id != nil, "Payment identifier must not be nil")
       return (baseURL + R.name + "/\(documentId)/payments/\(id!)").appendJSONSuffix()
     }
   }
