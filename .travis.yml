@@ -24,8 +24,5 @@ script:
   # Run tests in Debug
   - xcodebuild -workspace "${WORKSPACE}" -scheme "${SCHEME}" -destination "${DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=NO test | xcpretty -c
 
-  # Run tests in Release
-  - xcodebuild -workspace "${WORKSPACE}" -scheme "${SCHEME}" -destination "${DESTINATION}" -configuration Release ONLY_ACTIVE_ARCH=NO test | xcpretty -c
-
   # Check CocoaPods specs
   - pod lib lint --quick # This must be quick due to a warning in Alamofire
