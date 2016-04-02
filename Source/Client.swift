@@ -99,13 +99,8 @@ extension Client {
    - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
    */
   public func ping(completion: (success: Bool) -> Void = noop) {
-    request(Ping()) { response -> Void in
-      switch response {
-      case .Failure:
-        completion(success: false)
-      default:
-        completion(success: true)
-      }
+    request(Ping()) { response in
+      completion(success: response.isSuccess)
     }
   }
 
@@ -118,13 +113,12 @@ extension Client {
    */
   public func account(completion: (accountCredentials: AccountCredentials?) -> Void = noop) {
     request(Authorization()) { response in
-      let accountCredentials: AccountCredentials?
-      switch response {
-      case .Record(let result):
-        accountCredentials = AccountCredentials(jsonDictionary: result)
-      default:
-        accountCredentials = nil
+      guard case .Record(let result) = response else {
+        completion(accountCredentials: nil)
+        return
       }
+
+      let accountCredentials = AccountCredentials(jsonDictionary: result)
       completion(accountCredentials: accountCredentials)
     }
   }

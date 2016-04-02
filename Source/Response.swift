@@ -52,12 +52,10 @@ public enum Response<Error: ErrorType> {
 
   /// Whether the response is considered successful.
   public var isSuccess: Bool {
-    switch self {
-    case .Failure:
+    if case .Failure = self {
       return false
-    default:
-      return true
     }
+    return true
   }
 
   /// Whether the response is considered a failed response.
