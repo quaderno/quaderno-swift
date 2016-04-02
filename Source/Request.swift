@@ -24,7 +24,7 @@
 import Alamofire
 
 
-/// Alias for a dictionary representing the parameters sent along with a request.
+/// Alias for a dictionary representing the parameters of an HTTP request.
 public typealias RequestParameters = [String: AnyObject]
 
 /// Alias for HTTP method in Alamofire to avoid explicit dependency.
@@ -34,7 +34,7 @@ public typealias HTTPMethod = Alamofire.Method
 // MARK: - Request
 
 /**
-  Requirements of a request to perform an operation over a resource.
+ Requirements of an HTTP request to perform an operation over a resource.
  */
 public protocol Request {
 
@@ -45,25 +45,23 @@ public protocol Request {
   var parameters: RequestParameters? { get }
 
   /**
-    Returns a string representing the URI of a resource.
+   Returns a string representing the URI of a resource.
 
-    - parameter baseURL: The base URL of the service.
+   - parameter baseURL: The base URL of the service.
 
-    - returns: A string representing the URI of a resource.
+   - returns: A string representing the URI of a resource.
    */
   func uri(baseURL baseURL: String) -> String
 
 }
 
 
-// MARK: -
-
 extension String {
 
   /**
-    Returns a string with the suffix `".json"` appended.
-   
-    - returns: A string with the suffix `".json"` appended.
+   Returns a string with the suffix `".json"` appended.
+
+   - returns: A string with the suffix `".json"` appended.
    */
   func appendJSONSuffix() -> String {
     let jsonExtension = ".json"

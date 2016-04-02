@@ -23,9 +23,9 @@
 
 
 /**
-  A resource for managing contacts.
+ A resource for managing contacts.
 
-  - seealso: [Contacts](https://github.com/quaderno/quaderno-api/blob/master/sections/contacts.md).
+ - seealso: [Contacts](https://github.com/quaderno/quaderno-api/blob/master/sections/contacts.md).
  */
 public struct Contact: Resource {
 

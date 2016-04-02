@@ -22,22 +22,21 @@
 // THE SOFTWARE.
 
 
-// MARK: - Resource
-
 /**
-  Requirements of a resource.
+ Requirements of an API resource.
  */
 public protocol Resource {
 
   /**
-    Name of a resource.
+   Name of a resource.
 
-    This value is used to build URIs that expose different operations over the same resource. For instance, all
-    operations pertaining to invoicing may use the name `"invoices"`, thus having these URIs:
+   This value is used to build URIs that expose different operations over the
+   same resource. For instance, all operations pertaining to invoicing use the
+   name `"invoices"`, thus having these URIs:
 
-      - `https://quadernoapp.io/api/v1/invoices`
-      - `https://quadernoapp.io/api/v1/invoices/1.json`
-      - `https://quadernoapp.io/api/v1/invoices/deliver/24.json`
+   - `https://quadernoapp.io/api/v1/invoices`
+   - `https://quadernoapp.io/api/v1/invoices/1.json`
+   - `https://quadernoapp.io/api/v1/invoices/deliver/24.json`
    */
   static var name: String { get }
 

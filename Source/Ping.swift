@@ -23,9 +23,9 @@
 
 
 /**
-  A resource for checking the availability of the service.
+ A resource for checking the availability of the service.
 
-  - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
+ - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
  */
 struct Ping: Resource {
 

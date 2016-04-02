@@ -29,16 +29,19 @@ public typealias ResponseObject = [String: AnyObject]
 // MARK: - Response
 
 /**
-  Represents a response returned as a result of a request to a resource. Any response except `Failure` is considered
-  successful.
+ Represents a response returned as a result of a request to a resource. Any
+ response except `Failure` is considered successful.
 
-  - `Record`: The request was successful and a single record was returned as a result.
- 
-  - `Collection`: The request was successful and a collection of records was returned as a result.
+ - `Record`: The request was successful and a single record was returned as a
+ result.
 
-  - `Empty`: The request was successful but nothing was returned as a result.
-  
-  - `Failure`: The request failed and an error that caused the failure is reported.
+ - `Collection`: The request was successful and a collection of records was
+ returned as a result.
+
+ - `Empty`: The request was successful but nothing was returned as a result.
+
+ - `Failure`: The request failed and an error that caused the failure is
+ reported.
  */
 public enum Response<Error: ErrorType> {
 

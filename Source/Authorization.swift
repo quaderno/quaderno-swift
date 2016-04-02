@@ -23,11 +23,11 @@
 
 
 /**
-  A resource for fetching the details of a user account.
+ A resource for fetching the details of a user account.
 
-  - seealso:
-    - [Authentication](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md).
-    - `AccountCredentials`.
+ - seealso:
+  - [Authentication](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md).
+  - `AccountCredentials`.
  */
 struct Authorization: Resource {
 

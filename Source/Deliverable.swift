@@ -25,20 +25,20 @@
 // MARK: - Deliverable
 
 /**
-  Requirements of a resource that can be delivered.
-  
-  - seealso: `Resource`.
+ Requirements of a resource that can be delivered.
+
+ - seealso: `Resource`.
  */
 public protocol Deliverable {
 
   associatedtype DeliverableResource
 
   /**
-    Creates a request for delivering a resource.
+   Creates a request for delivering a resource.
 
-    - parameter id: The identifier of a resource.
+   - parameter id: The identifier of a resource.
 
-    - returns: A request for delivering a resource.
+   - returns: A request for delivering a resource.
    */
   static func deliver(id: Int) -> Request
 
@@ -48,11 +48,11 @@ public protocol Deliverable {
 // MARK:-
 
 /**
-  A struct to represent a request for delivering a resource.
+ A struct to represent a request for delivering a resource.
 
-  - seealso:
-    - `Resource`.
-    - `Deliverable`.
+ - seealso:
+  - `Resource`.
+  - `Deliverable`.
  */
 struct DeliveryRequest<R: Resource>: Request {
 

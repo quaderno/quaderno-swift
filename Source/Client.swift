@@ -24,7 +24,6 @@
 import Foundation
 import Alamofire
 
-// MARK: - Helper Functions
 
 /// Dummy function to provide as default value for optional trailing closures.
 func noop<T>(value: T) {}
@@ -33,19 +32,18 @@ func noop<T>(value: T) {}
 // MARK: -
 
 /**
-  An HTTP client responsible for making requests to a service exposing the Quaderno API.
+ An HTTP client responsible for making requests to a service exposing the
+ Quaderno API.
  */
 public class Client {
 
-  // MARK: Properties
-
-  /// The base URL of the service, typically `https://ACCOUNT-NAME.quadernoapp.com/api/v1/`.
+  /// Base URL of the service, typically `https://ACCOUNT-NAME.quadernoapp.com/api/v1/`.
   public let baseURL: String
 
-  /// The token used to authenticate requests to the service.
+  /// Token used to authenticate requests to the service.
   public let authenticationToken: String
 
-  /// The default encoding for every request.
+  /// Default encoding for every request.
   let defaultEncoding = ParameterEncoding.JSON
 
   /// HTTP headers to authorize every request.
@@ -59,39 +57,46 @@ public class Client {
   }()
 
   /**
-    The entitlements granted to the current user for using the service.
+   Entitlements granted to the current user for using the service.
 
-    If no entitlements are defined, it is not guaranteed that the next request will succeed.
+   If no entitlements are defined, it is not guaranteed that the next request
+   will succeed.
 
-    - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting)
+   - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting)
    */
   public private(set) var entitlements: ConnectionEntitlements?
 
   // MARK: Initialization
 
   /**
-    Initializes a client with a base URL and an authentication token.
-  
-    - parameter baseURL: The base URL of the service.
-    - parameter authenticationToken: The token used to authenticate request to the service.
+   Initializes a client with a base URL and an authentication token.
 
-    - returns: A newly initialized client.
+   - parameter baseURL: The base URL of the service.
+   - parameter authenticationToken: The token used to authenticate request to
+   the service.
 
-    - seealso: [Authentication](https://github.com/quaderno/quaderno-api#authentication)
+   - returns: A newly initialized client.
+
+   - seealso: [Authentication](https://github.com/quaderno/quaderno-api#authentication)
    */
   public init(baseURL: String, authenticationToken: String) {
     self.baseURL = baseURL
     self.authenticationToken = authenticationToken
   }
 
-  // MARK: Making Requests
+}
+
+
+// MARK: - Making Requests
+
+extension Client {
 
   /**
-    Checks availability of the service.
+   Checks availability of the service.
 
-    - parameter completion: A closure called when the request finishes.
+   - parameter completion: A closure called when the request finishes.
 
-    - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
+   - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
    */
   public func ping(completion: (success: Bool) -> Void = noop) {
     request(Ping()) { response -> Void in
@@ -105,11 +110,11 @@ public class Client {
   }
 
   /**
-    Fetches the account details for using the service.
+   Fetches the account details for using the service.
 
-    - parameter completion: A closure called when the request finishes.
+   - parameter completion: A closure called when the request finishes.
 
-    - seealso: [Authorization](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md#authorization).
+   - seealso: [Authorization](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md#authorization).
    */
   public func account(completion: (accountCredentials: AccountCredentials?) -> Void = noop) {
     request(Authorization()) { response in
@@ -125,15 +130,15 @@ public class Client {
   }
 
   /**
-    Requests a resource.
+   Requests a resource.
 
-    - parameter request:    A concrete request to a resource.
-    - parameter completion: A closure called when the request finishes. The closure has a single parameter that contains
-    the result of the request.
+   - parameter request:    A concrete request to a resource.
+   - parameter completion: A closure called when the request finishes. The
+   closure has a single parameter that contains the result of the request.
 
-    - seealso:
-      - [API resources](https://github.com/quaderno/quaderno-api#api-resources).
-      - `Response`.
+   - seealso:
+    - [API resources](https://github.com/quaderno/quaderno-api#api-resources).
+    - `Response`.
    */
   public func request(request: Request, completion: (response: Response<NSError>) -> Void = noop) {
     Alamofire.request(request.method, request.uri(baseURL: baseURL), parameters: request.parameters, encoding: .JSON, headers: authorizationHeaders)

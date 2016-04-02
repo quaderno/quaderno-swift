@@ -23,11 +23,12 @@
 
 
 /**
-  The entitlements granted to a given user for connecting to the service.
+ The entitlements granted to a given user for connecting to the service.
  */
 public struct ConnectionEntitlements {
 
-  /// The time interval in seconds until the counter of remaining requests is reset to the maximum allowed value.
+  /// The time interval in seconds until the counter of remaining requests is
+  /// reset to the maximum allowed value.
   public let resetInterval: Int
 
   /// The number of remaining requests until the next counter reset.
@@ -45,13 +46,15 @@ typealias HTTPHeaders = [NSObject: AnyObject]
 extension ConnectionEntitlements {
 
   /**
-    Initializes connection entitlements with an array of HTTP headers.
+   Initializes connection entitlements with an array of HTTP headers.
 
-    - precondition: All expected headers must be present. Otherwise initialization fails.
+   - precondition: All expected headers must be present. Otherwise
+   initialization fails.
 
-    - parameter httpHeaders: An array of HTTP headers, typically coming from a `NSHTTPURLResponse` object.
+   - parameter httpHeaders: An array of HTTP headers, typically coming from a
+   `NSHTTPURLResponse` object.
 
-    - returns: A newly initialized connection entitlements.
+   - returns: A newly initialized connection entitlements.
    */
   init?(httpHeaders: HTTPHeaders?) {
     guard let resetIntervalValue = httpHeaders?["X-RateLimit-Reset"] as? String else {

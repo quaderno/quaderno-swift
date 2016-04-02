@@ -26,13 +26,14 @@
 import XCTest
 
 /**
-  Experimental function to generate all cases in an enumeration. This might break in the future.
+ Experimental function to generate all cases in an enumeration. This might break
+ in the future.
  */
 func iterateEnum<T: Hashable>(_: T.Type) -> AnyGenerator<T> {
   var i = 0
   return AnyGenerator {
     defer {
-        i += 1
+      i += 1
     }
     let next = withUnsafePointer(&i) { UnsafePointer<T>($0).memory }
     return next.hashValue == i ? next : nil

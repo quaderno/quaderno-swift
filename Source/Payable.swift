@@ -25,24 +25,24 @@
 // MARK: - PaymentData
 
 /**
-  The details of a payment.
+ The details of a payment.
 
-  - seealso: [Payments](https://github.com/quaderno/quaderno-api/blob/master/sections/payments.md).
+ - seealso: [Payments](https://github.com/quaderno/quaderno-api/blob/master/sections/payments.md).
  */
 public struct PaymentData {
 
   /**
-    Represents the method used to execute a payment.
+   Represents the method used to execute a payment.
 
-    - `CreditCard`
-    - `Cash`
-    - `WireTransfer`
-    - `DirectDebit`
-    - `Check`
-    - `PromissoryNote`
-    - `IOU`
-    - `PayPal`
-    - `Other`
+   - `CreditCard`
+   - `Cash`
+   - `WireTransfer`
+   - `DirectDebit`
+   - `Check`
+   - `PromissoryNote`
+   - `IOU`
+   - `PayPal`
+   - `Other`
    */
   public enum Method: String {
 
@@ -70,31 +70,33 @@ public struct PaymentData {
 // MARK: - Payable
 
 /**
-  Requirements of a resource that can be paid.
-  
-  - seealso: [Payments](https://github.com/quaderno/quaderno-api/blob/master/sections/payments.md).
+ Requirements of a resource that can be paid.
+
+ - seealso: [Payments](https://github.com/quaderno/quaderno-api/blob/master/sections/payments.md).
  */
 public protocol Payable {
 
   associatedtype PayableResource
 
   /**
-    Creates a request for making a payment.
+   Creates a request for making a payment.
 
-    - parameter documentId: The identifier of a resource associated with the payment.
-    - parameter details:    The details of the payment.
+   - parameter documentId: The identifier of a resource associated with the
+   payment.
+   - parameter details:    The details of the payment.
 
-    - returns: A request for making a payment.
+   - returns: A request for making a payment.
    */
   static func pay(documentId: Int, details: PaymentData) -> Request
 
   /**
-    Creates a request for cancelling a payment.
+   Creates a request for cancelling a payment.
 
-    - parameter paymentId:  The identifier of a payment.
-    - parameter documentId: The identifier of a resource associated with the payment.
+   - parameter paymentId:  The identifier of a payment.
+   - parameter documentId: The identifier of a resource associated with the
+   payment.
 
-    - returns: A request for cancelling a payment.
+   - returns: A request for cancelling a payment.
    */
   static func cancelPayment(paymentId: Int, documentId: Int) -> Request
 
@@ -104,12 +106,12 @@ public protocol Payable {
 // MARK: - PaymentRequest
 
 /**
-  A request for paying a resource.
+ A request for paying a resource.
 
-  - seealso:
-    - `Request`.
-    - `Payable`.
-    - `PaymentData`.
+ - seealso:
+  - `Request`.
+  - `Payable`.
+  - `PaymentData`.
  */
 struct PaymentRequest<R: Resource>: Request {
 

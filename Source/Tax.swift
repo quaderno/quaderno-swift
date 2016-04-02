@@ -23,9 +23,9 @@
 
 
 /**
-  A resource for calculating taxes.
+ A resource for calculating taxes.
 
-  - seealso: [Taxes](https://github.com/quaderno/quaderno-api/blob/master/sections/taxes.md).
+ - seealso: [Taxes](https://github.com/quaderno/quaderno-api/blob/master/sections/taxes.md).
  */
 public struct Tax: Resource {
 
@@ -36,12 +36,12 @@ public struct Tax: Resource {
   // MARK: Transaction Types
 
   /**
-    Represents a type of transaction involved in tax calculation.
+   Represents a type of transaction involved in tax calculation.
 
-    - `Service`: A transaction.
-    - `Book`: A transaction.
-    - `Standard`: A transaction.
-  */
+   - `Service`: A transaction.
+   - `Book`: A transaction.
+   - `Standard`: A transaction.
+   */
   public enum TransactionType: String {
     case Service = "eservice"
     case Book = "ebook"
@@ -51,12 +51,12 @@ public struct Tax: Resource {
   // MARK: Calculating Taxes
 
   /**
-    A request for calculating taxes.
+   A request for calculating taxes.
 
-    - seealso:
-      - `Request`.
-      - `TaxData`.
-  */
+   - seealso:
+    - `Request`.
+    - `TaxData`.
+   */
   struct CalculateRequest: Request {
 
     /// The transaction details to calcutate taxes for.
@@ -92,7 +92,7 @@ public struct Tax: Resource {
   }
 
   /**
-    The details of a transaction suitable for calculating its taxes.
+   The details of a transaction suitable for calculating its taxes.
    */
   public struct TransactionDetails {
 
@@ -109,14 +109,14 @@ public struct Tax: Resource {
     let type: TransactionType
 
     /**
-      Initializes the details of a transaction.
+     Initializes the details of a transaction.
 
-      - parameter country:    The country code.
-      - parameter postalCode: The postal code.
-      - parameter vatNumber:  The VAT number.
-      - parameter type:       The transaction type.
+     - parameter country:    The country code.
+     - parameter postalCode: The postal code.
+     - parameter vatNumber:  The VAT number.
+     - parameter type:       The transaction type.
 
-      - returns: A newly initialized transaction.
+     - returns: A newly initialized transaction.
      */
     init(country: String, postalCode: String? = nil, vatNumber: String? = nil, type: TransactionType = .Service) {
       self.country = country
@@ -128,11 +128,11 @@ public struct Tax: Resource {
   }
 
   /**
-    Creates a request for calculating the taxes to apply to a given customer.
+   Creates a request for calculating the taxes to apply to a given customer.
 
-    - parameter transactionDetails: The details of a transaction.
+   - parameter transactionDetails: The details of a transaction.
 
-    - returns: A request for calculating the taxes.
+   - returns: A request for calculating the taxes.
    */
   public static func calculate(transactionDetails: TransactionDetails) -> Request {
     return CalculateRequest(transactionDetails: transactionDetails)

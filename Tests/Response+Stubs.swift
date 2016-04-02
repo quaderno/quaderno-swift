@@ -27,7 +27,7 @@
 // MARK: StubbedHTTPResponse
 
 /**
-  Properties of a stubbed response returned when requesting a resource.
+ Properties of a stubbed response returned when requesting a resource.
  */
 protocol StubbedHTTPResponse {
 
@@ -125,7 +125,7 @@ struct CreateContactResponse: StubbedHTTPResponse {
       "notes": "Siakafib weugo ra heztizig par cegam tijza is rul mudaaz dahi podwoj.",
       "secure_id": "f13936a86312h8a5d5a6a279kkb30da5e48ba1d5",
       "permalink": "https://quadernoapp.com/billing/f13936a86312h8a5d5a6a279kkb30da5e48ba1d5",
-      "url": "http://quadernoapp.com/api/v1/contacts/1"
+      "url": "http://quadernoapp.com/api/v1/contacts/1",
     ])
   }
 

@@ -23,9 +23,9 @@
 
 
 /**
-  A resource for managing items.
+ A resource for managing items.
 
-  - seealso: [Items](https://github.com/quaderno/quaderno-api/blob/master/sections/items.md).
+ - seealso: [Items](https://github.com/quaderno/quaderno-api/blob/master/sections/items.md).
  */
 public struct Item: Resource {
 

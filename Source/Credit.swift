@@ -23,9 +23,9 @@
 
 
 /**
-  A resource for managing credits.
+ A resource for managing credits.
 
-  - seealso: [Credits](https://github.com/quaderno/quaderno-api/blob/master/sections/credits.md).
+ - seealso: [Credits](https://github.com/quaderno/quaderno-api/blob/master/sections/credits.md).
  */
 public struct Credit: Resource {
 
