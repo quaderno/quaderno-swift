@@ -23,9 +23,9 @@
 
 
 /**
-  A resource for managing estimates.
+ A resource for managing estimates.
 
-  - seealso: [Estimates](https://github.com/quaderno/quaderno-api/blob/master/sections/estimates.md).
+ - seealso: [Estimates](https://github.com/quaderno/quaderno-api/blob/master/sections/estimates.md).
  */
 public struct Estimate: Resource {
 

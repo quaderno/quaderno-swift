@@ -67,7 +67,7 @@ You can ping the service in order to check whether it is available:
 
 ```swift
 let client = Quaderno.Client(/* ... */)
-client.ping() { success in
+client.ping { success in
   // success will be true if the service is available.
 }
 ```
@@ -128,6 +128,8 @@ After cloning this repository run the following commands:
 pod install
 ```
 
+If you need another option for managing dependencies (e.g. Carthage), please open an issue to discuss it.
+
 ###Project Structure
 
 The entry point for the project is the `Quaderno.xcworkspace` file, which contains two projects:
@@ -145,6 +147,11 @@ An [HTML version of the documentation](http://cocoadocs.org/docsets/Quaderno) ca
 ## More Information
 
 Remember that this is only a Swift wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://github.com/quaderno/quaderno-api).
+
+
+## Code of Conduct
+
+Please note that this project is released with a Contributor Code of Conduct, as defined by [contributor-covenant.org](http://contributor-covenant.org/version/1/4/). By participating in this project you agree to abide by its terms.
 
 
 ## Credits

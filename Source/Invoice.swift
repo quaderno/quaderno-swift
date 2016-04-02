@@ -23,9 +23,9 @@
 
 
 /**
-  A resource for managing invoices.
+ A resource for managing invoices.
 
-  - seealso: [Invoices](https://github.com/quaderno/quaderno-api/blob/master/sections/invoices.md).
+ - seealso: [Invoices](https://github.com/quaderno/quaderno-api/blob/master/sections/invoices.md).
  */
 public struct Invoice: Resource {
 

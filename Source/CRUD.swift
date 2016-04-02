@@ -25,59 +25,59 @@
 // MARK: - CRUD
 
 /**
-  Requirements of a resource that supports CRUD operations.
+ Requirements of a resource that supports CRUD operations.
 
-  - seealso:
-    - `Resource`.
-    - [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
+ - seealso:
+  - `Resource`.
+  - [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
  */
 public protocol CRUD {
 
-  typealias CRUDResource
+  associatedtype CRUDResource
 
   /**
-    Creates a request for creating a resource.
-   
-    - parameter attributes: The attributes of the resource.
-   
-    - returns: A request for creating a resource.
+   Creates a request for creating a resource.
+
+   - parameter attributes: The attributes of the resource.
+
+   - returns: A request for creating a resource.
    */
   static func create(attributes: RequestParameters) -> Request
 
   /**
-    Creates a request for reading a resource.
+   Creates a request for reading a resource.
 
-    - parameter id: The identifier of a resource.
+   - parameter id: The identifier of a resource.
 
-    - returns: A request for reading a resource.
+   - returns: A request for reading a resource.
    */
   static func read(id: Int) -> Request
 
   /**
-    Creates a request for reading a collection of resources.
+   Creates a request for reading a collection of resources.
 
-    - parameter page: The page to filter the resources to fetch.
+   - parameter page: The page to filter the resources to fetch.
 
-    - returns: A request for reading a collection of resources.
+   - returns: A request for reading a collection of resources.
    */
   static func list(page: Int) -> Request
 
   /**
-    Creates a request for updating a resource.
+   Creates a request for updating a resource.
 
-    - parameter id:         The identifier of the resource.
-    - parameter attributes: The attributes of the resource.
+   - parameter id:         The identifier of the resource.
+   - parameter attributes: The attributes of the resource.
 
-    - returns: A request for updating a resource.
+   - returns: A request for updating a resource.
    */
   static func update(id: Int, attributes: RequestParameters) -> Request
 
   /**
-    Creates a request for deleting a resource.
+   Creates a request for deleting a resource.
 
-    - parameter id: The identifier of a resource.
+   - parameter id: The identifier of a resource.
 
-    - returns: A request for deleting a resource.
+   - returns: A request for deleting a resource.
    */
   static func delete(id: Int) -> Request
 
@@ -87,13 +87,13 @@ public protocol CRUD {
 // MARK: - CRUDRequest
 
 /**
-  Represents a request to perform a CRUD operation.
+ Represents a request to perform a CRUD operation.
 
-  - `Create`: A request for creating a resource.
-  - `Read`: A request for reading a resource.
-  - `List`: A request for creating a collection of resources.
-  - `Update`: A request for updating a resource.
-  - `Delete`: A request for deleting a resource.
+ - `Create`: A request for creating a resource.
+ - `Read`: A request for reading a resource.
+ - `List`: A request for creating a collection of resources.
+ - `Update`: A request for updating a resource.
+ - `Delete`: A request for deleting a resource.
  */
 enum CRUDRequest<R: Resource>: Request {
 
@@ -170,5 +170,5 @@ extension CRUD where CRUDResource: Resource {
   public static func delete(id: Int) -> Request {
     return CRUDRequest<CRUDResource>.Delete(id)
   }
-  
+
 }

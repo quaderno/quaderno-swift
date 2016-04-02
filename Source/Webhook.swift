@@ -23,9 +23,9 @@
 
 
 /**
-  A resource for managing credits.
+ A resource for managing credits.
 
-  - seealso: [Webhooks](https://github.com/quaderno/quaderno-api/blob/master/sections/webhooks.md).
+ - seealso: [Webhooks](https://github.com/quaderno/quaderno-api/blob/master/sections/webhooks.md).
  */
 public struct Webhook: Resource {
 

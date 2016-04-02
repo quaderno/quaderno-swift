@@ -23,9 +23,9 @@
 
 
 /**
-  A resource for managing expenses.
+ A resource for managing expenses.
 
-  - seealso: [Expenses](https://github.com/quaderno/quaderno-api/blob/master/sections/expenses.md).
+ - seealso: [Expenses](https://github.com/quaderno/quaderno-api/blob/master/sections/expenses.md).
  */
 public struct Expense: Resource {
 

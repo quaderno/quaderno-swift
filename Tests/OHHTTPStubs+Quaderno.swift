@@ -28,20 +28,22 @@ import OHHTTPStubs
 // MARK: - OHHTTPStubs Matchers
 
 /**
-  Matcher testing that the `NSURLRequest` is using a given HTTP method.
+ Matcher testing that the `NSURLRequest` is using a given HTTP method.
 
-  - parameter method: An HTTP method to query the request against.
-  - returns:          A matcher (OHHTTPStubsTestBlock) that succeeds only if the request is using the given method.
+ - parameter method: An HTTP method to query the request against.
+ - returns:          A matcher (OHHTTPStubsTestBlock) that succeeds only if the
+ request is using the given method.
  */
 func isMethod(method: Alamofire.Method) -> OHHTTPStubsTestBlock {
   return { $0.HTTPMethod == method.rawValue }
 }
 
 /**
-  Matcher testing that the URL of a `NSURLRequest` has `path` as a suffix.
+ Matcher testing that the URL of a `NSURLRequest` has `path` as a suffix.
 
-  - parameter path: A path to query the request against.
-  - returns:        A matcher (OHHTTPStubsTestBlock) that succeeds only if the URL has `path` as a suffix.
+ - parameter path: A path to query the request against.
+ - returns:        A matcher (OHHTTPStubsTestBlock) that succeeds only if the
+ URL has `path` as a suffix.
  */
 func containsPath(path: String) -> OHHTTPStubsTestBlock {
   return { request in
@@ -60,25 +62,26 @@ extension OHHTTPStubs {
   // MARK: Helpers
 
   /**
-    Stubs a request that matches a given method and path, and provides a stubbed response.
+   Stubs a request that matches a given method and path, and provides a stubbed
+   response.
 
-    - parameter method:   The HTTP method of the request to stub.
-    - parameter path:     The relative path of the request to stub.
-    - parameter response: A stubbed response to provide as the result of the request.
-  */
+   - parameter method:   The HTTP method of the request to stub.
+   - parameter path:     The relative path of the request to stub.
+   - parameter response: A stubbed response to provide as the result of the request.
+   */
   final class func stubRequest(method method: Alamofire.Method, path: String, response: OHHTTPStubsResponse) {
     stub(isMethod(method) && containsPath(path)) { _ in return response }
   }
 
   /**
-    Stubs a response to provide as the result of a request.
+   Stubs a response to provide as the result of a request.
 
-    - parameter response: A response to stub.
-    - parameter success:  Whether the response should be stubbed as successful.
+   - parameter response: A response to stub.
+   - parameter success:  Whether the response should be stubbed as successful.
 
-    - returns: A stubbed response to provide when stubbing requests.
+   - returns: A stubbed response to provide when stubbing requests.
 
-    - seealso: `stubRequest(method:path:response)`
+   - seealso: `stubRequest(method:path:response)`
    */
   final class func stubResponse(response: StubbedHTTPResponse, success: Bool) -> OHHTTPStubsResponse {
     let responseObject = (success ? response.successJSON : response.failureJSON)
@@ -100,12 +103,13 @@ extension OHHTTPStubs {
   // MARK: Common Stubs
 
   /**
-    Stubs a request to a `Ping` resource.
+   Stubs a request to a `Ping` resource.
 
-    - parameter success:  Whether the stubbed response should be successful.
-    - parameter response: An optional stubbed response to overrides the default response.
+   - parameter success:  Whether the stubbed response should be successful.
+   - parameter response: An optional stubbed response to overrides the default
+   response.
 
-    - seealso: `PingResponse`.
+   - seealso: `PingResponse`.
    */
   final class func stubPingRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
     let pingResponse = response ?? stubResponse(PingResponse(), success: success)
@@ -113,12 +117,13 @@ extension OHHTTPStubs {
   }
 
   /**
-    Stubs a request to a `Authorization` resource.
+   Stubs a request to a `Authorization` resource.
 
-    - parameter success:  Whether the stubbed response should be successful.
-    - parameter response: An optional stubbed response to overrides the default response.
+   - parameter success:  Whether the stubbed response should be successful.
+   - parameter response: An optional stubbed response to overrides the default
+   response.
 
-    - seealso: `AuthorizationResponse`.
+   - seealso: `AuthorizationResponse`.
    */
   final class func stubAuthorizationRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
     let authorizationResponse = response ?? stubResponse(AuthorizationResponse(), success: success)
@@ -126,12 +131,13 @@ extension OHHTTPStubs {
   }
 
   /**
-    Stubs a request for creating a `Contact` resource.
+   Stubs a request for creating a `Contact` resource.
 
-    - parameter success:  Whether the stubbed response should be successful.
-    - parameter response: An optional stubbed response to overrides the default response.
+   - parameter success:  Whether the stubbed response should be successful.
+   - parameter response: An optional stubbed response to overrides the default
+   response.
 
-    - seealso: `CreateContactResponse`.
+   - seealso: `CreateContactResponse`.
    */
   final class func stubCreateContactRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
     let createContactResponse = response ?? stubResponse(CreateContactResponse(), success: success)
@@ -139,12 +145,13 @@ extension OHHTTPStubs {
   }
 
   /**
-    Stubs a request for reading a `Contact` resource.
+   Stubs a request for reading a `Contact` resource.
 
-    - parameter success:  Whether the stubbed response should be successful.
-    - parameter response: An optional stubbed response to overrides the default response.
+   - parameter success:  Whether the stubbed response should be successful.
+   - parameter response: An optional stubbed response to overrides the default
+   response.
 
-    - seealso: `ReadContactResponse`.
+   - seealso: `ReadContactResponse`.
    */
   final class func stubReadContactRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
     let readContactResponse = response ?? stubResponse(ReadContactResponse(), success: success)
@@ -152,12 +159,13 @@ extension OHHTTPStubs {
   }
 
   /**
-    Stubs a request for listing a collection of `Contact` resources.
+   Stubs a request for listing a collection of `Contact` resources.
 
-    - parameter success:  Whether the stubbed response should be successful.
-    - parameter response: An optional stubbed response to overrides the default response.
+   - parameter success:  Whether the stubbed response should be successful.
+   - parameter response: An optional stubbed response to overrides the default
+   response.
 
-    - seealso: `ListContactResponse`.
+   - seealso: `ListContactResponse`.
    */
   final class func stubListContactRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
     let listContactResponse = response ?? stubResponse(ListContactResponse(), success: success)
@@ -165,12 +173,13 @@ extension OHHTTPStubs {
   }
 
   /**
-    Stubs a request for updating a `Contact` resource.
+   Stubs a request for updating a `Contact` resource.
 
-    - parameter success:  Whether the stubbed response should be successful.
-    - parameter response: An optional stubbed response to overrides the default response.
+   - parameter success:  Whether the stubbed response should be successful.
+   - parameter response: An optional stubbed response to overrides the default
+   response.
 
-    - seealso: `UpdateContactResponse`.
+   - seealso: `UpdateContactResponse`.
    */
   final class func stubUpdateContactRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
     let updateContactResponse = response ?? stubResponse(UpdateContactResponse(), success: success)
@@ -178,12 +187,13 @@ extension OHHTTPStubs {
   }
 
   /**
-    Stubs a request for deleting a `Contact` resource.
+   Stubs a request for deleting a `Contact` resource.
 
-    - parameter success:  Whether the stubbed response should be successful.
-    - parameter response: An optional stubbed response to overrides the default response.
+   - parameter success:  Whether the stubbed response should be successful.
+   - parameter response: An optional stubbed response to overrides the default
+   response.
 
-    - seealso: `DeleteContactResponse`.
+   - seealso: `DeleteContactResponse`.
    */
   final class func stubDeleteContactRequest(success success: Bool, response: OHHTTPStubsResponse? = nil) {
     let deleteContactResponse = response ?? stubResponse(DeleteContactResponse(), success: success)

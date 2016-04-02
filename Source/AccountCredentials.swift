@@ -23,7 +23,7 @@
 
 
 /**
-  The credentials of an account entitled to use the service.
+ The credentials of an account entitled to use the service.
  */
 public struct AccountCredentials {
 
@@ -44,17 +44,18 @@ public struct AccountCredentials {
 
 // MARK: - Initializing From a JSON Response
 
-
 extension AccountCredentials {
 
   /**
-    Initializes an instance with a JSON object.
+   Initializes an instance with a JSON object.
 
-    - precondition: All expected headers must be present. Otherwise initialization fails.
+   - precondition: All expected headers must be present. Otherwise
+   initialization fails.
 
-    - parameter jsonDictionary: A dictionary representing a JSON object, typically coming from a service response.
+   - parameter jsonDictionary: A dictionary representing a JSON object,
+   typically coming from a service response.
 
-    - returns: A newly initialized instance.
+   - returns: A newly initialized instance.
    */
   init?(jsonDictionary: ResponseObject?) {
     guard let id = jsonDictionary?["id"] as? Int else {

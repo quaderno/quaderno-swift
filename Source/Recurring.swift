@@ -23,9 +23,9 @@
 
 
 /**
-  A resource for managing recurring.
+ A resource for managing recurring.
 
-  - seealso: [Recurring](https://github.com/quaderno/quaderno-api/blob/master/sections/recurring.md).
+ - seealso: [Recurring](https://github.com/quaderno/quaderno-api/blob/master/sections/recurring.md).
  */
 public struct Recurring: Resource {
 
