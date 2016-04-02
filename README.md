@@ -67,7 +67,7 @@ You can ping the service in order to check whether it is available:
 
 ```swift
 let client = Quaderno.Client(/* ... */)
-client.ping() { success in
+client.ping { success in
   // success will be true if the service is available.
 }
 ```
@@ -127,6 +127,8 @@ After cloning this repository run the following commands:
 ```bash
 pod install
 ```
+
+If you need another option for managing dependencies (e.g. Carthage), please open an issue to discuss it.
 
 ###Project Structure
 
