@@ -149,6 +149,11 @@ An [HTML version of the documentation](http://cocoadocs.org/docsets/Quaderno) ca
 Remember that this is only a Swift wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://github.com/quaderno/quaderno-api).
 
 
+## Code of Conduct
+
+Please note that this project is released with a Contributor Code of Conduct, as defined by [contributor-covenant.org](http://contributor-covenant.org/version/1/4/). By participating in this project you agree to abide by its terms.
+
+
 ## Credits
 
 Quaderno has been originally developed by [Eliezer Talón](https://github.com/elitalon).
