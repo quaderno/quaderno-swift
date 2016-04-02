@@ -47,14 +47,14 @@ public class Client {
   let defaultEncoding = ParameterEncoding.JSON
 
   /// HTTP headers to authorize every request.
-  lazy var authorizationHeaders: [String: String]? = { [unowned self] in
+  var authorizationHeaders: [String: String]? {
     guard let credentialData = "\(self.authenticationToken):".dataUsingEncoding(NSUTF8StringEncoding) else {
       return nil
     }
 
     let base64Credentials = credentialData.base64EncodedStringWithOptions([])
     return ["Authorization": "Basic \(base64Credentials)"]
-  }()
+  }
 
   /**
    Entitlements granted to the current user for using the service.
