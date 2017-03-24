@@ -1,7 +1,7 @@
 //
-// Estimate.swift
+// InvoiceResource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,28 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 
-/**
- A resource for managing estimates.
 
- - seealso: [Estimates](https://github.com/quaderno/quaderno-api/blob/master/sections/estimates.md).
- */
-public struct Estimate: Resource {
-
-  // MARK: Resource
-
-  public static let name = "estimates"
+/// A resource to manage invoices.
+///
+/// - seealso: [Invoices](https://quaderno.io/docs/api/#invoices)
+public protocol InvoiceResource: CRUDResource, DeliverableResource, PayableResource {
 
 }
 
-extension Estimate: CRUD {
 
-  public typealias CRUDResource = Estimate
+// MARK: - Default Implementation
 
-}
+extension InvoiceResource {
 
-extension Estimate: Deliverable {
-
-  public typealias DeliverableResource = Estimate
+    public static var name: String {
+        return "invoices"
+    }
 
 }

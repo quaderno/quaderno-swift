@@ -1,7 +1,7 @@
 //
-// Invoice.swift
+// ResponseTests.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2016 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,34 +21,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import XCTest
 
-/**
- A resource for managing invoices.
+@testable import Quaderno
 
- - seealso: [Invoices](https://github.com/quaderno/quaderno-api/blob/master/sections/invoices.md).
- */
-public struct Invoice: Resource {
+final class RequestTests: TestCase {
 
-  // MARK: Resource
+    private var request: DummyRequest!
 
-  public static let name = "invoices"
+    // MARK: Set up
 
-}
+    override func setUp() {
+        super.setUp()
+        request = DummyRequest()
+    }
 
-extension Invoice: CRUD {
+    override func tearDown() {
+        request = nil
+        super.tearDown()
+    }
 
-  public typealias CRUDResource = Invoice
+    // MARK: Examples
 
-}
+    func testThatDefaultMethodIsGET() {
+        XCTAssertEqual(request.method, .get)
+    }
 
-extension Invoice: Deliverable {
+    func testThatDefaultParametersIsNil() {
+        XCTAssertNil(request.parameters)
+    }
 
-  public typealias DeliverableResource = Invoice
-
-}
-
-extension Invoice: Payable {
-
-  public typealias PayableResource = Invoice
+    func testThatDefaultURIIsBaseURL() {
+        let baseURL = URL(string: "http://example.com")!
+        XCTAssertEqual(request.uri(using: baseURL), baseURL)
+    }
 
 }

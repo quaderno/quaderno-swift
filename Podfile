@@ -1,13 +1,16 @@
 platform :ios, '10.0'
 inhibit_all_warnings!
-use_frameworks!
 
-# Common dependencies for all targets
-pod 'Alamofire', '~> 4.0'
+target 'Quaderno' do
+  use_frameworks!
 
-# Extra dependencies for testing
-target 'QuadernoTests' do
-  OHHTTPStubsVersion = '~> 5.2'
-  pod 'OHHTTPStubs', OHHTTPStubsVersion
-  pod 'OHHTTPStubs/Swift', OHHTTPStubsVersion
+  pod 'Alamofire', '~> 4.0'
+
+  target 'QuadernoTests' do
+    inherit! :search_paths
+
+    OHHTTPStubsVersion = '~> 5.2'
+    pod 'OHHTTPStubs', OHHTTPStubsVersion
+    pod 'OHHTTPStubs/Swift', OHHTTPStubsVersion
+  end
 end

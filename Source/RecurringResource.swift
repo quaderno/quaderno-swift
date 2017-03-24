@@ -1,7 +1,7 @@
 //
-// Recurring.swift
+// RecurringResource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,22 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 
-/**
- A resource for managing recurring.
 
- - seealso: [Recurring](https://github.com/quaderno/quaderno-api/blob/master/sections/recurring.md).
- */
-public struct Recurring: Resource {
-
-  // MARK: Resource
-
-  public static let name = "recurring"
+/// A resource to manage recurring.
+///
+/// - seealso: [Recurring](https://quaderno.io/docs/api/#recurring)
+public protocol RecurringResource: CRUDResource {
 
 }
 
-extension Recurring: CRUD {
 
-  public typealias CRUDResource = Recurring
+// MARK: - Default Implementation
+
+extension RecurringResource {
+
+    public static var name: String {
+        return "recurring"
+    }
 
 }

@@ -1,7 +1,7 @@
 //
-// Item.swift
+// ContactResource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,22 +21,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 
-/**
- A resource for managing items.
 
- - seealso: [Items](https://github.com/quaderno/quaderno-api/blob/master/sections/items.md).
- */
-public struct Item: Resource {
+/// A resource to manage contacts.
+///
+/// - seealso: [Contacts](https://quaderno.io/docs/api/#contacts)
+public protocol ContactResource: CRUDResource {
 
-  // MARK: Resource
-
-  public static let name = "items"
+    // TODO: Add support for fetching contacts through gateways
+    // `GET :gateway/customers/:id.json`
+    // https://quaderno.io/docs/api/#retrieve-get-a-single-contact-by-payment-gateway-id
 
 }
 
-extension Item: CRUD {
 
-  public typealias CRUDResource = Item
+// MARK: - Default Implementation
+
+extension ContactResource {
+
+    public static var name: String {
+        return "contacts"
+    }
 
 }

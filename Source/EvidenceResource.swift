@@ -1,7 +1,7 @@
 //
-// Ping.swift
+// EvidenceResource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,32 +21,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 
-/**
- A resource for checking the availability of the service.
 
- - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
- */
-struct Ping: Resource {
-
-  // MARK: Resource
-
-  static let name = "ping"
+/// A resource to manage evidences.
+///
+/// - seealso: [Evidences](https://quaderno.io/docs/api/#evidences)
+///
+/// - warning: Although adopting `CRUDResource`, evidences only support a limited set of operations. Check the
+/// [API documentation](https://quaderno.io/docs/api/#evidences) for more details.
+public protocol EvidenceResource: CRUDResource {
 
 }
 
-extension Ping: Request {
 
-  var method: HTTPMethod {
-    return .GET
-  }
+// MARK: - Default Implementation
 
-  var parameters: RequestParameters? {
-    return nil
-  }
+extension EvidenceResource {
 
-  func uri(baseURL baseURL: String) -> String {
-    return (baseURL + Ping.name).appendJSONSuffix()
-  }
+    public static var name: String {
+        return "evidences"
+    }
 
 }

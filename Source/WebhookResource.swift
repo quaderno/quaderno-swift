@@ -1,7 +1,7 @@
 //
-// StringTests.swift
+// WebhookResource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,21 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-@testable import Quaderno
-
-import XCTest
+import Foundation
 
 
-class StringTests: XCTestCase {
+/// A resource to manage webhooks.
+///
+/// - seealso: [Webhooks](https://quaderno.io/docs/api/#webhooks)
+public protocol WebhookResource: CRUDResource {
 
-  // MARK: Examples
+}
 
-  func testThatStringAppendsJSONSuffixWhenIsNotPresent() {
-    XCTAssertEqual("example".appendJSONSuffix(), "example.json")
-  }
 
-  func testThatStringDoesNotAppendJSONSuffixWhenIsPresent() {
-    XCTAssertEqual("example.json".appendJSONSuffix(), "example.json")
-  }
+// MARK: - Default Implementation
+
+extension WebhookResource {
+
+    public static var name: String {
+        return "webhooks"
+    }
 
 }

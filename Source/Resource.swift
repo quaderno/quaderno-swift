@@ -1,7 +1,7 @@
 //
 // Resource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,22 +22,21 @@
 // THE SOFTWARE.
 
 
-/**
- Requirements of an API resource.
- */
+/// An operation to perform on a resource.
+public protocol Operation {}
+
+
+/// A type representing a resource in the Quaderno API.
 public protocol Resource {
 
-  /**
-   Name of a resource.
+    /// The type for identifiers of resources.
+    typealias Identifier = Int
 
-   This value is used to build URIs that expose different operations over the
-   same resource. For instance, all operations pertaining to invoicing use the
-   name `"invoices"`, thus having these URIs:
-
-   - `https://quadernoapp.io/api/v1/invoices`
-   - `https://quadernoapp.io/api/v1/invoices/1.json`
-   - `https://quadernoapp.io/api/v1/invoices/deliver/24.json`
-   */
-  static var name: String { get }
+    /// The name of the resource.
+    ///
+    /// This value is used to build URIs that expose different operations on the same resource. For instance, all
+    /// operations pertaining to invoicing MAY use the name `"invoices"`, thus having URL paths like `/invoices.json` or
+    /// `/invoices/1.json`
+    static var name: String { get }
 
 }

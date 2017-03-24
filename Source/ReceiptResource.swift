@@ -1,7 +1,7 @@
 //
-// AuthorizationTests.swift
+// ReceiptResource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,25 +21,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-@testable import Quaderno
-
-import XCTest
-import Alamofire
+import Foundation
 
 
-class AuthorizationTests: XCTestCase {
+/// A resource to manage receipts.
+///
+/// - seealso: [Receipts](https://quaderno.io/docs/api/#receipts)
+public protocol ReceiptResource: CRUDResource, DeliverableResource {
 
-  // MARK: Request
+    // TODO: Add support for fetching receipts from Stripe
+    // `GET stripe/charges/:id.json`
+    // https://quaderno.io/docs/api/#retrieve-get-a-single-receipt
 
-  func testThatBehavesAsRequest() {
-    let request = Authorization()
+}
 
-    XCTAssertEqual(request.method, Alamofire.Method.GET)
-    XCTAssertNil(request.parameters)
 
-    let uri = request.uri(baseURL: "")
-    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/authorization.json")
-    XCTAssertNotNil(NSURL(string: uri))
-  }
+// MARK: - Default Implementation
+
+extension ReceiptResource {
+
+    public static var name: String {
+        return "receipts"
+    }
 
 }

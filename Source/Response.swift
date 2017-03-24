@@ -1,7 +1,7 @@
 //
 // Response.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,45 +22,137 @@
 // THE SOFTWARE.
 
 
-/// Alias for objects returned in response to requests.
-public typealias ResponseObject = [String: AnyObject]
+/// A response returned once a request is finished.
+public enum Response<Value> {
 
+    /// The request was successful.
+    case success(Value, Page?)
 
-// MARK: - Response
+    /// The request failed.
+    case failure(ErrorResponse)
 
-/**
- Represents a response returned as a result of a request to a resource. Any
- response except `Failure` is considered successful.
-
- - `Record`: The request was successful and a single record was returned as a
- result.
-
- - `Collection`: The request was successful and a collection of records was
- returned as a result.
-
- - `Empty`: The request was successful but nothing was returned as a result.
-
- - `Failure`: The request failed and an error that caused the failure is
- reported.
- */
-public enum Response<Error: ErrorType> {
-
-  case Record(ResponseObject)
-  case Collection([ResponseObject])
-  case Empty
-  case Failure(Error)
-
-  /// Whether the response is considered successful.
-  public var isSuccess: Bool {
-    if case .Failure = self {
-      return false
+    /// Whether the response is an error.
+    var isError: Bool {
+        switch self {
+        case .success:
+            return false
+        case .failure:
+            return true
+        }
     }
-    return true
-  }
 
-  /// Whether the response is considered a failed response.
-  public var isFailure: Bool {
-    return !isSuccess
-  }
+    /// The associated value in case of success.
+    var value: Value? {
+        guard case let .success(value, _) = self else {
+            return nil
+        }
+        return value
+    }
+
+    /// The page in case of success.
+    var page: Page? {
+        guard case let .success(_, page) = self else {
+            return nil
+        }
+        return page
+    }
+
+    /// The associated error in case of failure.
+    var error: ErrorResponse? {
+        guard case let .failure(error) = self else {
+            return nil
+        }
+        return error
+    }
+
+}
+
+/// A response handler for a JSON object.
+public typealias JSONResponseHandler = (Response<[String: Any]>) -> Void
+
+/// A response handler for an array of JSON objects.
+public typealias JSONArrayResponseHandler = (Response<[[String: Any]]>) -> Void
+
+/// A response handler for an empty response.
+public typealias EmptyResponseHandler = (ErrorResponse?) -> Void
+
+
+// MARK: -
+
+/// Information about the page when request paginated results.
+///
+/// - Seealso: [Pagination](https://quaderno.io/docs/api/#pagination).
+public struct Page {
+
+    /// The number of the page returned in the response.
+    let number: Int
+
+    /// The total number of pages for the resource requested.
+    let totalPages: Int
+
+}
+
+extension Page {
+
+    /// Keys in HTTP header related to pagination.
+    enum HTTPHeader: String {
+
+        case currentPage = "X-Pages-CurrentPage"
+        case totalPages  = "X-Pages-TotalPages"
+
+    }
+
+    /// Initialize a page with an HTTP response.
+    ///
+    /// - Parameter httpResponse: An HTTP response.
+    init?(httpResponse: HTTPURLResponse?) {
+        guard let httpHeaders = httpResponse?.allHeaderFields as? [String: Any] else {
+            return nil
+        }
+
+        guard let currentPageValue = httpHeaders[HTTPHeader.currentPage.rawValue] as? String else {
+            return nil
+        }
+
+        guard let currentPage = Int(currentPageValue) else {
+            return nil
+        }
+
+        guard let totalPagesValue = httpHeaders[HTTPHeader.totalPages.rawValue] as? String else {
+            return nil
+        }
+
+        guard let totalPages = Int(totalPagesValue) else {
+            return nil
+        }
+
+        self.number = currentPage
+        self.totalPages = totalPages
+    }
+
+}
+
+
+// MARK: -
+
+/// The errors that can occurred when processing a response.
+public enum ErrorResponse: Error, CustomStringConvertible {
+
+    /// A response returned a value type different than the one expected.
+    case typeMismatch(expected: Any, found: Any)
+
+    /// The associated request caused an error in the web service.
+    case serviceError(NSError)
+
+    // MARK: CustomStringConvertible
+
+    public var description: String {
+        switch self {
+        case .typeMismatch(let expectedType, let actualType):
+            return "The response was expected to be \(expectedType), but \(actualType) was found instead."
+        case .serviceError(let error):
+            return error.localizedDescription
+        }
+    }
 
 }

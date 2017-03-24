@@ -1,7 +1,7 @@
 //
 // ClientTests.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,208 +21,175 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import XCTest
+
 @testable import Quaderno
 
-import XCTest
-import OHHTTPStubs
+final class ClientTests: TestCase {
 
+    typealias EntitlementsHTTPHeader = Client.Entitlements.HTTPHeader
 
-class ClientTests: XCTestCase {
+    // MARK: Initialization
 
-  // MARK: Test Subject
-
-  var httpClient: Client!
-
-  // MARK: Set Up
-
-  override func setUp() {
-    super.setUp()
-    httpClient = Client(baseURL: "https://example.com/api/v2/", authenticationToken: "My token")
-  }
-
-  override func tearDown() {
-    OHHTTPStubs.removeAllStubs()
-    super.tearDown()
-  }
-
-  // MARK: Ping
-
-  func testThatPingCompletesWithSuccessWhenConnectionIsAvailable() {
-    OHHTTPStubs.stubPingRequest(success: true)
-
-    let expectation = expectationWithDescription("ping finishes")
-    httpClient.ping { success in
-      if success {
-        expectation.fulfill()
-      }
+    func testThatBuildsAuthorizationHeaders() {
+        XCTAssertFalse(httpClient.authorizationHeaders["Authorization"]!.isEmpty)
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  func testThatPingCompletesWithoutSuccessWhenConnectionIsUnavailable() {
-    OHHTTPStubs.stubPingRequest(success: false)
+    // MARK: Entitlements
 
-    let expectation = expectationWithDescription("ping finishes")
-    httpClient.ping { success in
-      if !success {
-        expectation.fulfill()
-      }
+    func testThatEntitlementsDoesNotInitializeWhenHTTPHeadersAreEmpty() {
+        let entitlements = Client.Entitlements(httpHeaders: [:])
+        XCTAssertNil(entitlements)
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  // MARK: Connection Entitlements
+    func testThatEntitlementsDoesNotInitializeWhenRateLimitHTTPHeadersAreIncomplete() {
+        var incompleteHeaders = [String: Any]()
 
-  func testThatEntitlementsAreUnknownWhenHeadersAreInvalid() {
-    let response = OHHTTPStubsResponse(JSONObject: [], statusCode: 200, headers: nil)
-    OHHTTPStubs.stubPingRequest(success: true, response: response)
+        incompleteHeaders[EntitlementsHTTPHeader.rateLimitReset.rawValue] = "100"
+        XCTAssertNil(Client.Entitlements(httpHeaders: incompleteHeaders))
 
-    let expectation = expectationWithDescription("ping finishes")
-    httpClient.ping { success in
-      XCTAssertNil(self.httpClient.entitlements)
-      expectation.fulfill()
+        incompleteHeaders[EntitlementsHTTPHeader.rateLimitReset.rawValue] = nil
+        incompleteHeaders[EntitlementsHTTPHeader.rateLimitRemainingRequests.rawValue] = "100"
+        XCTAssertNil(Client.Entitlements(httpHeaders: incompleteHeaders))
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  func testThatEntitlementsAreKnownWhenHeadersAreValid() {
-    OHHTTPStubs.stubPingRequest(success: true)
+    func testThatEntitlementsDoesNotInitializeWhenRateLimitHTTPHeadersAreInvalid() {
+        var invalidHeaders = [String: Any]()
 
-    let expectation = expectationWithDescription("ping finishes")
-    httpClient.ping { success in
-      XCTAssertNotNil(self.httpClient.entitlements)
-      expectation.fulfill()
+        invalidHeaders[EntitlementsHTTPHeader.rateLimitRemainingRequests.rawValue] = "100"
+
+        invalidHeaders[EntitlementsHTTPHeader.rateLimitReset.rawValue] = Data()
+        XCTAssertNil(Client.Entitlements(httpHeaders: invalidHeaders))
+
+        invalidHeaders[EntitlementsHTTPHeader.rateLimitReset.rawValue] = "NonNumeric"
+        XCTAssertNil(Client.Entitlements(httpHeaders: invalidHeaders))
+
+        invalidHeaders[EntitlementsHTTPHeader.rateLimitReset.rawValue] = "100"
+
+        invalidHeaders[EntitlementsHTTPHeader.rateLimitRemainingRequests.rawValue] = Data()
+        XCTAssertNil(Client.Entitlements(httpHeaders: invalidHeaders))
+
+        invalidHeaders[EntitlementsHTTPHeader.rateLimitRemainingRequests.rawValue] = "NonNumeric"
+        XCTAssertNil(Client.Entitlements(httpHeaders: invalidHeaders))
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  // MARK: Account Credentials
-
-  func testThatAccountReturnsNilWhenJSONIsInvalid() {
-    let response = OHHTTPStubsResponse(JSONObject: [], statusCode: 200, headers: nil)
-    OHHTTPStubs.stubAuthorizationRequest(success: true, response: response)
-
-    let expectation = expectationWithDescription("authorization finishes")
-    httpClient.account { credentials in
-      XCTAssertNil(credentials)
-      expectation.fulfill()
+    func testThatEntitlementsInitializesWhenAllHTTPHeaderArePresent() {
+        let httpHeaders: [String: Any] = [
+            EntitlementsHTTPHeader.rateLimitReset.rawValue: "15",
+            EntitlementsHTTPHeader.rateLimitRemainingRequests.rawValue: "100",
+        ]
+        let entitlements = Client.Entitlements(httpHeaders: httpHeaders)
+        XCTAssertNotNil(entitlements)
+        XCTAssertEqual(entitlements?.resetInterval, 15)
+        XCTAssertEqual(entitlements?.remainingRequests, 100)
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  func testThatAccountReturnsCredentialsWhenJSONIsValid() {
-    OHHTTPStubs.stubAuthorizationRequest(success: true)
+    // MARK: Processing Response Metadata
 
-    let expectation = expectationWithDescription("authorization finishes")
-    httpClient.account { credentials in
-      XCTAssertNotNil(credentials)
-      expectation.fulfill()
+    func testThatEntitlementsIsNilBeforeSendingAnyRequest() {
+        XCTAssertNil(httpClient.entitlements)
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  // MARK: Requesting Resources
+    func testThatUpdatesEntitlementsWhenSendingRequests() {
+        let request = DummyRequest()
+        stub(request, using: httpClient)
+        XCTAssertNil(httpClient.entitlements)
 
-  func testThatCreatingResourcesReturnsTheCreatedRecordWhenSucceeds() {
-    OHHTTPStubs.stubCreateContactRequest(success: true)
-
-    let expectation = expectationWithDescription("creating a contact finishes")
-    let resource = Contact.create(["first_name": "John"])
-    httpClient.request(resource) { response in
-      XCTAssert(response.isSuccess)
-      switch response{
-      case .Record:
-        expectation.fulfill()
-      default:
-        XCTFail("Unexpected response when creating a resource")
-      }
+        let expectation = self.expectation(description: "request finishes")
+        httpClient.send(request) { error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(self.httpClient.entitlements)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 2, handler: nil)
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  func testThatReadingResourcesReturnsTheRecordWhenSucceeds() {
-    OHHTTPStubs.stubReadContactRequest(success: true)
+    func testThatBuildsPageWhenPaginationIsActive() {
+        let request = DummyRequest()
+        stub(request, using: httpClient, succeeding: true, with: successJSONResponse(paginated: true))
 
-    let expectation = expectationWithDescription("reading a contact finishes")
-    let resource = Contact.read(1)
-    httpClient.request(resource) { response in
-      XCTAssert(response.isSuccess)
-      switch response{
-      case .Record:
-        expectation.fulfill()
-      default:
-        XCTFail("Unexpected response when reading a resource")
-      }
+        let expectation = self.expectation(description: "request finishes")
+        httpClient.send(request) { (result: Response<[String: Any]>) in
+            XCTAssertFalse(result.isError)
+            XCTAssertNotNil(result.page)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 2, handler: nil)
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  func testThatListingResourcesReturnsAnArrayOfRecordsWhenSucceeds() {
-    OHHTTPStubs.stubListContactRequest(success: true)
+    func testThatDoesNotBuildPageWhenPaginationIsNotActive() {
+        let request = DummyRequest()
+        stub(request, using: httpClient)
 
-    let expectation = expectationWithDescription("listing contacts finishes")
-    let resource = Contact.list(1)
-    httpClient.request(resource) { response in
-      XCTAssert(response.isSuccess)
-      switch response{
-      case .Collection:
-        expectation.fulfill()
-      default:
-        XCTFail("Unexpected response when listing resources")
-      }
+        let expectation = self.expectation(description: "request finishes")
+        httpClient.send(request) { (result: Response<[String: Any]>) in
+            XCTAssertFalse(result.isError)
+            XCTAssertNil(result.page)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 2, handler: nil)
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  func testThatUpdatingResourcesReturnsTheRecordWhenSucceeds() {
-    OHHTTPStubs.stubUpdateContactRequest(success: true)
+    // MARK: Ping
 
-    let expectation = expectationWithDescription("updating a contact finishes")
-    let resource = Contact.update(1, attributes: ["first_name": "John"])
-    httpClient.request(resource) { response in
-      XCTAssert(response.isSuccess)
-      switch response{
-      case .Record:
-        expectation.fulfill()
-      default:
-        XCTFail("Unexpected response when updating a resource")
-      }
+    func testThatPingRequestBuildsURL() {
+        let url = Client.PingRequest().uri(using: httpClient.baseURL)
+        XCTAssertEqual(url.absoluteString, "\(httpClient.baseURL.absoluteString)/ping.json")
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  func testThatDeletingResourcesReturnsEmptyWhenSucceeds() {
-    OHHTTPStubs.stubDeleteContactRequest(success: true)
+    func testThatPingReturnsSuccessWhenConnectionIsAllowed() {
+        let pingRequest = Client.PingRequest()
+        stub(pingRequest, using: httpClient)
 
-    let expectation = expectationWithDescription("deleting a contact finishes")
-    let resource = Contact.delete(1)
-    httpClient.request(resource) { response in
-      XCTAssert(response.isSuccess)
-      switch response{
-      case .Empty:
-        expectation.fulfill()
-      default:
-        XCTFail("Unexpected response when deleting a resource")
-      }
+        let expectation = self.expectation(description: "request finishes")
+        httpClient.ping { error in
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 2, handler: nil)
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
 
-  func testThatRequestingResourcesReturnsErrorWhenFails() {
-    OHHTTPStubs.stubDeleteContactRequest(success: false)
+    func testThatPingReturnsFailureWhenConnectionIsAllowed() {
+        let pingRequest = Client.PingRequest()
+        stub(pingRequest, using: httpClient, succeeding: false, with: unauthorizedJSONResponse)
 
-    let expectation = expectationWithDescription("deleting a contact finishes")
-    let resource = Contact.delete(1)
-    httpClient.request(resource) { response in
-      XCTAssert(response.isFailure)
-      switch response{
-      case .Failure:
-        expectation.fulfill()
-      default:
-        XCTFail("Unexpected response when deleting a resource")
-      }
+        let expectation = self.expectation(description: "request finishes")
+        httpClient.ping { error in
+            XCTAssertNotNil(error)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 2, handler: nil)
     }
-    waitForExpectationsWithTimeout(1, handler: nil)
-  }
+
+    // MARK: Authorization
+
+    func testThatAuthorizationRequestBuildsURL() {
+        let url = Client.AuthorizationRequest().uri(using: httpClient.baseURL)
+        XCTAssertEqual(url.absoluteString, "https://quadernoapp.com/api/authorization.json")
+    }
+
+    func testThatAuthorizationReturnsSuccessWhenConnectionIsAllowed() {
+        let authorizationRequest = Client.AuthorizationRequest()
+        stub(authorizationRequest, using: httpClient)
+
+        let expectation = self.expectation(description: "request finishes")
+        httpClient.account { result in
+            XCTAssertFalse(result.isError)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 2, handler: nil)
+    }
+
+    func testThatAuthorizationReturnsFailureWhenConnectionIsAllowed() {
+        let authorizationRequest = Client.AuthorizationRequest()
+        stub(authorizationRequest, using: httpClient, succeeding: false, with: unauthorizedJSONResponse)
+
+        let expectation = self.expectation(description: "request finishes")
+        httpClient.account { result in
+            XCTAssert(result.isError)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 2, handler: nil)
+    }
 
 }

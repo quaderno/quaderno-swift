@@ -1,7 +1,7 @@
 //
-// Credit.swift
+// EstimateResource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,28 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 
-/**
- A resource for managing credits.
 
- - seealso: [Credits](https://github.com/quaderno/quaderno-api/blob/master/sections/credits.md).
- */
-public struct Credit: Resource {
-
-  // MARK: Resource
-
-  public static let name = "credits"
+/// A resource to manage estimates.
+///
+/// - seealso: [Estimates](https://quaderno.io/docs/api/#estimates)
+public protocol EstimateResource: CRUDResource, DeliverableResource {
 
 }
 
-extension Credit: CRUD {
 
-  public typealias CRUDResource = Credit
+// MARK: - Default Implementation
 
-}
+extension EstimateResource {
 
-extension Credit: Deliverable {
-
-  public typealias DeliverableResource = Credit
+    public static var name: String {
+        return "estimates"
+    }
 
 }

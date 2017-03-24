@@ -1,7 +1,7 @@
 //
-// Expense.swift
+// ItemResource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,28 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 
-/**
- A resource for managing expenses.
 
- - seealso: [Expenses](https://github.com/quaderno/quaderno-api/blob/master/sections/expenses.md).
- */
-public struct Expense: Resource {
-
-  // MARK: Resource
-
-  public static let name = "expenses"
+/// A resource to manage items.
+///
+/// - seealso: [Items](https://quaderno.io/docs/api/#items)
+public protocol ItemResource: CRUDResource {
 
 }
 
-extension Expense: CRUD {
 
-  public typealias CRUDResource = Expense
+// MARK: - Default Implementation
 
-}
+extension ItemResource {
 
-extension Expense: Payable {
-
-  public typealias PayableResource = Expense
+    public static var name: String {
+        return "items"
+    }
 
 }

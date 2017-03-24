@@ -1,7 +1,7 @@
 //
 // ResponseTests.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,36 +21,95 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import XCTest
+
 @testable import Quaderno
 
-import XCTest
-import Alamofire
+final class ResponseTests: TestCase {
 
+    private let paginationHeaders: [String: String] = [
+        Page.HTTPHeader.currentPage.rawValue: "2",
+        Page.HTTPHeader.totalPages.rawValue : "5",
+    ]
 
-class ResponseTests: XCTestCase {
+    private func httpResponse(with headers: [String: String]?, statusCode: Int = 200) -> HTTPURLResponse {
+        let url = URL(string: "http://example.com")!
+        return HTTPURLResponse(url: url, statusCode: statusCode, httpVersion: nil, headerFields: headers)!
+    }
 
-  func testThatRecordIsConsideredASuccessfulResponse() {
-    let response = Quaderno.Response<NSError>.Record(["foo": "bar"])
-    XCTAssert(response.isSuccess)
-    XCTAssertFalse(response.isFailure)
-  }
+    // MARK: Pagination
 
-  func testThatCollectionIsConsideredASuccessfulResponse() {
-    let response = Quaderno.Response<NSError>.Collection([["foo": "bar"]])
-    XCTAssert(response.isSuccess)
-    XCTAssertFalse(response.isFailure)
-  }
+    func testThatPageDoesNotInitializeWhenHTTPHeadersAreEmpty() {
+        let response = httpResponse(with: nil)
+        XCTAssertNil(Page(httpResponse: response))
+    }
 
-  func testThatEmptyIsConsideredASuccessfulResponse() {
-    let response = Quaderno.Response<NSError>.Empty
-    XCTAssert(response.isSuccess)
-    XCTAssertFalse(response.isFailure)
-  }
+    func testThatPageDoesNotInitializeWhenCurrentPageHTTPHeaderIsMissing() {
+        var incompleteHeaders = paginationHeaders
+        incompleteHeaders.removeValue(forKey: Page.HTTPHeader.currentPage.rawValue)
 
-  func testThatFailureIsConsideredAnUnsuccessfulResponse() {
-    let response = Quaderno.Response<NSError>.Failure(NSError(domain: "", code: 1, userInfo: nil))
-    XCTAssert(response.isFailure)
-    XCTAssertFalse(response.isSuccess)
-  }
+        let response = httpResponse(with: incompleteHeaders)
+        XCTAssertNil(Page(httpResponse: response))
+    }
+
+    func testThatPageDoesNotInitializeWhenTotalPagesHTTPHeaderIsMissing() {
+        var incompleteHeaders = paginationHeaders
+        incompleteHeaders.removeValue(forKey: Page.HTTPHeader.totalPages.rawValue)
+
+        let response = httpResponse(with: incompleteHeaders)
+        XCTAssertNil(Page(httpResponse: response))
+    }
+
+    func testThatPageDoesNotInitializeWhenCurrentPageHTTPHeaderIsInvalid() {
+        var incompleteHeaders = paginationHeaders
+        incompleteHeaders[Page.HTTPHeader.currentPage.rawValue] = "a"
+
+        let response = httpResponse(with: incompleteHeaders)
+        XCTAssertNil(Page(httpResponse: response))
+    }
+
+    func testThatPageDoesNotInitializeWhenTotalPagesHTTPHeaderIsInvalid() {
+        var incompleteHeaders = paginationHeaders
+        incompleteHeaders[Page.HTTPHeader.totalPages.rawValue] = "a"
+
+        let response = httpResponse(with: incompleteHeaders)
+        XCTAssertNil(Page(httpResponse: response))
+    }
+
+    func testThatPageInitializesWhenAllHTTPHeaderArePresent() {
+        let response = httpResponse(with: paginationHeaders)
+        let page = Page(httpResponse: response)
+        XCTAssertNotNil(page)
+        XCTAssertEqual(page?.number, 2)
+        XCTAssertEqual(page?.totalPages, 5)
+    }
+
+    // MARK: Response Properties
+
+    func testThatResponseDoesNotHaveValueWhenIsFailure() {
+        let fakeError = NSError(domain: "io.quaderno.swift", code: 401, userInfo: nil)
+        let response = Response<String>.failure(.serviceError(fakeError))
+        XCTAssertNil(response.value)
+        XCTAssertNil(response.page)
+        XCTAssertNotNil(response.error)
+        XCTAssert(response.isError)
+    }
+
+    func testThatResponseDoesNotHaveAnErrorWhenIsSuccessful() {
+        let response = Response<String>.success("OK", nil)
+        XCTAssertNotNil(response.value)
+        XCTAssertNil(response.error)
+        XCTAssertFalse(response.isError)
+    }
+
+    func testThatResponseDoesNotHaveAPageWhenIsSuccessfulWithoutPagination() {
+        let response = Response<String>.success("OK", nil)
+        XCTAssertNil(response.page)
+    }
+
+    func testThatResponseHasAPageWhenIsSuccessfulWithPagination() {
+        let response = Response<String>.success("OK", Page(number: 1, totalPages: 1))
+        XCTAssertNotNil(response.page)
+    }
 
 }

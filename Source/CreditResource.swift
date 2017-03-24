@@ -1,7 +1,7 @@
 //
-// Contact.swift
+// CreditResource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,22 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 
-/**
- A resource for managing contacts.
 
- - seealso: [Contacts](https://github.com/quaderno/quaderno-api/blob/master/sections/contacts.md).
- */
-public struct Contact: Resource {
-
-  // MARK: Resource
-
-  public static let name = "contacts"
+/// A resource to manage credits.
+///
+/// - seealso: [Credits](https://quaderno.io/docs/api/#credits)
+public protocol CreditResource: CRUDResource, DeliverableResource {
 
 }
 
-extension Contact: CRUD {
 
-  public typealias CRUDResource = Contact
+// MARK: - Default Implementation
+
+extension CreditResource {
+
+    public static var name: String {
+        return "credits"
+    }
 
 }

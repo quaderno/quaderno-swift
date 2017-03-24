@@ -1,7 +1,7 @@
 //
-// PingTests.swift
+// ExpenseResource.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,26 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-@testable import Quaderno
-
-import XCTest
-import Alamofire
+import Foundation
 
 
-class PingTests: XCTestCase {
+/// A resource to manage expenses.
+///
+/// - seealso: [Expenses](https://quaderno.io/docs/api/#expenses)
+public protocol ExpenseResource: CRUDResource, PayableResource {
 
-  // MARK: Request
+}
 
-  func testThatBehavesAsRequest() {
-    let request = Ping()
 
-    XCTAssertEqual(request.method, Alamofire.Method.GET)
-    XCTAssertNil(request.parameters)
+// MARK: - Default Implementation
 
-    let baseURL = "https://quadernoapp.com/api/v1/"
-    let uri = request.uri(baseURL: baseURL)
-    XCTAssertEqual(uri, "https://quadernoapp.com/api/v1/ping.json")
-    XCTAssertNotNil(NSURL(string: uri))
-  }
+extension ExpenseResource {
+
+    public static var name: String {
+        return "expenses"
+    }
 
 }
