@@ -5,6 +5,9 @@
 Pods/
 !Podfile.lock
 
+## Rubygems
+!Gemfile.lock
+
 ## OS X temporary files that should never be committed
 *.swp
 *.lock
