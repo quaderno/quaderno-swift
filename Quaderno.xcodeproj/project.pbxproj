@@ -126,17 +126,17 @@
 				31E859961E59F64A006F29EA /* DeliverableResource.swift */,
 				318D1ABA1C36FCC30005599A /* PayableResource.swift */,
 			);
-			name = Behaviours;
+			path = Behaviours;
 			sourceTree = "<group>";
 		};
 		31B979191BE2384800AD6234 = {
 			isa = PBXGroup;
 			children = (
-				31B979251BE2384800AD6234 /* Source */,
-				31B979311BE2384800AD6234 /* Tests */,
-				31B979241BE2384800AD6234 /* Products */,
 				045B35A44C340808E33EE06A /* Frameworks */,
 				8B1BB6065569029BF5172D19 /* Pods */,
+				31B979241BE2384800AD6234 /* Products */,
+				31B979251BE2384800AD6234 /* Source */,
+				31B979311BE2384800AD6234 /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,14 +152,14 @@
 		31B979251BE2384800AD6234 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				31B979261BE2384800AD6234 /* Quaderno.h */,
-				31A076861BE26FF800276DE1 /* Client.swift */,
-				31C2E1831BECA359005104BB /* Request.swift */,
-				31E08A561BE37D680080AE74 /* Resource.swift */,
-				317E9C4E1BF29B7500A1C331 /* Response.swift */,
 				3154BEA11E85892800AE079B /* Behaviours */,
 				31C2E1801BECA30C005104BB /* Resources */,
 				31B979491BE240DC00AD6234 /* Supporting Files */,
+				31A076861BE26FF800276DE1 /* Client.swift */,
+				31B979261BE2384800AD6234 /* Quaderno.h */,
+				31C2E1831BECA359005104BB /* Request.swift */,
+				31E08A561BE37D680080AE74 /* Resource.swift */,
+				317E9C4E1BF29B7500A1C331 /* Response.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -167,13 +167,13 @@
 		31B979311BE2384800AD6234 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				3161E2981E7DAED1002E0551 /* TestCase.swift */,
-				31B979321BE2384800AD6234 /* ClientTests.swift */,
-				3133A8491DEC9AEA0081F3FE /* RequestTests.swift */,
-				3133A8471DEC7F900081F3FE /* ResponseTests.swift */,
-				317E9C4A1BF284C700A1C331 /* ResourceTests.swift */,
 				31B9794A1BE240E300AD6234 /* Supporting Files */,
+				31B979321BE2384800AD6234 /* ClientTests.swift */,
 				3161E29A1E7DB970002E0551 /* OHHTTPStubs+QuadernoTests.swift */,
+				3133A8491DEC9AEA0081F3FE /* RequestTests.swift */,
+				317E9C4A1BF284C700A1C331 /* ResourceTests.swift */,
+				3133A8471DEC7F900081F3FE /* ResponseTests.swift */,
+				3161E2981E7DAED1002E0551 /* TestCase.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -183,7 +183,7 @@
 			children = (
 				31B979281BE2384800AD6234 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		31B9794A1BE240E300AD6234 /* Supporting Files */ = {
@@ -191,7 +191,7 @@
 			children = (
 				31B979341BE2384800AD6234 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		31C2E1801BECA30C005104BB /* Resources */ = {
@@ -209,7 +209,7 @@
 				31082B6B1C04B99900719A6A /* TaxResource.swift */,
 				3154BEB01E858A5E00AE079B /* WebhookResource.swift */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8B1BB6065569029BF5172D19 /* Pods */ = {
@@ -600,7 +600,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Alamofire",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.recreahq.ios.Quaderno;
@@ -619,7 +619,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Alamofire",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.recreahq.ios.Quaderno;
@@ -631,7 +631,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0570EF9B809BA233F58DACB3 /* Pods-QuadernoTests.debug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "$(SRCROOT)/Tests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.recreahq.ios.QuadernoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -642,7 +642,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B5E43A2FA8F93DC505A02351 /* Pods-QuadernoTests.release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "$(SRCROOT)/Tests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.recreahq.ios.QuadernoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
