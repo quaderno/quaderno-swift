@@ -5,21 +5,21 @@
 [![Platform](https://img.shields.io/cocoapods/p/Quaderno.svg?style=flat)](http://cocoadocs.org/docsets/Quaderno)
 [![Twitter](https://img.shields.io/badge/twitter-@quadernoapp-blue.svg?style=flat)](https://twitter.com/quadernoapp)
 
-Quaderno is a Swift framework that provides easy access to the [Quaderno API](https://github.com/recrea/quaderno-api).
+Quaderno is a Swift framework that provides easy access to the [Quaderno API](https://quaderno.io/docs/api/).
 
 
 ## Why Using It?
 
-You can implement your own client for the [Quaderno API](https://github.com/quaderno/quaderno-api). However, using [Quaderno](https://github.com/quaderno/quaderno-swift) gives you instant access to the same interface without messing around with low-level HTTP requests and JSON-encoded data.
+You can implement your own client for the [Quaderno API](https://quaderno.io/docs/api/). However, using [quaderno-swift](https://github.com/quaderno/quaderno-swift) gives you instant access to the same interface without the details of HTTP requests and responses.
 
 Note that you need a valid account to use Quaderno.
 
 
 ## Supported OS & SDK Versions
 
-* Supported build target - iOS 9.0
+* Supported build target - iOS 10.x
 * Earliest supported deployment target - iOS 9.0
-* Earliest compatible deployment target - iOS 8.0
+* Earliest compatible deployment target - iOS 9.0
 
 *'Supported'* means that the library has been tested with this version. *'Compatible'* means that the library should work on this OS version (i.e. it doesn't rely on any unavailable SDK features) but is no longer being tested for compatibility and may require tweaking or bug fixes to run correctly.
 
@@ -29,7 +29,7 @@ Note that you need a valid account to use Quaderno.
 Add Quaderno to your Podfile if you are using CocoaPods:
 
 ```ruby
-pod "Quaderno", "~> 1.0.0"
+pod "Quaderno", "~> 2.0"
 ```
 
 Otherwise just drag the `.swift` source files under the `Source` directory into your project.
@@ -41,17 +41,13 @@ Otherwise just drag the `.swift` source files under the `Source` directory into 
 
 ## Usage
 
-In order to make requests you need to instantiate at least one `Client` object, providing a base URI for building resource paths and your authentication token:
+In order to make requests you need to instantiate at least one `Client` object, providing a base URL for building resource paths and your authentication token:
 
 ```swift
-let client = Quaderno.Client(baseURL: "https://quadernoapp.io/api/v1/", authenticationToken: "my token")
+let client = Client(baseURL: "https://quadernoapp.io/api/v1/", authenticationToken: "your token")
 ```
 
-All requests are done asynchronously, as explained in this [excerpt from Alamofire's README](https://github.com/Alamofire/Alamofire/blob/master/README.md):
-
-> Networking [...] is done _asynchronously_. Asynchronous programming may be a source of frustration to programmers unfamiliar with the concept, but there are [very good reasons](https://developer.apple.com/library/ios/qa/qa1693/_index.html) for doing it this way.
-
-> Rather than blocking execution to wait for a response from the server, a [callback](http://en.wikipedia.org/wiki/Callback_%28computer_programming%29) is specified to handle the response once it's received. The result of a request is only available inside the scope of a response handler. Any execution contingent on the response or data received from the server must be done within a handler.
+All requests are done asynchronously, as explained in [Alamofire's README](https://github.com/Alamofire/Alamofire#response-handling).
 
 ### Importing the Module
 
@@ -66,9 +62,9 @@ import Quaderno
 You can ping the service in order to check whether it is available:
 
 ```swift
-let client = Quaderno.Client(/* ... */)
-client.ping { success in
-  // success will be true if the service is available.
+let client = Client(baseURL: "https://quadernoapp.io/api/v1/", authenticationToken: "your token")
+client.ping { error in
+  // error will be nil if the service is available.
 }
 ```
 
@@ -77,38 +73,47 @@ client.ping { success in
 You can fetch the account credentials for a given user:
 
 ```swift
-let client = Quaderno.Client(/* ... */)
-client.account { credentials in
-  // credentials will contain the account credentials.
+let client = Client(baseURL: "https://quadernoapp.io/api/v1/", authenticationToken: "your token")
+client.account { result in
+  // result will contain either an error or a JSON object with the account information.
 }
 ```
 
-See [`AccountCredentials`](https://github.com/quaderno/quaderno-swift/blob/master/Source/AccountCredentials.swift) for further details.
+See the ["Authorization" section](https://quaderno.io/docs/api/#authorization) on the Quaderno API for further details.
 
 ### Requesting Resources
 
-You can request any resource using the `request(_:completion)` function:
+You can request any supported resource using the `send(_:completion)` function:
 
 ```swift
-let client = Quaderno.Client(/* ... */)
+let client = Client(baseURL: "https://quadernoapp.io/api/v1/", authenticationToken: "your token")
 
-let readContact = Contact.read(48)
-client.request(readContact) { response in
-  // response will contain the result of the request.
+let request = Contact.request(.read(48))
+client.send(request) { response in
+  // response will contain either an error or the response to the request.
 }
 ```
 
-The first parameter must be an object conforming to the [`Request`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Request.swift) protocol. For convenience, Quaderno already provides a set of default resources conforming to it (e.g. `Ping`, `Contact`,...).
+The first parameter must be an object conforming to the [`Request`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Request.swift) protocol.
 
-Moreover, Quaderno also provides different behaviours for implementing common operations on different resources (e.g. `CRUD`, `SingleRequest`,...).
+For convenience, Quaderno already provides a set of default resources (`ContactResource`, `InvoiceResource`,…) that adopt `Request` and provide requests for common behaviours (`CRUDResource`, `DeliverableResource`,…). For further details check also [`Resource`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Resource.swift) protocol.
 
-For further details check also [`Resource`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Response.swift) and [`Response`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Response.swift).
+The second parameter is a closure that receives a generic [`Response`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Response.swift) as only parameter. The type of the response is inferred at compilation depending on what you provide. Quaderno will try to cast the response received by the server to the type you indicate:
+
+```swift
+let client = Client(baseURL: "https://quadernoapp.io/api/v1/", authenticationToken: "your token")
+
+let request = Contact.request(.read(48))
+client.send(request) { (response: Response<[String: Any]>) in
+  // response will contain either an error or a dictionary.
+}
+```
 
 ### Connection Entitlements
 
 You can check the entitlements for using the service (e.g. the rate limit) by inspecting the `entitlements` property of `Client`.
 
-See [`ConnectionEntitlements`](https://github.com/quaderno/quaderno-swift/blob/master/Source/ConnectionEntitlements.swift) for further details.
+See the [`Client.Entitlements`](https://github.com/quaderno/quaderno-swift/blob/master/Source/Client.swift) struct for further details.
 
 
 ## Persistence
@@ -118,7 +123,7 @@ Quaderno does not automatically persist your objects for you.
 
 ## Development
 
-###Getting Started
+### Getting Started
 
 Quaderno uses [CocoaPods](http://cocoapods.org) to manage dependencies. See `Podfile` to get a comprehensive list of dependencies.
 
@@ -130,23 +135,21 @@ pod install
 
 If you need another option for managing dependencies (e.g. Carthage), please open an issue to discuss it.
 
-###Project Structure
+### Project Structure
 
 The entry point for the project is the `Quaderno.xcworkspace` file, which contains two projects:
 
 1. `Quaderno.xcodeproj`, with the source code of the framework.
 2. `Pods.xcodeproj`, with third-party dependencies automatically managed by CocoaPods.
 
-###Documentation
+### Documentation
 
 The source code is fully documented using the markup formatting commands defined by Apple.
-
-An [HTML version of the documentation](http://cocoadocs.org/docsets/Quaderno) can be found at [CocoaDocs](http://cocoadocs.org).
 
 
 ## More Information
 
-Remember that this is only a Swift wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://github.com/quaderno/quaderno-api).
+Remember that this is only a Swift wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://quaderno.io/docs/api/).
 
 
 ## Code of Conduct
