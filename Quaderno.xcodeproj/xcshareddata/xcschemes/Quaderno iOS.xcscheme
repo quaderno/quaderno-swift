@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "31B979221BE2384800AD6234"
                BuildableName = "Quaderno.framework"
-               BlueprintName = "Quaderno"
+               BlueprintName = "Quaderno iOS"
                ReferencedContainer = "container:Quaderno.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "31B9792C1BE2384800AD6234"
-               BuildableName = "QuadernoTests.xctest"
-               BlueprintName = "QuadernoTests"
+               BuildableName = "Quaderno iOS Tests.xctest"
+               BlueprintName = "Quaderno iOS Tests"
                ReferencedContainer = "container:Quaderno.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -45,7 +45,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "31B979221BE2384800AD6234"
             BuildableName = "Quaderno.framework"
-            BlueprintName = "Quaderno"
+            BlueprintName = "Quaderno iOS"
             ReferencedContainer = "container:Quaderno.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -67,10 +67,17 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "31B979221BE2384800AD6234"
             BuildableName = "Quaderno.framework"
-            BlueprintName = "Quaderno"
+            BlueprintName = "Quaderno iOS"
             ReferencedContainer = "container:Quaderno.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -85,7 +92,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "31B979221BE2384800AD6234"
             BuildableName = "Quaderno.framework"
-            BlueprintName = "Quaderno"
+            BlueprintName = "Quaderno iOS"
             ReferencedContainer = "container:Quaderno.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

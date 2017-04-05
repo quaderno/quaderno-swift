@@ -5,6 +5,10 @@
 Pods/
 !Podfile.lock
 
+## Carthage
+Carthage/
+!Cartfile.resolved
+
 ## Rubygems
 !Gemfile.lock
 
