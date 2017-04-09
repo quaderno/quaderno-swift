@@ -1,35 +1,41 @@
 # Quaderno
 
 [![Build Status](https://travis-ci.org/quaderno/quaderno-swift.svg)](https://travis-ci.org/quaderno/quaderno-swift)
-[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/Quaderno.svg)](https://img.shields.io/cocoapods/v/Quaderno.svg)
-[![Platform](https://img.shields.io/cocoapods/p/Quaderno.svg?style=flat)](http://cocoadocs.org/docsets/Quaderno)
-[![Twitter](https://img.shields.io/badge/twitter-@quadernoapp-blue.svg?style=flat)](https://twitter.com/quadernoapp)
+[![Cocoapods Compatible](https://img.shields.io/cocoapods/p/Quaderno.svg)][quaderno-repository]
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)][quaderno-repository]
+[![Twitter](https://img.shields.io/badge/twitter-@quadernoapp-blue.svg?style=flat)][quaderno-twitter]
 
-Quaderno is a Swift framework that provides easy access to the [Quaderno API](https://quaderno.io/docs/api/).
+Quaderno is a Swift framework that provides easy access to the [Quaderno API][quaderno-api-docs].
 
 
 ## Why Using It?
 
-You can implement your own client for the [Quaderno API](https://quaderno.io/docs/api/). However, using [quaderno-swift](https://github.com/quaderno/quaderno-swift) gives you instant access to the same interface without the details of HTTP requests and responses.
+You can implement your own client for the [Quaderno API][quaderno-api-docs]. However, using [quaderno-swift][quaderno-repository] gives you instant access to the same interface without the details of HTTP requests and responses.
 
 Note that you need a valid account to use Quaderno.
 
 
 ## Supported OS & SDK Versions
 
-* Supported build target - iOS 10.x
-* Earliest supported deployment target - iOS 9.0
-* Earliest compatible deployment target - iOS 9.0
+* Supported build target - iOS 10.x, macOS 10.12
+* Earliest supported deployment target - iOS 9.0, macOS 10.11
+* Earliest compatible deployment target - iOS 9.0, macOS 10.11
 
 *'Supported'* means that the library has been tested with this version. *'Compatible'* means that the library should work on this OS version (i.e. it doesn't rely on any unavailable SDK features) but is no longer being tested for compatibility and may require tweaking or bug fixes to run correctly.
 
 
 ## Installation
 
-Add Quaderno to your Podfile if you are using CocoaPods:
+Add Quaderno to your Podfile if you are using [CocoaPods](http://cocoapods.org):
 
 ```ruby
 pod "Quaderno", "~> 2.0"
+```
+
+Or to your Cartfile if you are using [Carthage][carthage-repository]:
+
+```ruby
+github "Quaderno/Quaderno" "~> 2.0"
 ```
 
 Otherwise just drag the `.swift` source files under the `Source` directory into your project.
@@ -125,22 +131,20 @@ Quaderno does not automatically persist your objects for you.
 
 ### Getting Started
 
-Quaderno uses [CocoaPods](http://cocoapods.org) to manage dependencies. See `Podfile` to get a comprehensive list of dependencies.
+Quaderno uses [Carthage][carthage-repository] to manage dependencies. See `Cartfile` and `Cartfile.private` to see the current dependencies.
 
 After cloning this repository run the following commands:
 
 ```bash
-pod install
+carthage bootstrap
 ```
-
-If you need another option for managing dependencies (e.g. Carthage), please open an issue to discuss it.
 
 ### Project Structure
 
-The entry point for the project is the `Quaderno.xcworkspace` file, which contains two projects:
+The entry point for the project is the `Quaderno.xcodeproj` file, which contains two targets and their testing counterparts:
 
-1. `Quaderno.xcodeproj`, with the source code of the framework.
-2. `Pods.xcodeproj`, with third-party dependencies automatically managed by CocoaPods.
+1. `Quaderno iOS`, for building on iOS platforms.
+2. `Quaderno macOS`, for building on macOS platforms.
 
 ### Documentation
 
@@ -149,7 +153,7 @@ The source code is fully documented using the markup formatting commands defined
 
 ## More Information
 
-Remember that this is only a Swift wrapper for the original API. If you want more information about the API itself, head to the original [API documentation](https://quaderno.io/docs/api/).
+Remember that this is only a Swift wrapper for the original API. If you want more information about the API itself, head to the original [API documentation][quaderno-api-docs].
 
 
 ## Code of Conduct
@@ -164,9 +168,15 @@ Quaderno has been originally developed by [Eliezer Talón](https://github.com/el
 
 ## Contact
 
-Follow Quaderno ([@quadernoapp](https://twitter.com/quadernoapp)) on Twitter.
+Follow Quaderno ([@quadernoapp][quaderno-twitter]) on Twitter.
 
 
 ## License
 
 Quaderno is released under the MIT license. See [LICENSE.txt](https://github.com/quaderno/quaderno-swift/blob/master/LICENSE.txt).
+
+
+[quaderno-repository]: https://github.com/quaderno/quaderno-swift/  "quaderno-swift"
+[quaderno-api-docs]: https://quaderno.io/docs/api/  "Quaderno API"
+[quaderno-twitter]: https://twitter.com/quadernoapp/  "Quaderno on Twitter"
+[carthage-repository]: https://github.com/Carthage/Carthage/ "Carthage"

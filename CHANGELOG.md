@@ -19,12 +19,14 @@ Unreleased.
 - `ConnectionEntitlements` has been replaced by `Client.Entitlements`.
 - `Request` works now with Foundation's `URL` instead of `String`.
 - `Response` now handles generic responses, instead of only records and collection of records.
+- Dependencies are now managed with Carthage instead of CocoaPods.
 
 #### Added
 
 - `Response` supports now pagination, which is automatically parsed by `Client` whenever a request finishes.
 - `Response` supports now concrete error types through `ErrorResponse`.
 - Partial support for `Evidences` (see limitations in Quaderno's API documentation).
+- Support for macOS platform.
 
 #### Removed
 
