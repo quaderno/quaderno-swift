@@ -1,14 +1,17 @@
 language: objective-c
-osx_image: xcode8.2
+osx_image: xcode8.3
 notifications:
   email: false
-before_install:
-  - bundle install
-  - bundle exec pod repo update
 env:
   matrix:
-    - DESTINATION="OS=9.0,name=iPhone 6"
-    - DESTINATION="OS=10.0,name=iPhone 6s Plus"
+    - DESTINATION="OS=9.0,name=iPhone 6".       SCHEME="Quaderno iOS".   PLATFORM="iOS"
+    - DESTINATION="OS=10.3,name=iPhone 7 Plus". SCHEME="Quaderno iOS".   PLATFORM="iOS"
+    - DESTINATION="arch=x86_64".                SCHEME="Quaderno macOS". PLATFORM="macOS"
+before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+install:
+  - carthage bootstrap --platform ${PLATFORM}
 script:
   - set -o pipefail
-  - xcodebuild -destination "${DESTINATION}" -sdk iphonesimulator10.2 -workspace Quaderno.xcworkspace -scheme Quaderno -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES clean build test | xcpretty
+  - xcodebuild -scheme "${SCHEME}" -destination "${DESTINATION}" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty
