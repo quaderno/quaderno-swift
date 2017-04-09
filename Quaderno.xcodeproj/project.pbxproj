@@ -209,10 +209,10 @@
 		31B979191BE2384800AD6234 = {
 			isa = PBXGroup;
 			children = (
-				045B35A44C340808E33EE06A /* Frameworks */,
-				31B979241BE2384800AD6234 /* Products */,
 				31B979251BE2384800AD6234 /* Source */,
 				31B979311BE2384800AD6234 /* Tests */,
+				045B35A44C340808E33EE06A /* Frameworks */,
+				31B979241BE2384800AD6234 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -230,14 +230,14 @@
 		31B979251BE2384800AD6234 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				3154BEA11E85892800AE079B /* Behaviours */,
-				31C2E1801BECA30C005104BB /* Resources */,
-				31B979491BE240DC00AD6234 /* Supporting Files */,
-				31A076861BE26FF800276DE1 /* Client.swift */,
 				31B979261BE2384800AD6234 /* Quaderno.h */,
+				31A076861BE26FF800276DE1 /* Client.swift */,
 				31C2E1831BECA359005104BB /* Request.swift */,
 				31E08A561BE37D680080AE74 /* Resource.swift */,
 				317E9C4E1BF29B7500A1C331 /* Response.swift */,
+				3154BEA11E85892800AE079B /* Behaviours */,
+				31C2E1801BECA30C005104BB /* Models */,
+				31B979491BE240DC00AD6234 /* Supporting Files */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -245,13 +245,13 @@
 		31B979311BE2384800AD6234 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				31B9794A1BE240E300AD6234 /* Supporting Files */,
+				3161E2981E7DAED1002E0551 /* TestCase.swift */,
 				31B979321BE2384800AD6234 /* ClientTests.swift */,
 				3161E29A1E7DB970002E0551 /* OHHTTPStubs+QuadernoTests.swift */,
 				3133A8491DEC9AEA0081F3FE /* RequestTests.swift */,
 				317E9C4A1BF284C700A1C331 /* ResourceTests.swift */,
 				3133A8471DEC7F900081F3FE /* ResponseTests.swift */,
-				3161E2981E7DAED1002E0551 /* TestCase.swift */,
+				31B9794A1BE240E300AD6234 /* Supporting Files */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -272,7 +272,7 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		31C2E1801BECA30C005104BB /* Resources */ = {
+		31C2E1801BECA30C005104BB /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				3154BE9F1E8584FA00AE079B /* ContactResource.swift */,
@@ -287,7 +287,7 @@
 				31082B6B1C04B99900719A6A /* TaxResource.swift */,
 				3154BEB01E858A5E00AE079B /* WebhookResource.swift */,
 			);
-			path = Resources;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		31CE9B011E9A8B500073DB1A /* iOS */ = {

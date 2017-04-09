@@ -1,5 +1,5 @@
 //
-// ResponseTests.swift
+// RequestTests.swift
 //
 // Copyright (c) 2016 Recrea (http://recreahq.com/)
 //
