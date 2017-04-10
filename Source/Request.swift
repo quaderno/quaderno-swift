@@ -1,7 +1,7 @@
 //
 // Request.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,54 +21,61 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Alamofire
+/// The parameters of an HTTP request.
+public typealias HTTPParameters = [String: Any]
 
-
-/// Alias for a dictionary representing the parameters of an HTTP request.
-public typealias RequestParameters = [String: AnyObject]
-
-/// Alias for HTTP method in Alamofire to avoid explicit dependency.
-public typealias HTTPMethod = Alamofire.Method
-
-
-// MARK: - Request
-
-/**
- Requirements of an HTTP request to perform an operation over a resource.
- */
+/// A type representing an HTTP request that performs an operation on a resource.
 public protocol Request {
 
-  /// The HTTP method to use when requesting a resource
-  var method: HTTPMethod { get }
+    /// The HTTP method (defaults to `.get`).
+    var method: HTTPMethod { get }
 
-  /// Parameters to use when requesting a resource.
-  var parameters: RequestParameters? { get }
+    /// The parameters (defaults to `nil`).
+    var parameters: HTTPParameters? { get }
 
-  /**
-   Returns a string representing the URI of a resource.
+    /// Build the URI of a resource using a base URL.
+    ///
+    /// The default implementation returns the base URL without any further modification.
+    ///
+    /// - Parameter baseURL: The base URL of the URI.
+    /// - Returns: The URI of a resource.
+    func uri(using baseURL: URL) -> URL
 
-   - parameter baseURL: The base URL of the service.
+}
 
-   - returns: A string representing the URI of a resource.
-   */
-  func uri(baseURL baseURL: String) -> String
+public extension Request {
+
+    var method: HTTPMethod {
+        return .get
+    }
+
+    var parameters: HTTPParameters? {
+        return nil
+    }
+
+    func uri(using baseURL: URL) -> URL {
+        return baseURL
+    }
+
+}
+
+extension URL {
+
+    var toJSON: URL {
+        return appendingPathExtension("json")
+    }
 
 }
 
 
-extension String {
+// MARK: -
 
-  /**
-   Returns a string with the suffix `".json"` appended.
+/// HTTP methods available for sending requests.
+public enum HTTPMethod: String {
 
-   - returns: A string with the suffix `".json"` appended.
-   */
-  func appendJSONSuffix() -> String {
-    let jsonExtension = ".json"
-    guard !hasSuffix(jsonExtension) else {
-      return self
-    }
-    return self + jsonExtension
-  }
+    case get    = "GET"
+    case post   = "POST"
+    case put    = "PUT"
+    case delete = "DELETE"
 
 }

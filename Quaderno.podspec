@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name               = 'Quaderno'
-  s.version            = '1.0.1'
+  s.version            = '2.0.0'
   s.license            = 'MIT'
   s.summary            = 'Swift wrapper for the Quaderno API.'
   s.homepage           = 'https://www.quaderno.io'
@@ -11,9 +11,9 @@ Pod::Spec.new do |s|
   }
   s.source             = { :git => 'https://github.com/quaderno/quaderno-swift.git', :tag => s.version }
 
-  s.platform           = :ios, '9.0'
+  s.platform           = :ios, '10.0'
   s.requires_arc       = true
-  s.source_files       = 'Source/*.swift'
+  s.source_files       = 'Source/**/*.swift'
 
-  s.dependency 'Alamofire', '~> 3.0'
+  s.dependency 'Alamofire', '~> 4.0'
 end

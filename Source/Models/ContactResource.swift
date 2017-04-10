@@ -1,7 +1,7 @@
 //
-// Resource.swift
+// ContactResource.swift
 //
-// Copyright (c) 2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2017 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,22 +21,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
-/// An operation to perform on a resource.
-public protocol Operation {}
+import Foundation
 
 
-/// A type representing a resource in the Quaderno API.
-public protocol Resource {
+/// A resource to manage contacts.
+///
+/// - seealso: [Contacts](https://quaderno.io/docs/api/#contacts)
+public protocol ContactResource: CRUDResource {
 
-    /// The type for identifiers of resources.
-    typealias Identifier = Int
+    // TODO: Add support for fetching contacts through gateways
+    // `GET :gateway/customers/:id.json`
+    // https://quaderno.io/docs/api/#retrieve-get-a-single-contact-by-payment-gateway-id
 
-    /// The name of the resource.
-    ///
-    /// This value is used to build URIs that expose different operations on the same resource. For instance, all
-    /// operations pertaining to invoicing MAY use the name `"invoices"`, thus having URL paths like `/invoices.json` or
-    /// `/invoices/1.json`
-    static var name: String { get }
+}
+
+
+// MARK: - Default Implementation
+
+extension ContactResource {
+
+    public static var name: String {
+        return "contacts"
+    }
 
 }

@@ -5,8 +5,38 @@ All notable changes to this project will be documented in this file. `Quaderno` 
 - `0.0.x` Releases - [0.0.1](#001) | [0.0.2](#002)
 - `0.x.x` Releases - [0.1.0](#010) | [0.2.0](#020) | [0.3.0](#030) | [0.4.0](#040) | [0.5.0](#050) | [0.6.0](#060)
 - `1.x.x` Releases - [1.0.0](#100)
+- `2.x.x` Releases - [2.0.0](#200)
 
 ---
+
+## [2.0.0](https://github.com/quaderno/quaderno-swift/releases/tag/2.0.0)
+
+Unreleased.
+
+#### Changed
+
+- Resource structs (e.g. `Contact`) have been replaced by protocols (e.g. `ContactResource`).
+- `ConnectionEntitlements` has been replaced by `Client.Entitlements`.
+- `Request` works now with Foundation's `URL` instead of `String`.
+- `Response` now handles generic responses, instead of only records and collection of records.
+- Dependencies are now managed with Carthage instead of CocoaPods.
+
+#### Added
+
+- `Response` supports now pagination, which is automatically parsed by `Client` whenever a request finishes.
+- `Response` supports now concrete error types through `ErrorResponse`.
+- Partial support for `Evidences` (see limitations in Quaderno's API documentation).
+- Support for macOS platform.
+
+#### Removed
+
+- `AccountCredentials` has been removed. Use the JSON response of the request instead.
+
+#### Fixed
+
+- Support for Swift 3.
+- `PayableResource` now support all available operations.
+
 
 ## [1.0.0](https://github.com/quaderno/quaderno-swift/releases/tag/1.0.0)
 

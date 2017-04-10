@@ -5,6 +5,13 @@
 Pods/
 !Podfile.lock
 
+## Carthage
+Carthage/
+!Cartfile.resolved
+
+## Rubygems
+!Gemfile.lock
+
 ## OS X temporary files that should never be committed
 *.swp
 *.lock

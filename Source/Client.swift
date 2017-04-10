@@ -1,7 +1,7 @@
 //
 // Client.swift
 //
-// Copyright (c) 2015-2016 Recrea (http://recreahq.com/)
+// Copyright (c) 2015 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,135 +25,223 @@ import Foundation
 import Alamofire
 
 
-/// Dummy function to provide as default value for optional trailing closures.
-func noop<T>(value: T) {}
+/// An HTTP client sending requests to a web service exposing the Quaderno API.
+///
+/// - Seealso: [Quaderno API](https://quaderno.io/docs/api/).
+open class Client {
 
+    /// The base URL of the service.
+    public let baseURL: URL
 
-// MARK: -
+    /// The token authenticating every request.
+    public let authenticationToken: String
 
-/**
- An HTTP client responsible for making requests to a service exposing the
- Quaderno API.
- */
-public class Client {
+    /// The HTTP headers authorizing every request.
+    var authorizationHeaders: [String: String] {
+        guard let credentialData = "\(authenticationToken):".data(using: String.Encoding.utf8) else {
+            assertionFailure("Failed to encode the authentication token to UTF-8.")
+            return [:]
+        }
 
-  /// Base URL of the service, typically `https://ACCOUNT-NAME.quadernoapp.com/api/v1/`.
-  public let baseURL: String
-
-  /// Token used to authenticate requests to the service.
-  public let authenticationToken: String
-
-  /// Default encoding for every request.
-  let defaultEncoding = ParameterEncoding.JSON
-
-  /// HTTP headers to authorize every request.
-  var authorizationHeaders: [String: String]? {
-    guard let credentialData = "\(self.authenticationToken):".dataUsingEncoding(NSUTF8StringEncoding) else {
-      return nil
+        let base64Credentials = credentialData.base64EncodedString()
+        return ["Authorization": "Basic \(base64Credentials)"]
     }
 
-    let base64Credentials = credentialData.base64EncodedStringWithOptions([])
-    return ["Authorization": "Basic \(base64Credentials)"]
-  }
+    // MARK: Initialization
 
-  /**
-   Entitlements granted to the current user for using the service.
+    /// Initialize a client with a base URL and an authentication token.
+    ///
+    /// - Parameters:
+    ///   - baseURL: The base URL of the web service.
+    ///   - authenticationToken: The token authenticating every request.
+    public init(baseURL: URL, authenticationToken: String) {
+        self.baseURL             = baseURL
+        self.authenticationToken = authenticationToken
+    }
 
-   If no entitlements are defined, it is not guaranteed that the next request
-   will succeed.
+    // MARK: Connection Entitlements
 
-   - seealso: [Rate limiting](https://github.com/quaderno/quaderno-api#rate-limiting)
-   */
-  public private(set) var entitlements: ConnectionEntitlements?
+    /// The entitlements granted to a client for using the web service.
+    ///
+    /// - Seealso: [Rate Limiting](https://quaderno.io/docs/api/#rate-limiting).
+    public struct Entitlements {
 
-  // MARK: Initialization
+        /// The time interval in seconds until `remainingRequests` is set to the maximum allowed value.
+        public let resetInterval: TimeInterval
 
-  /**
-   Initializes a client with a base URL and an authentication token.
+        /// The number of remaining requests until the next cycle.
+        public let remainingRequests: Int
 
-   - parameter baseURL: The base URL of the service.
-   - parameter authenticationToken: The token used to authenticate request to
-   the service.
+        /// Keys in HTTP header related to entitlements.
+        enum HTTPHeader: String {
 
-   - returns: A newly initialized client.
+            case rateLimitReset             = "X-RateLimit-Reset"
+            case rateLimitRemainingRequests = "X-RateLimit-Remaining"
 
-   - seealso: [Authentication](https://github.com/quaderno/quaderno-api#authentication)
-   */
-  public init(baseURL: String, authenticationToken: String) {
-    self.baseURL = baseURL
-    self.authenticationToken = authenticationToken
-  }
+        }
+
+    }
+
+    /// The entitlements currently granted.
+    public fileprivate(set) var entitlements: Entitlements?
 
 }
 
 
-// MARK: - Making Requests
+// MARK: - Sending Requests
+
+private func noop<T>(_ value: T) {}
+
+private extension HTTPMethod {
+
+    var alamofired: Alamofire.HTTPMethod {
+        guard let afMethod = Alamofire.HTTPMethod(rawValue: rawValue) else {
+            fatalError("Failed to create the equivalent HTTP method of \(self) in Alamofire")
+        }
+        return afMethod
+    }
+
+}
+
+extension Client.Entitlements {
+
+    /// Initialize a set of entitlements with a dictionary of HTTP headers.
+    ///
+    /// - Precondition: All expected headers MUST be present.
+    ///
+    /// - Parameter httpHeaders: A dictionary of HTTP headers, as represented in `HTTPURLResponse`.
+    init?(httpHeaders: [String: Any]) {
+        guard let resetIntervalValue = httpHeaders[HTTPHeader.rateLimitReset.rawValue] as? String else {
+            return nil
+        }
+
+        guard let resetInterval = TimeInterval(resetIntervalValue) else {
+            return nil
+        }
+
+        guard let remainingRequestsValue = httpHeaders[HTTPHeader.rateLimitRemainingRequests.rawValue] as? String else {
+            return nil
+        }
+
+        guard let remainingRequests = Int(remainingRequestsValue) else {
+            return nil
+        }
+
+        self.resetInterval = resetInterval
+        self.remainingRequests = remainingRequests
+    }
+
+    fileprivate static func updateEntitlements(of client: Client, with response: HTTPURLResponse?) {
+        guard let httpHeaders = response?.allHeaderFields as? [String: Any] else {
+            return
+        }
+        client.entitlements = Client.Entitlements(httpHeaders: httpHeaders)
+    }
+
+}
 
 extension Client {
 
-  /**
-   Checks availability of the service.
-
-   - parameter completion: A closure called when the request finishes.
-
-   - seealso: [Ping the API](https://github.com/quaderno/quaderno-api#ping-the-api).
-   */
-  public func ping(completion: (success: Bool) -> Void = noop) {
-    request(Ping()) { response in
-      completion(success: response.isSuccess)
+    private func dataRequest(validating request: Request) -> Alamofire.DataRequest {
+        return Alamofire.request(request.uri(using: baseURL),
+                                 method: request.method.alamofired,
+                                 parameters: request.parameters,
+                                 encoding: JSONEncoding.default,
+                                 headers: authorizationHeaders).validate()
     }
-  }
 
-  /**
-   Fetches the account details for using the service.
+    /// Send a request to the web service expecting a given response.
+    ///
+    /// - Parameters:
+    ///   - request: The request to send.
+    ///   - completion: A closure to execute once the request is finished.
+    public func send<T>(_ request: Request, completion: @escaping (Response<T>) -> Void = noop) {
+        dataRequest(validating: request).responseJSON { response in
+            Entitlements.updateEntitlements(of: self, with: response.response)
 
-   - parameter completion: A closure called when the request finishes.
-
-   - seealso: [Authorization](https://github.com/quaderno/quaderno-api/blob/master/sections/authentication.md#authorization).
-   */
-  public func account(completion: (accountCredentials: AccountCredentials?) -> Void = noop) {
-    request(Authorization()) { response in
-      guard case .Record(let result) = response else {
-        completion(accountCredentials: nil)
-        return
-      }
-
-      let accountCredentials = AccountCredentials(jsonDictionary: result)
-      completion(accountCredentials: accountCredentials)
-    }
-  }
-
-  /**
-   Requests a resource.
-
-   - parameter request:    A concrete request to a resource.
-   - parameter completion: A closure called when the request finishes. The
-   closure has a single parameter that contains the result of the request.
-
-   - seealso:
-    - [API resources](https://github.com/quaderno/quaderno-api#api-resources).
-    - `Response`.
-   */
-  public func request(request: Request, completion: (response: Response<NSError>) -> Void = noop) {
-    Alamofire.request(request.method, request.uri(baseURL: baseURL), parameters: request.parameters, encoding: .JSON, headers: authorizationHeaders)
-      .validate()
-      .responseJSON { response in
-        self.entitlements = ConnectionEntitlements(httpHeaders: response.response?.allHeaderFields)
-
-        switch response.result {
-        case .Success(let value) where value is ResponseObject:
-          completion(response: Response.Record(value as! ResponseObject))
-        case .Success(let value) where value is [ResponseObject]:
-          completion(response: .Collection(value as! [ResponseObject]))
-        case .Success(let value) where value is NSNull:
-          completion(response: .Empty)
-        case .Failure(let error):
-          completion(response: .Failure(error))
-        default:
-          assertionFailure("Unexpected value returned: \(response.result)")
-          completion(response: .Empty)
+            switch response.result {
+            case .success(let value):
+                if let transformedValue = value as? T {
+                    completion(.success(transformedValue, Page(httpResponse: response.response)))
+                } else {
+                    let error = ErrorResponse.typeMismatch(expected: T.self, found: type(of: value))
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                let serviceError = ErrorResponse.serviceError(error as NSError)
+                completion(.failure(serviceError))
+            }
         }
     }
-  }
+
+    /// Send a request to the web service expecting an empty response.
+    ///
+    /// - Parameters:
+    ///   - request: The request to send.
+    ///   - completion: A closure to execute once the request is finished.
+    public func send(_ request: Request, completion: @escaping EmptyResponseHandler = noop) {
+        dataRequest(validating: request).response { response in
+            Entitlements.updateEntitlements(of: self, with: response.response)
+
+            if let error = response.error {
+                completion(.serviceError(error as NSError))
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+}
+
+
+// MARK: - Sending a Ping Request
+
+extension Client {
+
+    struct PingRequest: Request {
+
+        func uri(using baseURL: URL) -> URL {
+            return baseURL.appendingPathComponent("ping").toJSON
+        }
+
+    }
+
+    /// Ping the service.
+    ///
+    /// - Parameter completion: A closure to execute once the request is finished.
+    ///
+    /// - Seealso: [Ping the API](https://quaderno.io/docs/api/#authentication).
+    public func ping(_ completion: @escaping EmptyResponseHandler = noop) {
+        send(PingRequest(), completion: completion)
+    }
+
+}
+
+
+// MARK: - Sending an Authorization Request
+
+extension Client {
+
+    struct AuthorizationRequest: Request {
+
+        func uri(using baseURL: URL) -> URL {
+            // Input base URL is ignored because the authorization resource is not tied to any account.
+            guard let baseURL = URL(string: "https://quadernoapp.com/api") else {
+                fatalError("Cannot build base URL for authorization")
+            }
+
+            return baseURL.appendingPathComponent("authorization").toJSON
+        }
+
+    }
+
+    /// Ask the service for the account associated with an authorized user.
+    ///
+    /// - Parameter completion: A closure to execute once the request if finished
+    ///
+    /// - Seealso: [Authorization](https://quaderno.io/docs/api/#authorization).
+    public func account(_ completion: @escaping JSONResponseHandler = noop) {
+        send(AuthorizationRequest(), completion: completion)
+    }
 
 }

@@ -1,7 +1,7 @@
 //
-// Resource.swift
+// RequestTests.swift
 //
-// Copyright (c) 2015 Recrea (http://recreahq.com/)
+// Copyright (c) 2016 Recrea (http://recreahq.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,22 +21,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import XCTest
 
-/// An operation to perform on a resource.
-public protocol Operation {}
+@testable import Quaderno
 
+final class RequestTests: TestCase {
 
-/// A type representing a resource in the Quaderno API.
-public protocol Resource {
+    private var request: DummyRequest!
 
-    /// The type for identifiers of resources.
-    typealias Identifier = Int
+    // MARK: Set up
 
-    /// The name of the resource.
-    ///
-    /// This value is used to build URIs that expose different operations on the same resource. For instance, all
-    /// operations pertaining to invoicing MAY use the name `"invoices"`, thus having URL paths like `/invoices.json` or
-    /// `/invoices/1.json`
-    static var name: String { get }
+    override func setUp() {
+        super.setUp()
+        request = DummyRequest()
+    }
+
+    override func tearDown() {
+        request = nil
+        super.tearDown()
+    }
+
+    // MARK: Examples
+
+    func testThatDefaultMethodIsGET() {
+        XCTAssertEqual(request.method, .get)
+    }
+
+    func testThatDefaultParametersIsNil() {
+        XCTAssertNil(request.parameters)
+    }
+
+    func testThatDefaultURIIsBaseURL() {
+        let baseURL = URL(string: "http://example.com")!
+        XCTAssertEqual(request.uri(using: baseURL), baseURL)
+    }
 
 }
